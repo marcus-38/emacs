@@ -1,2 +1,28 @@
-# emacs
+* emacs
 My Personal Emacs Configuration
+
+=Warning=
+This is my personal Emacs configuration. The file is tangled from a
+literate org document where I try to document what each piece is for.
+If you found my configurations you are free to use as you please, but
+please read the whole thing before you do. I regulary commit my
+configuration even though it is not working. Yes, I know, you shouldn't
+do that but you have been warned.
+
+Here be dragons
+
+* Table of Contents :toc_4:
+
+* Package Manager
+* Startup and Garbage Collection
+* General Settings
+** Misc Settings
+Misc settings.
+#+begin_src emacs-lisp
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1)
+#+end_src
+* User Interface
+* Org
+* Programming
+
