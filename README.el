@@ -1,9 +1,13 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")
+             ("nongnu" . "https://elpa.nongnu.org/nongnu/")
 			 ("gnu" . "https://elpa.gnu.org/packages/")))
 (setq package-user-dir (expand-file-name "~/.emacs.d/packages"))
 (require 'package)
 (package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+(package-install-selected-packages)
 
 (when (eq system-type 'darwin)
   (setq mac-option-modifier 'meta
@@ -87,11 +91,101 @@
   )
 
 (use-package evil
-  :ensure
+  :ensure t
   :init (evil-mode 1))
 
 (use-package which-key
-  :ensure t)
+  :ensure t
+  :delight
+  :custom (which-key-idle-delay 0.5)
+  :config (which-key-mode))
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(set-face-attribute 'default nil :font "Source Code Pro")
+(set-fontset-font t 'latin "Noto Sans")
+
+(use-package hydra
+  :ensure t
+  :bind (("C-c w" . hydra-windows/body)))
+
+(use-package major-mode-hydra
+  :after hydra
+  :ensure t
+  :preface
+  (defun with-alltheicon (icon str &optional height v-adjust face)
+    "Display an icon from all-the-icon."
+    (s-concat (all-the-icons-alltheicon icon :v-adjust (or v-adjust 0) :height (or height 1) :face face) " " str))
+
+  (defun with-faicon (icon str &optional height v-adjust face)
+    "Display an icon from Font Awesome icon."
+    (s-concat (all-the-icons-faicon icon ':v-adjust (or v-adjust 0) :height (or height 1) :face face) " " str))
+
+  (defun with-fileicon (icon str &optional height v-adjust face)
+    "Display an icon from the Atom File Icons package."
+    (s-concat (all-the-icons-fileicon icon :v-adjust (or v-adjust 0) :height (or height 1) :face face) " " str))
+
+  (defun with-octicon (icon str &optional height v-adjust face)
+    "Display an icon from the GitHub Octicons."
+    (s-concat (all-the-icons-octicon icon :v-adjust (or v-adjust 0) :height (or height 1) :face face) " " str)))
+
+(pretty-hydra-define hydra-windows
+  (:hint nil :forein-keys warn :quit-key "q" :title (with-faicon "windows" "Windows" 1 -0.05))
+  ("Window"
+   (("b" balance-windows "balance")
+    ("c" centered-window-mode "center")
+    ("i" enlarge-window "heighten")
+    ("j" shrink-window-horizontally "narrow")
+    ("k" shrink-window "lower")
+    ("u" winner-undo "undo")
+    ("r" winner-redo "redo")
+    ("l" enlarge-window-horizontally "widen")
+    ("s" switch-window-then-swap-buffer "swap" :color teal))
+   "Zoom"
+   (("-" text-scale-decrease "out")
+    ("+" text-scale-increase "in")
+    ("=" (text-scale-increase 0) "reset"))))
+
+(use-package window
+  :ensure nil
+  :bind (("C-x 2" . vsplit-last-buffer)
+         ("C-x 3" . hsplit-last-buffer)
+         ([remap kill-buffer] . kill-this-buffer))
+  :preface
+  (defun hsplit-last-buffer ()
+    "Focus to the last created horizontal window."
+    (interactive)
+    (split-window-horizontally)
+    (other-window 1))
+  (defun vsplit-last-buffer ()
+    "Focus to the last created vertical window."
+    (interactive)
+    (split-window-vertically)
+    (other-window 1)))
+
+(use-package switch-window
+  :ensure t
+  :bind (("C-x o" . switch-window)
+         ("C-x w" . switch-window-then-swap-buffer)))
+
+(use-package winner
+  :ensure nil
+  :config (winner-mode))
+
+(use-package ibuffer
+  :ensure nil
+  :preface
+  (defvar protected-buffers '("*scratch*" "*Messages*")
+    "Buffer that cannot be killed.")
+  (defun my/protected-buffers ()
+    "Protect some buffers from being killed."
+    (dolist (buffer protected-buffers)
+      (with-current-buffer buffer
+        (emacs-lock-mode 'kill))))
+  :bind ("C-x C-b" . ibuffer)
+  :init (my/protected-buffers))
 
 (use-package org
   :ensure t)
@@ -99,3 +193,104 @@
 (use-package org-tempo
   :config
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp")))
+
+(use-package dashboard
+  :ensure t
+  :custom
+  (dashboard-banner-logo-title "With Great Power Comes Great Responsibility!")
+  (dashboard-center-content t)
+  (dashboard-items '((agenda)
+                     (projects . 5)))
+  (dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+  (dashboard-set-file-icons t)
+  (dashboard-set-footer nil)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-navigator t)
+  (dashboard-startup-banner 'logo)
+  :config
+  (dashboard-setup-startup-hook))
+
+(use-package helpful
+  :ensure t
+  :commands (helpful-at-point
+             helpful-callable
+             helpful-command
+             helpful-function
+             helpful-key
+             helpful-macro
+             helpful-variable)
+  :bind
+  ([remap display-local-help] . helpful-at-point)
+  ([remap describe-function] . helpful-callable)
+  ([remap describe-variable] . helpful-varable)
+  ([remap describe-symbol] . helpful-symbol)
+  ([remap describe-key] . helpful-key)
+  ([remap describe-command] . helpful-command))
+
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook ((prog-mode . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :custom
+  (lsp-enable-folding nil)
+  (lsp-enable-links nil)
+  (lsp-enable-snippet nil)
+  (lsp-keymap-prefix "C-c ;")
+  (lsp-session-file (expand-file-name (format "%s/emacs/lsp-session-v1" xdg-data)))
+  (read-process-output-max (* 1024 1024)))
+
+(use-package dap-mode
+  :ensure t
+  :after lsp-mode
+  :config
+  (dap-mode t)
+  (dap-ui-mode t))
+
+(use-package vertico
+  :ensure t
+  :init (vertico-mode)
+  :bind (:map vertico-map
+              ("C-<backspace>" . vertico-directory-up))
+  :custom (vertico-cycle t)
+  :custom-face (vertico-current ((t (:background "#1d1f21")))))
+
+(use-package marginalia
+  :ensure t
+  :after vertico
+  :init (marginalia-mode)
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
+
+(use-package all-the-icons-completion
+  :ensure t
+  :after (marginalia all-the-icons)
+  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles . (partial-completion)))))
+  (completion-styles '(orderless)))
+
+(use-package embark
+  :ensure t
+  :bind ("C-." . embark-act))
+
+(use-package company
+  :ensure t
+  :after lsp-mode
+  :hook (lsp-mode . company-mode)
+  :custom
+  (company-begin-commands '(self-insert-command))
+  (company-idle-delay 0.5)
+  (company-minimum-prefix-length 1)
+  (company-show-quick-access t)
+  (company-tooltip-align-annotations 't))
+
+(use-package company-box
+  :ensure t
+  :if (display-graphic-p)
+  :after company
+  :hook (company-mode . company-box-mode))
