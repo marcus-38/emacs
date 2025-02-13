@@ -10,7 +10,7 @@ please read the whole thing before you do. I regulary commit my
 configuration even though it is not working. Yes, I know, you shouldn't
 do that but you have been warned.
 
-Here be dragons
+*Here be dragons*
 
 * Table of Contents :toc_4:
 
