@@ -2,6 +2,7 @@
 My Personal Emacs Configuration
 
 =Warning=
+
 This is my personal Emacs configuration. The file is tangled from a
 literate org document where I try to document what each piece is for.
 If you found my configurations you are free to use as you please, but
