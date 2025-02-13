@@ -26,7 +26,35 @@ do that but you have been warned.
 * Startup and Garbage Collection
 * General Settings
 ** Emacs Settings
-Emacs settings.
+Emacs settings and keybindings.
+
+|-------------+------------------------------------|
+| Key         | Function                           |
+|-------------+------------------------------------|
+| ⌘ - c       | Copy                               |
+| ⌘ - v       | Paste                              |
+| ⌘ - x       | Cut                                |
+| ⌘ - a       | Mark whole buffer                  |
+| ⌘ - z       | Undo                               |
+| ⌘ - f       | Search                             |
+| ⌘ - g       | Repeat Search                      |
+| ⌘ - o       | Open file                          |
+| ⌘ - n       | Open file                          |
+| ⌘ - s       | Save buffer                        |
+| ⌘ - p       | Mac Preview (requires mac-preview) |
+| ⌘ - w       | Kill buffer                        |
+| ⌘ - m       | Iconify frame (hide)               |
+| ⌘ - q       | Save all and quit                  |
+| ⌘ - .       | Keyboard quit                      |
+| ⌘ - l       | Goto line                          |
+| ⌘ - k       | Kill buffer                        |
+| ⌘ - <up>    | Go to beginning of buffer          |
+| ⌘ - <down>  | Go to end of buffer                |
+| ⌘ - <left>  | Go to beginning of line            |
+| ⌘ - <right> | Go to end of line                  |
+|-------------+------------------------------------|
+
+
 #+begin_src emacs-lisp
   (when (eq system-type 'darwin)
     (setq mac-option-modifier 'meta
@@ -129,6 +157,11 @@ Emacs settings.
 : text-scale-decrease
 
 * Org
+** Org
+#+begin_src emacs-lisp
+  (use-package org
+    :ensure t)
+#+end_src
 ** Org Tempo
 #+begin_src emacs-lisp
   (use-package org-tempo
