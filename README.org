@@ -1,5 +1,7 @@
-* Configuration
-My Personal Emacs Configuration
+#+TITLE: My literate Emacs Configuration
+#+AUTHOR: Marcus
+
+* My Personal Emacs Configuration
 
 =Warning=
 
@@ -12,7 +14,7 @@ do that but you have been warned.
 
 *Here be dragons*
 
-* Table of Contents :toc_4:
+* Table of Contents :TOC_4:
 
 * Package Manager
 #+begin_src emacs-lisp
@@ -148,13 +150,21 @@ Emacs settings and keybindings.
   	 )
     )
 #+end_src
-** Keybindings
+** Evil keybindings
 #+begin_src emacs-lisp
-  
+  (use-package evil
+    :ensure t
+    :init (evil-mode 1))
+#+end_src
+** Which Key
+#+begin_src emacs-lisp
+      (use-package which-key
+        :ensure t
+        :init
+        (which-key-mode 1))
 #+end_src
 
 #+RESULTS:
-: text-scale-decrease
 
 * Org
 ** Org

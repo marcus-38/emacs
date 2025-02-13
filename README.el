@@ -86,7 +86,15 @@
 	 )
   )
 
+(use-package evil
+  :ensure
+  :init (evil-mode 1))
 
+(use-package which-key
+  :ensure t)
+
+(use-package org
+  :ensure t)
 
 (use-package org-tempo
   :config
