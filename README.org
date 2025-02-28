@@ -23,6 +23,7 @@ If you are looking for insperation, check out these instead:
 
 If you want to learn more about Org:
 - [[https://orgmode.org/manual/index.html][The Org manual]]
+- [[https://www.gnu.org/software/emacs/tour/][A guided tour of Emacs]]
   
 * Table of Contents :TOC_4:
 * File Headers
