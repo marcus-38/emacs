@@ -282,8 +282,6 @@
         dashboard-icon-file-v-adjust -0.125
         dashboard-heading-icon-height 1.75
         dashboard-heading-icon-v-adjust -0.125)
-  (add-to-list 'dashboard-items '(agenda) t)
-  (setq dashboard-week-agenda t)
   (dashboard-setup-startup-hook))
 
 (use-package magit
