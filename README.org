@@ -401,6 +401,40 @@ Text
                          )
                        )))
 #+end_src
+**** Dashboard
+[[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] is an extensible emacs startup screen showing you what’s most important.
+#+begin_src emacs-lisp :tangle init.el
+  (use-package dashboard
+    :ensure t
+    :config
+    (setq dashboard-banner-logo-text "Emacs, what else?"
+          dashboard-startup-banner 'official
+          dashboard-center-content t
+          dashboard-vertically-center-content t
+          dashboard-show-shortcuts t
+          dashboard-items '((recent . 10)
+                            (bookmarks . 10)
+                            (projects . 10)
+                            (agenda . 10)
+                            (registers . 10))
+          dashboard-item-shortcuts '((recents . "r")
+                                     (bookmarks . "b")
+                                     (projects . "p")
+                                     (agenda . "a")
+                                     (registers . "e"))
+          dashboard-navigation-cycle t
+          dashboard-display-icons-p t
+          dashboard-icon-type 'nerd-icons
+          dashboard-set-heading-icons t
+          dashboard-set-file-icons t
+          dashboard-icon-file-height 1.75
+          dashboard-icon-file-v-adjust -0.125
+          dashboard-heading-icon-height 1.75
+          dashboard-heading-icon-v-adjust -0.125)
+    (add-to-list 'dashboard-items '(agenda) t)
+    (setq dashboard-week-agenda t)
+    (dashboard-setup-startup-hook))
+#+end_src
 * Programming
 ** Version control
 *** Magit
