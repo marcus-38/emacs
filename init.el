@@ -262,18 +262,18 @@
         dashboard-startup-banner 'official
         dashboard-center-content t
         dashboard-vertically-center-content t
-        dashboard-show-shortcuts t
-        dashboard-items '((recent . 10)
+        dashboard-show-shortcuts t)
+  (setq dashboard-items '((recents . 10)
                           (bookmarks . 10)
                           (projects . 10)
                           (agenda . 10)
-                          (registers . 10))
-        dashboard-item-shortcuts '((recents . "r")
+                          (registers . 10)))
+  (setq dashboard-item-shortcuts '((recents . "r")
                                    (bookmarks . "b")
                                    (projects . "p")
                                    (agenda . "a")
-                                   (registers . "e"))
-        dashboard-navigation-cycle t
+                                   (registers . "e")))
+  (setq dashboard-navigation-cycle t
         dashboard-display-icons-p t
         dashboard-icon-type 'nerd-icons
         dashboard-set-heading-icons t
@@ -282,6 +282,7 @@
         dashboard-icon-file-v-adjust -0.125
         dashboard-heading-icon-height 1.75
         dashboard-heading-icon-v-adjust -0.125)
+  :init
   (dashboard-setup-startup-hook))
 
 (use-package magit
