@@ -1,0 +1,19 @@
+# Compiled
+*.elc
+
+# Packaging
+.cask
+
+# Backup files
+*~
+
+# Undo-tree save-files
+*.~undo-tree
+.#README.org
+#README.org#
+
+manual-packages/
+packages/
+transient/
+auto-save-list/
+elpa/
