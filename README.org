@@ -235,6 +235,11 @@ Settings that doesn't fit in anywhere else.
     :config
     (add-to-list 'evil-collection-mode-list 'help)
     (evil-collection-init))
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil))
+  (setq org-return-follows-link t)
 #+end_src
 *** My personal key bindings
 I will try to enter all my personal key bindings here... but some are defined

@@ -91,6 +91,11 @@
   :config
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "SPC") nil)
+  (define-key evil-motion-state-map (kbd "RET") nil)
+  (define-key evil-motion-state-map (kbd "TAB") nil))
+(setq org-return-follows-link t)
 
 (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
 (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
