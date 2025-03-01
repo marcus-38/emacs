@@ -567,10 +567,28 @@ This configuration file is writen with org-mode.
 #+begin_src emacs-lisp :tangle init.el
   (use-package org
     :ensure t)
+#+end_src
 
+** Org make-toc
+[[https://github.com/alphapapa/org-make-toc][Org-make-toc]] creates tables of contents for org-mode files.
+
+A document may have any number of tables of contents (TOCs), each of which may list entries in a highly
+configurable way.
+
+To make a basic TOC, follow these steps:
+
+1. Choose a heading to contain a TOC and move the point to it.
+2. Run command =org-make-toc-insert=, which inserts a =:CONTENTS:= drawer and sets TOC properties.
+   Set the =include= property to all.
+3. Run the command =org-make-toc= to update all TOCs in the document.
+
+Use command =org-make-toc-set= to change TOC properties for the entry at point with completion.
+
+#+begin_src emacs-lisp :tangle init.el
   (use-package org-make-toc
     :ensure t)
 #+end_src
+
 ** Org tempo
 With [[https://orgmode.org/manual/Structure-Templates.html][structure templates]] it is possible to insert empty structural blocks,
 such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such a block.
