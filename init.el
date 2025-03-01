@@ -211,6 +211,23 @@
   :init
   (doom-modeline-mode 1))
 
+(set-face-attribute 'default nil
+                    :font "Iosevka Fixed"
+                    :height 160
+                    :weight 'medium)
+(set-face-attribute 'variable-pitch nil
+                    :font "Iosevka"
+                    :height 150
+                    :weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+                    :font "Iosevka Fixed"
+                    :height 160
+                    :weight 'medium)
+(set-face-attribute 'font-lock-comment-face nil
+                    :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+                    :slant 'italic)
+
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))

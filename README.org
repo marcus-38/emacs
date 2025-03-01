@@ -351,7 +351,7 @@ and literal matches are enabled.
     (minibuffer-prompt-properties
      '(read-only t cursor-intangible t face minibuffer-prompt)))
 #+end_src
-** Themes
+** Themes and Fonts
 Some packages, such as EF-themes, I download myself into =~/.emacs.d/manual-packages/<package>=.
 To be able to use these packages I first add the path to the =load-path= list and then =require=
 each package.
@@ -421,6 +421,28 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
     :init
     (doom-modeline-mode 1))
 #+end_src
+
+*** Fonts
+Setting the font faces.
+#+begin_src emacs-lisp :tangle init.el
+  (set-face-attribute 'default nil
+                      :font "Iosevka Fixed"
+                      :height 160
+                      :weight 'medium)
+  (set-face-attribute 'variable-pitch nil
+                      :font "Iosevka"
+                      :height 150
+                      :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil
+                      :font "Iosevka Fixed"
+                      :height 160
+                      :weight 'medium)
+  (set-face-attribute 'font-lock-comment-face nil
+                      :slant 'italic)
+  (set-face-attribute 'font-lock-keyword-face nil
+                      :slant 'italic)
+#+end_src
+
 *** Icons
 **** All-the-icons
 [[https://github.com/domtronn/all-the-icons.el][All-the-icons]] is a utility package to collect various Icon Fonts and propertize them within Emacs.
