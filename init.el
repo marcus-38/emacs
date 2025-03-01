@@ -287,7 +287,8 @@
 (use-package org
   :ensure t)
 
-(add-to-list 'org-tag-alist '("TOC" . ?T))
+(use-package org-make-toc
+  :ensure t)
 
 (use-package org-tempo
   :config

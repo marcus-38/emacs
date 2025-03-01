@@ -28,11 +28,50 @@ If you want to learn more about Org:
   
 * Table of Contents
 :PROPERTIES:
-:TOC:
+:TOC:      :include all :depth 4 :force (nothing) :ignore (this) :local (nothing)
 :END:
 :CONTENTS:
-
+- [[#emacs-configuration][Emacs Configuration]]
+- [[#generate-files-and-file-headers][Generate files and file headers]]
+  - [[#initel][init.el]]
+  - [[#early-initel][early-init.el]]
+  - [[#customel][custom.el]]
+- [[#package-manager][Package Manager]]
+- [[#macos-specifics][MacOS Specifics]]
+  - [[#exec-path-from-shell][Exec path from shell]]
+  - [[#macos-keyboard-settings][MacOS keyboard settings]]
+- [[#look-and-feel][Look and Feel]]
+  - [[#misc-settings][Misc settings]]
+  - [[#keybindings][Keybindings]]
+    - [[#evil][Evil]]
+    - [[#my-personal-key-bindings][My personal key bindings]]
+    - [[#helpful][Helpful]]
+    - [[#move-text][Move text]]
+  - [[#minibuffer][Minibuffer]]
+    - [[#which-key][Which key]]
+    - [[#vertico][Vertico]]
+    - [[#save-history][Save history]]
+    - [[#marginalia][Marginalia]]
+    - [[#orderless][Orderless]]
+    - [[#emacs-minibuffer-configurations][Emacs minibuffer configurations]]
+  - [[#themes][Themes]]
+    - [[#ef-themes][EF-themes]]
+    - [[#doom-themes][Doom Themes]]
+    - [[#modeline][Modeline]]
+    - [[#icons][Icons]]
+    - [[#windows][Windows]]
+- [[#programming][Programming]]
+  - [[#version-control][Version control]]
+    - [[#magit][Magit]]
+  - [[#project-management][Project management]]
+    - [[#projectile][Projectile]]
+- [[#org][Org]]
+  - [[#org][Org]]
+  - [[#org-tempo][Org tempo]]
+- [[#internet][Internet]]
+  - [[#browse-url][Browse URL]]
 :END:
+
 
 * Generate files and file headers
 The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
@@ -529,7 +568,8 @@ This configuration file is writen with org-mode.
   (use-package org
     :ensure t)
 
-  (add-to-list 'org-tag-alist '("TOC" . ?T))
+  (use-package org-make-toc
+    :ensure t)
 #+end_src
 ** Org tempo
 With [[https://orgmode.org/manual/Structure-Templates.html][structure templates]] it is possible to insert empty structural blocks,
