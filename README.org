@@ -247,7 +247,8 @@ Settings that doesn't fit in anywhere else.
 #+end_src
 *** My personal key bindings
 I will try to enter all my personal key bindings here... but some are defined
-in the MacOS keyboard settings and some are defined in other places. Oh my.
+in the MacOS keyboard settings and some are defined in other places. And there
+are a lot of them in the =General= section below. Oh my.
 
 #+begin_src emacs-lisp :tangle init.el
   (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
