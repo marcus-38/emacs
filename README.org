@@ -45,6 +45,8 @@ If you want to learn more about Org:
   - [[#keybindings][Keybindings]]
     - [[#evil][Evil]]
     - [[#my-personal-key-bindings][My personal key bindings]]
+    - [[#ivy-and-counsel][IVY and Counsel]]
+    - [[#general-key-binding][General key binding]]
     - [[#helpful][Helpful]]
     - [[#move-text][Move text]]
   - [[#minibuffer][Minibuffer]]
@@ -54,10 +56,11 @@ If you want to learn more about Org:
     - [[#marginalia][Marginalia]]
     - [[#orderless][Orderless]]
     - [[#emacs-minibuffer-configurations][Emacs minibuffer configurations]]
-  - [[#themes][Themes]]
+  - [[#themes-and-fonts][Themes and Fonts]]
     - [[#ef-themes][EF-themes]]
     - [[#doom-themes][Doom Themes]]
     - [[#modeline][Modeline]]
+    - [[#fonts][Fonts]]
     - [[#icons][Icons]]
     - [[#windows][Windows]]
 - [[#programming][Programming]]
@@ -71,6 +74,7 @@ If you want to learn more about Org:
   - [[#org-tempo][Org tempo]]
 - [[#internet][Internet]]
   - [[#browse-url][Browse URL]]
+  - [[#elfeed][Elfeed]]
 :END:
 
 * Generate files and file headers
