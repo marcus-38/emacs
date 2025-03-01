@@ -73,7 +73,6 @@ If you want to learn more about Org:
   - [[#browse-url][Browse URL]]
 :END:
 
-
 * Generate files and file headers
 The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
 use this configuration as is.
