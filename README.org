@@ -382,6 +382,65 @@ in the MacOS keyboard settings and some are defined in other places. Oh my.
       "g s" '(magit-stage-file :wk "Git stage file")
       "g u" '(magit-unstage-file :wk "Git unstage file")
       )
+
+    (my/leader-keys
+      "h" '(:ignore t :wk "Help")
+      "h a" '(counsel-apropos :wk "Apropos")
+      "h b" '(describe-bindings :wk "Desc. bindings")
+      "h c" '(describe-char :wk "Desc. character under cursor")
+      "h d" '(:ignore t :wk "Emacs documentation")
+      "h d a" '(about-emacs :wk "About Emacs")
+      "h d d" '(view-emacs-debugging :wk "View Emacs debugging")
+      "h d f" '(view-emacs-FAQ :wk "View Emacs FAQ")
+      "h d m" '(info-emacs-manual :wk "The Emacs manual")
+      "h d n" '(view-emacs-news :wk "View Emacs News")
+      "h d o" '(describe-distribution :wk "How to obtain Emacs")
+      "h d p" '(view-emacs-problems :wk "View Emacs problems")
+      "h d t" '(view-emacs-todo :wk "View Emacs todo")
+      "h d w" '(describe-no-warranty :wk "Desc. no warranty")
+      "h e" '(view-echo-area-messages :wk "View echo area messages")
+      "h f" '(describe-function :wk "Desc. function")
+      "h F" '(describe-face :wk "Desc. face")
+      "h g" '(describe-gnu-project :wk "Desc. GNU Project")
+      "h i" '(info :wk "Info")
+      "h I" '(describe-input-method :wk "Desc. input method")
+      "h k" '(describe-key :wk "Desc. key")
+      "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
+      "h L" '(describe-language-environment :wk "Desc. language environment")
+      "h m" '(describe-mode :wk "Desc. mode")
+      "h r" '(:ignore t :wk "Reload")
+      "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :wk "Reload emacs config")
+      "h t" '(load-theme :wk "Load theme")
+      "h v" '(describe-variable :wk "Desc. variable")
+      "h w" '(where-is :wk "Prints keybinding for command if set")
+      "h x" '(describe-command :wk "Desc. command")
+      )
+
+    (my/leader-keys
+      "m" '(:ignore t :wk "Org")
+      )
+
+    (my/leader-keys
+      "o" '(:ignore t :wk "Open")
+      )
+
+    (my/leader-keys
+      "p" '(projectile-command-map :wk "Projectile")
+      )
+
+    (my/leader-keys
+      "s" '(:ignore t :wk "Search")
+      )
+
+    (my/leader-keys
+      "t" '(:ignore t :wk "Toggle")
+      "t t" '(ef-themes-toggle :wk "Switch light/dark theme")
+      )
+
+    (my/leader-keys
+      "w" '(:ignore t :wk "Windows")
+      )
+    
     ) 
 #+end_src
 *** Helpful
