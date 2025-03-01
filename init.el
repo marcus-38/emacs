@@ -78,7 +78,19 @@
 
 (use-package evil
   :ensure t
-  :init (evil-mode 1))
+  :init
+  (setq evil-want-integration t
+        evil-want-keybinding nil
+        evil-vsplit-window-right t
+        evil-split-window-below t
+        evil-undo-system 'undo-redo)
+  (evil-mode 1))
+(use-package evil-collection
+  :ensure t
+  :after evil
+  :config
+  (add-to-list 'evil-collection-mode-list 'help)
+  (evil-collection-init))
 
 (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
 (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
@@ -303,3 +315,12 @@
   :config
   (put 'browse-url-handlers 'safe-local-variable (lambda (x) t))
   (put 'browse-url-browser-function 'safe-local-variable (lambda (x) t)))
+
+(use-package elfeed
+  :ensure t
+  :config
+  (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
+        elfeed-feeds (quote
+                      (("https://www.reddit.com/r/emacs.rss" reddit emacs)
+                       ("https://sachachua.com/blog/category/emacs-news/feed" sacha emacs)
+                       ))))

@@ -222,7 +222,19 @@ Settings that doesn't fit in anywhere else.
 #+begin_src emacs-lisp :tangle init.el
   (use-package evil
     :ensure t
-    :init (evil-mode 1))
+    :init
+    (setq evil-want-integration t
+          evil-want-keybinding nil
+          evil-vsplit-window-right t
+          evil-split-window-below t
+          evil-undo-system 'undo-redo)
+    (evil-mode 1))
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    :config
+    (add-to-list 'evil-collection-mode-list 'help)
+    (evil-collection-init))
 #+end_src
 *** My personal key bindings
 I will try to enter all my personal key bindings here... but some are defined
@@ -629,4 +641,15 @@ TODO work in progress
     (put 'browse-url-handlers 'safe-local-variable (lambda (x) t))
     (put 'browse-url-browser-function 'safe-local-variable (lambda (x) t)))
 #+end_src
-
+** Elfeed
+[[https://github.com/skeeto/elfeed][An Emacs web feeds client]].
+#+begin_src emacs-lisp :tangle init.el
+  (use-package elfeed
+    :ensure t
+    :config
+    (setq elfeed-search-feed-face ":foreground #ffffff :weight bold"
+          elfeed-feeds (quote
+                        (("https://www.reddit.com/r/emacs.rss" reddit emacs)
+                         ("https://sachachua.com/blog/category/emacs-news/feed" sacha emacs)
+                         ))))
+#+end_src
