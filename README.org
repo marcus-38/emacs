@@ -258,6 +258,8 @@ are a lot of them in the =General= section below. Oh my.
   (global-set-key (kbd "C--") 'text-scale-decrease)      ; decrease text size
   (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
   (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+  (global-set-key [escape] 'keyboard-escape-quit)        ; be default, Emacs requires you to hit ESC
+                                                         ; three times to escape quit the minibuffer
 #+end_src
 *** IVY and Counsel
 #+begin_src emacs-lisp :tangle init.el

@@ -104,6 +104,8 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)      ; decrease text size
 (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
 (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+(global-set-key [escape] 'keyboard-escape-quit)        ; be default, Emacs requires you to hit ESC
+                                                       ; three times to escape quit the minibuffer
 
 (use-package counsel
   :ensure t
