@@ -291,3 +291,12 @@
   :config
   (add-to-list 'org-structure-template-alist
 	       '("el" . "src emacs-lisp")))
+
+(use-package browse-url
+  :ensure nil
+  :custom
+  (browse-url-chrome-program "/Application/Google Chrome.app/Contents/MacOS/Google Chrome")
+  (browse-url-browser-function 'eww-browse-url)
+  :config
+  (put 'browse-url-handlers 'safe-local-variable (lambda (x) t))
+  (put 'browse-url-browser-function 'safe-local-variable (lambda (x) t)))

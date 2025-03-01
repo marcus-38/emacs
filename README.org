@@ -547,3 +547,18 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
     (add-to-list 'org-structure-template-alist
   	       '("el" . "src emacs-lisp")))
 #+end_src
+* Internet
+** Browse URL
+TODO work in progress
+
+#+begin_src emacs-lisp :tangle init.el
+  (use-package browse-url
+    :ensure nil
+    :custom
+    (browse-url-chrome-program "/Application/Google Chrome.app/Contents/MacOS/Google Chrome")
+    (browse-url-browser-function 'eww-browse-url)
+    :config
+    (put 'browse-url-handlers 'safe-local-variable (lambda (x) t))
+    (put 'browse-url-browser-function 'safe-local-variable (lambda (x) t)))
+#+end_src
+
