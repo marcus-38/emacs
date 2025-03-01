@@ -64,6 +64,7 @@
 	      indent-tabs-mode nil
 	      fill-column 80
 	      tab-width 4)
+
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (menu-bar-mode t) ; I use a Mac and it looks odd if there is no menu
@@ -226,34 +227,22 @@
   :ensure nil
   :config (winner-mode))
 
-(use-package all-the-icons-ibuffer
-  :ensure t
-  :defer
-  :custom
-  (all-the-icons-ibuffer-formats
-   '((mark modified read-only locked vc-status-mini
-           " " ,(if all-the-icons-ibuffer-icon
-                    '(icon 2 2 :left :elide)
-                  "")
-           ,(if all-the-icons-ibuffer-icon
-                (propertize " " 'display `(space :align-to 8))
-              "")
-           (name 18 18 :left :elide)
-           " " (size-h 9 -1 :right)
-           " " (mode+ 16 16 :left :elide)
-           " " (vc-status 16 16 :left)
-           " " vc-relative-file)
-     (mark "" (name 16 -1) " " filename)))
-   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
-
-(use-package ibuffer-vc
-  :ensure t
-  :hook (ibuffer . (lambda ()
-                     (ibuffer-vc-set-filter-groups-by-vc-root)
-                     (unless (eq ibuffer-sorting-mode 'alphabetic)
-                       (ibuffer-do-sort-by-vc-status)
-                       )
-                     )))
+(global-set-key (kbd "C-x C-b") 'ibuffer) ; instead of buffer-list
+(setq ibuffer-expert t)                   ; stop yes no prompt on delete
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("dired" (mode . dired-mode))
+               ("org" (mode . org-mode))
+               ("magit" (name . "^magit"))
+               ("planner" (or
+                           (name . "^\\*Calendar\\*$")
+                           (name . "^\\*Org Agenda\\*$")))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")))
+               ))))
+(add-hook 'ibuffer-mode-hook (lambda ()
+                               (ibuffer-switch-to-saved-filter-groups "default")))
 
 (use-package dashboard
   :ensure t
@@ -274,14 +263,14 @@
                                    (agenda . "a")
                                    (registers . "e")))
   (setq dashboard-navigation-cycle t
-        dashboard-display-icons-p t
-        dashboard-icon-type 'nerd-icons
-        dashboard-set-heading-icons t
-        dashboard-set-file-icons t
-        dashboard-icon-file-height 1.75
-        dashboard-icon-file-v-adjust -0.125
-        dashboard-heading-icon-height 1.75
-        dashboard-heading-icon-v-adjust -0.125)
+        dashboard-display-icons-p t)
+        ;dashboard-icon-type 'nerd-icons
+        ;dashboard-set-heading-icons t
+        ;dashboard-set-file-icons t
+        ;dashboard-icon-file-height 1.75
+        ;dashboard-icon-file-v-adjust -0.125
+        ;dashboard-heading-icon-height 1.75
+        ;dashboard-heading-icon-v-adjust -0.125)
   :init
   (dashboard-setup-startup-hook))
 
