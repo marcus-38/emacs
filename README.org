@@ -27,7 +27,7 @@ If you want to learn more about Org:
 - [[https://www.gnu.org/software/emacs/manual/index.html][GNU Emacs Manuals Online]]
   
 * Table of Contents :TOC_4:
-* File Headers
+* Generate files and file headers
 The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
 use this configuration as is.
 
@@ -69,6 +69,17 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 ;; Here be dragons
 
 ;; Code:
+#+end_src
+
+** custom.el
+In Emacs, a custom file is used to store customization settings seperately
+from the main init file, allowing for easier management of user preferences.
+I use this literate org-file but I like to separate the preferences all the same.
+
+#+begin_src emacs-lisp :tangle init.el
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file))
 #+end_src
 
 * Package Manager
