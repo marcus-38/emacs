@@ -249,6 +249,67 @@ in the MacOS keyboard settings and some are defined in other places. Oh my.
   (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
   (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
   (global-set-key (kbd "C-c p") 'projectile-command-map) ; projectile command map
+  (global-set-key (kbd "C-+") 'text-scale-increase)      ; increase text size
+  (global-set-key (kbd "C--") 'text-scale-decrease)      ; decrease text size
+  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+#+end_src
+*** IVY and Counsel
+#+begin_src emacs-lisp :tangle init.el
+  (use-package counsel
+    :ensure t
+    :after ivy
+    :diminish
+    :config
+    (counsel-mode)
+    (setq ivy-initial-inputs-alist nil))
+
+  (use-package ivy
+    :ensure t
+    :bind
+    (("C-c C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :diminish
+    :custom
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) "
+          enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
+
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
+
+  (use-package ivy-rich
+    :ensure t
+    :after ivy
+    :init (ivy-rich-mode 1)
+    :custom (ivy-virtual-abbreviate 'full
+                                    ivy-rich-switch-buffer-align-virtual-buffer t
+                                    ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+                                 'ivy-rich-switch-buffer-transformer))
+#+end_src
+*** General key binding
+[[https://github.com/noctuid/general.el][General]] is a more convenient key definition system in Emacs.
+#+begin_src emacs-lisp :tangle init.el
+  (use-package general
+    :ensure t
+    :config
+    (general-evil-setup)
+    ;; set up "SPC" as the global leader key
+    (general-create-definer my/leader-keys
+                            :states '(normal insert visual emacs)
+                            :keymaps 'override
+                            :prefix "SPC"
+                            :global-prefix "M-SPC") ; access leader key in insert mode
+    (my/leader-keys
+     "SPC" '(counsel-M-x :wk "Counsel M-x")
+     "." '(find-file :wk "Find file")
+     )
+    ) 
 #+end_src
 *** Helpful
 [[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
