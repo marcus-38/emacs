@@ -67,6 +67,7 @@ If you want to learn more about Org:
     - [[#projectile][Projectile]]
 - [[#org][Org]]
   - [[#org][Org]]
+  - [[#org-make-toc][Org make-toc]]
   - [[#org-tempo][Org tempo]]
 - [[#internet][Internet]]
   - [[#browse-url][Browse URL]]
