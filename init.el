@@ -287,6 +287,8 @@
 (use-package org
   :ensure t)
 
+(add-to-list 'org-tag-alist '("TOC" . ?T))
+
 (use-package org-tempo
   :config
   (add-to-list 'org-structure-template-alist

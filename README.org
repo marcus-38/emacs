@@ -1,7 +1,7 @@
 #+TITLE: My literate Emacs Configuration
 #+AUTHOR: Marcus
 
-* Emacs Configuration
+* Emacs Configuration 
 
 =WARNING=
 
@@ -26,7 +26,14 @@ If you want to learn more about Org:
 - [[https://www.gnu.org/software/emacs/tour/][A guided tour of Emacs]]
 - [[https://www.gnu.org/software/emacs/manual/index.html][GNU Emacs Manuals Online]]
   
-* Table of Contents :TOC_4:
+* Table of Contents
+:PROPERTIES:
+:TOC:
+:END:
+:CONTENTS:
+
+:END:
+
 * Generate files and file headers
 The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
 use this configuration as is.
@@ -327,6 +334,7 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
   (use-package doom-themes
     :ensure t)
 #+end_src
+
 *** Modeline
 [[https://github.com/seagle0128/doom-modeline][Doom modeline]] is used to cleanup and configure the modeline.
 
@@ -509,7 +517,7 @@ by using Magit.
     )
 #+end_src
 * Org
-** Org
+** Org                                                              
 Why usse Emacs? Because [[https://orgmode.org/][Org-mode]] exists. Org-mode is a  GNU Emacs major mode for
 keeping notes, authoring documents, computational notebooks, literate programming,
 maintaining to-do lists, planning projects, and more — in a fast and effective
@@ -520,6 +528,8 @@ This configuration file is writen with org-mode.
 #+begin_src emacs-lisp :tangle init.el
   (use-package org
     :ensure t)
+
+  (add-to-list 'org-tag-alist '("TOC" . ?T))
 #+end_src
 ** Org tempo
 With [[https://orgmode.org/manual/Structure-Templates.html][structure templates]] it is possible to insert empty structural blocks,
