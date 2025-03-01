@@ -69,9 +69,12 @@
 	      fill-column 80
 	      tab-width 4)
 
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(menu-bar-mode t) ; I use a Mac and it looks odd if there is no menu
+(tool-bar-mode -1)                 ; Disable the tool-bar.
+(scroll-bar-mode -1)               ; Specify whether to have vertical scroll bars, and on which side.
+(menu-bar-mode t)                  ; I use a Mac and it looks odd if there is no menu
+
+(setq load-prefer-newer t)         ; Non-nil means load prefers the newest version of a file.
+(setq tab-always-indent 'complete) ; Controls the operation of the TAB key.
 
 (use-package evil
   :ensure t
