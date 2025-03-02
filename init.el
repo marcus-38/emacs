@@ -67,6 +67,7 @@
 	      c-default-style "linux"  ; Style which gets installed by default when a file is visited.
 	      indent-tabs-mode nil     ; Don't insert tabs
 	      fill-column 80           ; Column beyond which automatic line-wrapping should happen.
+          column-number-mode t     ; Show column number in modeline.
 	      tab-width 4)             ; Distance between tab stops, in columns.
 
 (tool-bar-mode -1)                 ; Disable the tool-bar.

@@ -53,7 +53,7 @@ If you want to learn more about Org:
     - [[#marginalia][Marginalia]]
     - [[#orderless][Orderless]]
     - [[#emacs-minibuffer-configurations][Emacs minibuffer configurations]]
-  - [[#themes-and-fonts][Themes and Fonts]]
+  - [[#themes-modeline-and-fonts][Themes, modeline and Fonts]]
     - [[#ef-themes][EF-themes]]
     - [[#doom-themes][Doom Themes]]
     - [[#modeline][Modeline]]
@@ -276,6 +276,7 @@ Settings that doesn't fit in anywhere else.
   	      c-default-style "linux"  ; Style which gets installed by default when a file is visited.
   	      indent-tabs-mode nil     ; Don't insert tabs
   	      fill-column 80           ; Column beyond which automatic line-wrapping should happen.
+            column-number-mode t     ; Show column number in modeline.
   	      tab-width 4)             ; Distance between tab stops, in columns.
 
   (tool-bar-mode -1)                 ; Disable the tool-bar.
@@ -381,9 +382,9 @@ and literal matches are enabled.
     (minibuffer-prompt-properties
      '(read-only t cursor-intangible t face minibuffer-prompt)))
 #+end_src
-** Themes and Fonts
+** Themes, modeline and Fonts
 :PROPERTIES:
-:CUSTOM_ID: themes-and-fonts
+:CUSTOM_ID: themes-modeline-and-fonts
 :END:
 Some packages, such as EF-themes, I download myself into =~/.emacs.d/manual-packages/<package>=.
 To be able to use these packages I first add the path to the =load-path= list and then =require=
