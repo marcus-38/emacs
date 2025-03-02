@@ -272,24 +272,24 @@ My prefered keyboard settings when on a Mac.
 Settings that doesn't fit in anywhere else.
 
 #+begin_src emacs-lisp :tangle init.el
-  (setq-default c-basic-offset 4     ; Amount of basic offset used by + and - symbols in 'c-offsets-alist'. 
-  	      c-default-style "linux"  ; Style which gets installed by default when a file is visited.
-  	      indent-tabs-mode nil     ; Don't insert tabs
-  	      fill-column 80           ; Column beyond which automatic line-wrapping should happen.
-            column-number-mode t     ; Show column number in modeline.
-  	      tab-width 4)             ; Distance between tab stops, in columns.
+  (setq-default c-basic-offset 4 ; Amount of basic offset used by + and - symbols in 'c-offsets-alist'. 
+  	      c-default-style "linux" ; Style which gets installed by default when a file is visited.
+  	      indent-tabs-mode nil ; Don't insert tabs
+  	      fill-column 80 ; Column beyond which automatic line-wrapping should happen.
+            column-number-mode t ; Show column number in modeline.
+  	      tab-width 4) ; Distance between tab stops, in columns.
 
-  (tool-bar-mode -1)                 ; Disable the tool-bar.
-  (scroll-bar-mode -1)               ; Specify whether to have vertical scroll bars, and on which side.
-  (menu-bar-mode t)                  ; I use a Mac and it looks odd if there is no menu
+  (tool-bar-mode -1) ; Disable the tool-bar.
+  (scroll-bar-mode -1) ; Specify whether to have vertical scroll bars, and on which side.
+  (menu-bar-mode t) ; I use a Mac and it looks odd if there is no menu
 
-  (setq load-prefer-newer t)         ; Non-nil means load prefers the newest version of a file.
+  (setq load-prefer-newer t) ; Non-nil means load prefers the newest version of a file.
   (setq tab-always-indent 'complete) ; Controls the operation of the TAB key.
 
-  (delete-selection-mode 1)          ; select text and delete it by typing.
-  (setq org-support-shift-select t)  ; Non-nil means make shift-cursor select text when possible.
+  (delete-selection-mode 1) ; select text and delete it by typing.
+  (setq org-support-shift-select t) ; Non-nil means make shift-cursor select text when possible.
 
-  (global-hl-line-mode 1)            ; Highlight the current line in Emacs.
+  (global-hl-line-mode 1) ; Highlight the current line in Emacs.
 
   (setq display-line-numbers 'relative) ; Show relative line numbers
 #+end_src
