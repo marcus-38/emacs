@@ -549,7 +549,6 @@
 (defun my/update-toc-before-save-hook ()
   "Update TOC before saving buffer in org-mode"
   (when (eq major-mode 'org-mode)
-    (message "Updateing TOC")
     (org-make-toc)
     ))
 
