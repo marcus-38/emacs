@@ -76,6 +76,9 @@
 (setq load-prefer-newer t)         ; Non-nil means load prefers the newest version of a file.
 (setq tab-always-indent 'complete) ; Controls the operation of the TAB key.
 
+(delete-selection-mode 1)          ; select text and delete it by typing.
+(setq org-support-shift-select t)  ; Non-nil means make shift-cursor select text when possible.
+
 (use-package which-key
   :ensure t
   :delight
@@ -180,6 +183,16 @@
                     :slant 'italic)
 (set-face-attribute 'font-lock-keyword-face nil
                     :slant 'italic)
+
+(use-package beacon
+  :ensure t
+  :config
+  (setq beacon-blink-duration 0.5
+        beacon-blink-when-window-scrolls t
+        beacon-blink-when-window-changes t
+        beacon-blink-when-point-moves t)
+  :init
+  (beacon-mode 1))
 
 (use-package all-the-icons
   :ensure t

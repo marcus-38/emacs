@@ -58,6 +58,7 @@ If you want to learn more about Org:
     - [[#doom-themes][Doom Themes]]
     - [[#modeline][Modeline]]
     - [[#fonts][Fonts]]
+    - [[#where-is-my-cursor][Where is my cursor]]
     - [[#icons][Icons]]
     - [[#windows][Windows]]
 - [[#keybindings][Keybindings]]
@@ -283,6 +284,10 @@ Settings that doesn't fit in anywhere else.
 
   (setq load-prefer-newer t)         ; Non-nil means load prefers the newest version of a file.
   (setq tab-always-indent 'complete) ; Controls the operation of the TAB key.
+
+  (delete-selection-mode 1)          ; select text and delete it by typing.
+  (setq org-support-shift-select t)  ; Non-nil means make shift-cursor select text when possible.
+
 #+end_src
 ** Minibuffer
 :PROPERTIES:
@@ -482,6 +487,22 @@ Setting the font faces.
                       :slant 'italic)
 #+end_src
 
+*** Where is my cursor
+:PROPERTIES:
+:CUSTOM_ID: where-is-my-cursor
+:END:
+[[https://github.com/Malabarba/beacon][Beacon]] is a light that follows your cursor around so you don't lose it.
+#+begin_src emacs-lisp :tangle init.el
+  (use-package beacon
+    :ensure t
+    :config
+    (setq beacon-blink-duration 0.5
+          beacon-blink-when-window-scrolls t
+          beacon-blink-when-window-changes t
+          beacon-blink-when-point-moves t)
+    :init
+    (beacon-mode 1))
+#+end_src
 *** Icons
 :PROPERTIES:
 :CUSTOM_ID: icons
