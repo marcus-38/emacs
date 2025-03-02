@@ -491,6 +491,7 @@ Setting the font faces.
 :PROPERTIES:
 :CUSTOM_ID: where-is-my-cursor
 :END:
+**** Beacon
 [[https://github.com/Malabarba/beacon][Beacon]] is a light that follows your cursor around so you don't lose it.
 #+begin_src emacs-lisp :tangle init.el
   (use-package beacon
@@ -502,6 +503,19 @@ Setting the font faces.
           beacon-blink-when-point-moves t)
     :init
     (beacon-mode 1))
+#+end_src
+**** Pulsar
+[[https://github.com/protesilaos/pulsar][Pulsar]] is an Emacs package that pulse the current line after running select functions.
+#+begin_src emacs-lisp :tangle init.el
+  (add-to-list 'load-path "~/.emacs.d/manual-packages/pulsar")
+  (require 'pulsar)
+  (setq pulsar-pulse t
+        pulsar-delay 0.055
+        pulsar-iterations 10
+        pulsar-face 'pulsar-magenta
+        pulsar-highlight-face 'pulsar-yellow
+        )
+  (pulsar-global-mode 1)
 #+end_src
 *** Icons
 :PROPERTIES:

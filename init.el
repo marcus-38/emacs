@@ -194,6 +194,16 @@
   :init
   (beacon-mode 1))
 
+(add-to-list 'load-path "~/.emacs.d/manual-packages/pulsar")
+(require 'pulsar)
+(setq pulsar-pulse t
+      pulsar-delay 0.055
+      pulsar-iterations 10
+      pulsar-face 'pulsar-magenta
+      pulsar-highlight-face 'pulsar-yellow
+      )
+(pulsar-global-mode 1)
+
 (use-package all-the-icons
   :ensure t
   :if (display-graphic-p))
