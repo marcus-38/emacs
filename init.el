@@ -524,6 +524,8 @@
     "t t" '(ef-themes-toggle :wk "Switch light/dark theme")
     "t e" '(eshell-toggle :wk "Toggle Eshell")
     "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
+    "t r" '((lambda() (interactive) (setq display-line-numbers 'relative)) :wk "Relative line numbers")
+    "t o" '((lambda() (interactive) (setq display-line-numbers 't)) :wk "Ordinary line numbers")
     )
 
   (my/leader-keys
