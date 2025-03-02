@@ -17,6 +17,7 @@ recentf
 custom.el
 history
 url/
+tldr/
 manual-packages/
 packages/
 transient/

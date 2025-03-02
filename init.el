@@ -458,11 +458,23 @@
 
   (my/leader-keys
     "m" '(:ignore t :wk "Org")
-    "m i" '(org-id-get-create :wk "Add org-id")
+    "m a" '(org-agenda :wk "Org agenda")
+    "m e" '(org-export-dispatch :wk "Org export dispatch")
+    "m i" '(org-toggle-item :wk "Org toggle item")
+    "m t" '(org-todo :wk "Org todo")
+    "m B" '(org-babel-tangle :wk "Org babel tangle")
+    "m T" '(org-todo-list :wk "Org todo list")
+    "m b" '(:ignore t :wk "Tables")
+    "m b -" '(org-table-insert-hline :wk "Insert hline in table")
+    "m d" '(:ignore t :wk "Date/deadline")
+    "m d t" '(org-time-stamp :wk "Org time stamp")
     )
+  
 
   (my/leader-keys
     "o" '(:ignore t :wk "Open")
+    "o d" '(dashboard-open :wk "Dashboard")
+    "o e" '(elfeed :wk "Elfeed")
     )
 
   (my/leader-keys
@@ -471,6 +483,9 @@
 
   (my/leader-keys
     "s" '(:ignore t :wk "Search")
+    "s d" '(dictionary-search :wk "Search dictioinary")
+    "s m" '(man :wk "Man pages")
+    "s t" '(tldr :wk "Lookup TLDR docs for a command")
     )
 
   (my/leader-keys
@@ -481,6 +496,15 @@
 
   (my/leader-keys
     "w" '(:ignore t :wk "Windows")
+    "w c" '(evil-window-delete :wk "Close window")
+    "w n" '(evil-window-new :wk "New window")
+    "w s" '(evil-window-split :wk "Horizontal split window")
+    "w v" '(evil-window-vsplit :wk "Vertical split window")
+    "w h" '(evil-window-left :wk "Window left")
+    "w j" '(evil-window-down :wk "Window down")
+    "w l" '(evil-window-right :wk "Window right")
+    "w k" '(evil-window-up :wk "Window up")
+    "w w" '(evil-window-next :wk "Next window")
     )
   
   )
@@ -506,6 +530,9 @@
   :ensure t
   :defer
   :init (move-text-default-bindings))
+
+(use-package tldr
+  :ensure t)
 
 (use-package magit
   :ensure t)
