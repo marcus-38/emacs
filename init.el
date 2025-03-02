@@ -76,6 +76,198 @@
 (setq load-prefer-newer t)         ; Non-nil means load prefers the newest version of a file.
 (setq tab-always-indent 'complete) ; Controls the operation of the TAB key.
 
+(use-package which-key
+  :ensure t
+  :delight
+  :custom (which-key-idle-delay 0.5)
+  :config (which-key-mode))
+
+(use-package vertico
+  :ensure t
+  :init (vertico-mode)
+  :bind (:map vertico-map
+	      ("C-<backspace>" . vertico-directory-up))
+  :config
+  (keymap-set vertico-map "?" #'minibuffer-completion-help)
+  (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+  (keymap-set vertico-map "M-TAB" #'minibuffer-complete))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+
+(use-package marginalia
+  :ensure t
+  :after vertico
+  :init (marginalia-mode)
+  :custom
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles . (partial-completion)))))
+  (completion-styles '(orderless)))
+
+(use-package emacs
+  :custom
+  (enable-recursive-minibuffers t)
+  (read-extended-command-predicate #'command-completion-default-include-p)
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt)))
+
+(add-to-list 'load-path "~/.emacs.d/manual-packages/ef-themes")
+    (require 'ef-themes)
+    (setq ef-themes-to-toggle '(ef-arbutus ef-elea-dark))
+    (setq ef-themes-headings
+    	'((0 variable-pitch light 1.9)
+    	  (1 variable-pitch light 1.8)
+    	  (2 variable-pitch regular 1.7)
+    	  (3 variable-pitch regular 1.6)
+    	  (4 variable-pitch regular 1.5)
+    	  (5 variable-pitch 1.4) ; absence of weight means 'bold'
+    	  (6 variable-pitch 1.3)
+    	  (7 variable-pitch 1.2)
+    	  (t variable-pitch 1.1)))
+  (setq ef-themes-mixed-fonts t
+        ef-themes-variable-pitch-ui t)
+(mapc #'disable-theme custom-enabled-themes) ; disable all other themes to avoid awkward blending
+(load-theme 'ef-arbutus :no-confirm)
+
+(use-package doom-themes
+  :ensure t)
+
+(use-package doom-modeline
+  :ensure t
+  :config
+  (setq
+   doom-modeline-support-imenu t
+   doom-modeline-icon t
+   doom-modeline-major-mode-icon t
+   doom-modeline-buffer-state-icon t
+   doom-modeline-buffer-modification-icon t
+   doom-modeline-column-zero-based t
+   doom-modeline-highlight-modified-buffer-name nil
+   doom-modeline-percent-position '(-3 "%p")
+   doom-modeline-position-column-line-format '("%l:%c")
+   doom-modeline-total-line-number t
+   doom-modeline-modal t
+   doom-modeline-modal-modern-icon t
+   doom-modeline-time t
+   )
+  (setq doom-modeline-height 25)
+  (if (facep 'mode-line-active)
+      (set-face-attribute 'mode-line-active nil :family "Noto Sans" :height 140)
+    (set-face-attribute 'mode-line nil :family "Noto Sans" :height 140)
+    (set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 140))
+  :init
+  (doom-modeline-mode 1))
+
+(set-face-attribute 'default nil
+                    :font "Iosevka Fixed"
+                    :height 160
+                    :weight 'medium)
+(set-face-attribute 'variable-pitch nil
+                    :font "Iosevka"
+                    :height 150
+                    :weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+                    :font "Iosevka Fixed"
+                    :height 160
+                    :weight 'medium)
+(set-face-attribute 'font-lock-comment-face nil
+                    :slant 'italic)
+(set-face-attribute 'font-lock-keyword-face nil
+                    :slant 'italic)
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-completion
+  :ensure t
+  :defer
+  :hook (marginalia-mode . #'all-the-icons-completion-marginalia-setup)
+  :init
+  (all-the-icons-completion-mode))
+
+(use-package nerd-icons
+  :ensure t)
+
+(use-package window
+  :ensure nil
+  :bind (("C-x 2" . vsplit-last-buffer)
+         ("C-x 3" . hsplit-last-buffer)
+         ([remap kill-buffer] . kill-this-buffer))
+  :preface
+  (defun hsplit-last-buffer ()
+    "Focus to the last created horizontal window."
+    (interactive)
+    (split-window-horizontally)
+    (other-window 1))
+  (defun vsplit-last-buffer ()
+    "Focus to the last created vertical window."
+    (interactive)
+    (split-window-vertically)
+    (other-window 1)))
+
+(use-package switch-window
+  :ensure t
+  :bind (("C-x o" . switch-window)
+         ("C-x w" . switch-window-then-swap-buffer)))
+
+(use-package winner
+  :ensure nil
+  :config (winner-mode))
+
+(global-set-key (kbd "C-x C-b") 'ibuffer) ; instead of buffer-list
+(setq ibuffer-expert t)                   ; stop yes no prompt on delete
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("dired" (mode . dired-mode))
+               ("org" (mode . org-mode))
+               ("magit" (name . "^magit"))
+               ("planner" (or
+                           (name . "^\\*Calendar\\*$")
+                           (name . "^\\*Org Agenda\\*$")))
+               ("emacs" (or
+                         (name . "^\\*scratch\\*$")
+                         (name . "^\\*Messages\\*$")))
+               ))))
+(add-hook 'ibuffer-mode-hook (lambda ()
+                               (ibuffer-switch-to-saved-filter-groups "default")))
+
+(use-package dashboard
+  :ensure t
+  :config
+  (setq dashboard-banner-logo-text "Emacs, what else?"
+        dashboard-startup-banner 'official
+        dashboard-center-content t
+        dashboard-vertically-center-content t
+        dashboard-show-shortcuts t)
+  (setq dashboard-items '((recents . 10)
+                          (bookmarks . 10)
+                          (projects . 10)
+                          (agenda . 10)
+                          (registers . 10)))
+  (setq dashboard-item-shortcuts '((recents . "r")
+                                   (bookmarks . "b")
+                                   (projects . "p")
+                                   (agenda . "a")
+                                   (registers . "e")))
+  (setq dashboard-navigation-cycle t
+        dashboard-display-icons-p t)
+        ;dashboard-icon-type 'nerd-icons
+        ;dashboard-set-heading-icons t
+        ;dashboard-set-file-icons t
+        ;dashboard-icon-file-height 1.75
+        ;dashboard-icon-file-v-adjust -0.125
+        ;dashboard-heading-icon-height 1.75
+        ;dashboard-heading-icon-v-adjust -0.125)
+  :init
+  (dashboard-setup-startup-hook))
+
 (use-package evil
   :ensure t
   :init
@@ -315,198 +507,6 @@
   :defer
   :init (move-text-default-bindings))
 
-(use-package which-key
-  :ensure t
-  :delight
-  :custom (which-key-idle-delay 0.5)
-  :config (which-key-mode))
-
-(use-package vertico
-  :ensure t
-  :init (vertico-mode)
-  :bind (:map vertico-map
-	      ("C-<backspace>" . vertico-directory-up))
-  :config
-  (keymap-set vertico-map "?" #'minibuffer-completion-help)
-  (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
-  (keymap-set vertico-map "M-TAB" #'minibuffer-complete))
-
-(use-package savehist
-  :init
-  (savehist-mode))
-
-(use-package marginalia
-  :ensure t
-  :after vertico
-  :init (marginalia-mode)
-  :custom
-  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
-
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles . (partial-completion)))))
-  (completion-styles '(orderless)))
-
-(use-package emacs
-  :custom
-  (enable-recursive-minibuffers t)
-  (read-extended-command-predicate #'command-completion-default-include-p)
-  (minibuffer-prompt-properties
-   '(read-only t cursor-intangible t face minibuffer-prompt)))
-
-(add-to-list 'load-path "~/.emacs.d/manual-packages/ef-themes")
-    (require 'ef-themes)
-    (setq ef-themes-to-toggle '(ef-arbutus ef-elea-dark))
-    (setq ef-themes-headings
-    	'((0 variable-pitch light 1.9)
-    	  (1 variable-pitch light 1.8)
-    	  (2 variable-pitch regular 1.7)
-    	  (3 variable-pitch regular 1.6)
-    	  (4 variable-pitch regular 1.5)
-    	  (5 variable-pitch 1.4) ; absence of weight means 'bold'
-    	  (6 variable-pitch 1.3)
-    	  (7 variable-pitch 1.2)
-    	  (t variable-pitch 1.1)))
-  (setq ef-themes-mixed-fonts t
-        ef-themes-variable-pitch-ui t)
-(mapc #'disable-theme custom-enabled-themes) ; disable all other themes to avoid awkward blending
-(load-theme 'ef-arbutus :no-confirm)
-
-(use-package doom-themes
-  :ensure t)
-
-(use-package doom-modeline
-  :ensure t
-  :config
-  (setq
-   doom-modeline-support-imenu t
-   doom-modeline-icon t
-   doom-modeline-major-mode-icon t
-   doom-modeline-buffer-state-icon t
-   doom-modeline-buffer-modification-icon t
-   doom-modeline-column-zero-based t
-   doom-modeline-highlight-modified-buffer-name nil
-   doom-modeline-percent-position '(-3 "%p")
-   doom-modeline-position-column-line-format '("%l:%c")
-   doom-modeline-total-line-number t
-   doom-modeline-modal t
-   doom-modeline-modal-modern-icon t
-   doom-modeline-time t
-   )
-  (setq doom-modeline-height 25)
-  (if (facep 'mode-line-active)
-      (set-face-attribute 'mode-line-active nil :family "Noto Sans" :height 140)
-    (set-face-attribute 'mode-line nil :family "Noto Sans" :height 140)
-    (set-face-attribute 'mode-line-inactive nil :family "Noto Sans" :height 140))
-  :init
-  (doom-modeline-mode 1))
-
-(set-face-attribute 'default nil
-                    :font "Iosevka Fixed"
-                    :height 160
-                    :weight 'medium)
-(set-face-attribute 'variable-pitch nil
-                    :font "Iosevka"
-                    :height 150
-                    :weight 'medium)
-(set-face-attribute 'fixed-pitch nil
-                    :font "Iosevka Fixed"
-                    :height 160
-                    :weight 'medium)
-(set-face-attribute 'font-lock-comment-face nil
-                    :slant 'italic)
-(set-face-attribute 'font-lock-keyword-face nil
-                    :slant 'italic)
-
-(use-package all-the-icons
-  :ensure t
-  :if (display-graphic-p))
-
-(use-package all-the-icons-completion
-  :ensure t
-  :defer
-  :hook (marginalia-mode . #'all-the-icons-completion-marginalia-setup)
-  :init
-  (all-the-icons-completion-mode))
-
-(use-package nerd-icons
-  :ensure t)
-
-(use-package window
-  :ensure nil
-  :bind (("C-x 2" . vsplit-last-buffer)
-         ("C-x 3" . hsplit-last-buffer)
-         ([remap kill-buffer] . kill-this-buffer))
-  :preface
-  (defun hsplit-last-buffer ()
-    "Focus to the last created horizontal window."
-    (interactive)
-    (split-window-horizontally)
-    (other-window 1))
-  (defun vsplit-last-buffer ()
-    "Focus to the last created vertical window."
-    (interactive)
-    (split-window-vertically)
-    (other-window 1)))
-
-(use-package switch-window
-  :ensure t
-  :bind (("C-x o" . switch-window)
-         ("C-x w" . switch-window-then-swap-buffer)))
-
-(use-package winner
-  :ensure nil
-  :config (winner-mode))
-
-(global-set-key (kbd "C-x C-b") 'ibuffer) ; instead of buffer-list
-(setq ibuffer-expert t)                   ; stop yes no prompt on delete
-(setq ibuffer-saved-filter-groups
-      (quote (("default"
-               ("dired" (mode . dired-mode))
-               ("org" (mode . org-mode))
-               ("magit" (name . "^magit"))
-               ("planner" (or
-                           (name . "^\\*Calendar\\*$")
-                           (name . "^\\*Org Agenda\\*$")))
-               ("emacs" (or
-                         (name . "^\\*scratch\\*$")
-                         (name . "^\\*Messages\\*$")))
-               ))))
-(add-hook 'ibuffer-mode-hook (lambda ()
-                               (ibuffer-switch-to-saved-filter-groups "default")))
-
-(use-package dashboard
-  :ensure t
-  :config
-  (setq dashboard-banner-logo-text "Emacs, what else?"
-        dashboard-startup-banner 'official
-        dashboard-center-content t
-        dashboard-vertically-center-content t
-        dashboard-show-shortcuts t)
-  (setq dashboard-items '((recents . 10)
-                          (bookmarks . 10)
-                          (projects . 10)
-                          (agenda . 10)
-                          (registers . 10)))
-  (setq dashboard-item-shortcuts '((recents . "r")
-                                   (bookmarks . "b")
-                                   (projects . "p")
-                                   (agenda . "a")
-                                   (registers . "e")))
-  (setq dashboard-navigation-cycle t
-        dashboard-display-icons-p t)
-        ;dashboard-icon-type 'nerd-icons
-        ;dashboard-set-heading-icons t
-        ;dashboard-set-file-icons t
-        ;dashboard-icon-file-height 1.75
-        ;dashboard-icon-file-v-adjust -0.125
-        ;dashboard-heading-icon-height 1.75
-        ;dashboard-heading-icon-v-adjust -0.125)
-  :init
-  (dashboard-setup-startup-hook))
-
 (use-package magit
   :ensure t)
 
@@ -516,19 +516,32 @@
 (use-package org-make-toc
   :ensure t)
 
-(defun my-update-toc-before-save-hook ()
+(defun my/update-toc-before-save-hook ()
   "Update TOC before saving buffer in org-mode"
   (when (eq major-mode 'org-mode)
     (message "Updateing TOC")
     (org-make-toc)
     ))
 
-(add-hook 'before-save-hook #'my-update-toc-before-save-hook)
+(add-hook 'before-save-hook #'my/update-toc-before-save-hook)
+
+(defun my/org-add-ids-to-headlines-in-file ()
+  "Add ID properites to all headlines in the current file which do not already have one."
+  (interactive)
+  (org-map-entries 'org-id-get-create))
+
+(add-hook 'org-mode-hook
+          (lambda () (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
 
 (use-package org-tempo
   :config
   (add-to-list 'org-structure-template-alist
 	       '("el" . "src emacs-lisp")))
+
+(use-package org-bullets
+  :ensure t
+  )
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 (use-package browse-url
   :ensure nil

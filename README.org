@@ -2,6 +2,9 @@
 #+AUTHOR: Marcus
 
 * Emacs Configuration 
+:PROPERTIES:
+:ID:       emacs-configuration
+:END:
 
 =WARNING=
 
@@ -28,7 +31,8 @@ If you want to learn more about Org:
   
 * Table of Contents
 :PROPERTIES:
-:TOC:      :include all :depth 4 :force (nothing) :ignore (this) :local (nothing)
+:TOC:      :include all :depth 4 :ignore (this) 
+:ID:       484856C8-B2D9-4C7A-83C1-0D48CDE89C73
 :END:
 :CONTENTS:
 - [[#emacs-configuration][Emacs Configuration]]
@@ -44,13 +48,6 @@ If you want to learn more about Org:
   - [[#macos-keyboard-settings][MacOS keyboard settings]]
 - [[#look-and-feel][Look and Feel]]
   - [[#misc-settings][Misc settings]]
-  - [[#keybindings][Keybindings]]
-    - [[#evil][Evil]]
-    - [[#my-personal-key-bindings][My personal key bindings]]
-    - [[#ivy-and-counsel][IVY and Counsel]]
-    - [[#general-key-binding][General key binding]]
-    - [[#helpful][Helpful]]
-    - [[#move-text][Move text]]
   - [[#minibuffer][Minibuffer]]
     - [[#which-key][Which key]]
     - [[#vertico][Vertico]]
@@ -65,6 +62,13 @@ If you want to learn more about Org:
     - [[#fonts][Fonts]]
     - [[#icons][Icons]]
     - [[#windows][Windows]]
+- [[#keybindings][Keybindings]]
+  - [[#evil][Evil]]
+  - [[#my-personal-key-bindings][My personal key bindings]]
+  - [[#ivy-and-counsel][IVY and Counsel]]
+  - [[#general-key-binding][General key binding]]
+  - [[#helpful][Helpful]]
+  - [[#move-text][Move text]]
 - [[#programming][Programming]]
   - [[#version-control][Version control]]
     - [[#magit][Magit]]
@@ -74,6 +78,7 @@ If you want to learn more about Org:
   - [[#org][Org]]
   - [[#org-make-toc][Org make-toc]]
   - [[#org-tempo][Org tempo]]
+  - [[#org-bullets][Org bullets]]
 - [[#internet][Internet]]
   - [[#browse-url][Browse URL]]
   - [[#elfeed][Elfeed]]
@@ -279,291 +284,6 @@ Settings that doesn't fit in anywhere else.
 
   (setq load-prefer-newer t)         ; Non-nil means load prefers the newest version of a file.
   (setq tab-always-indent 'complete) ; Controls the operation of the TAB key.
-#+end_src
-** Keybindings
-:PROPERTIES:
-:ID:       72A6F9BB-1A72-4B97-AA4B-13D2547BB0A1
-:END:
-*** Evil
-:PROPERTIES:
-:ID:       FB3F22F7-AD87-49B3-BD8C-8F4F80E02A09
-:END:
-[[https://github.com/emacs-evil/evil][Evil]] is an extensible *vi* layer for Emacs.
-
-#+begin_src emacs-lisp :tangle init.el
-  (use-package evil
-    :ensure t
-    :init
-    (setq evil-want-integration t
-          evil-want-keybinding nil
-          evil-vsplit-window-right t
-          evil-split-window-below t
-          evil-undo-system 'undo-redo)
-    (evil-mode 1))
-  (use-package evil-collection
-    :ensure t
-    :after evil
-    :config
-    (add-to-list 'evil-collection-mode-list 'help)
-    (evil-collection-init))
-  (with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map (kbd "SPC") nil)
-    (define-key evil-motion-state-map (kbd "RET") nil)
-    (define-key evil-motion-state-map (kbd "TAB") nil))
-  (setq org-return-follows-link t)
-#+end_src
-*** My personal key bindings
-:PROPERTIES:
-:ID:       16D646B4-5F9E-4465-837F-B463C73FEADB
-:END:
-I will try to enter all my personal key bindings here... but some are defined
-in the MacOS keyboard settings and some are defined in other places. And there
-are a lot of them in the =General= section below. Oh my.
-
-#+begin_src emacs-lisp :tangle init.el
-  (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
-  (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
-  (global-set-key (kbd "C-c p") 'projectile-command-map) ; projectile command map
-  (global-set-key (kbd "C-+") 'text-scale-increase)      ; increase text size
-  (global-set-key (kbd "C--") 'text-scale-decrease)      ; decrease text size
-  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
-  (global-set-key [escape] 'keyboard-escape-quit)        ; be default, Emacs requires you to hit ESC
-                                                         ; three times to escape quit the minibuffer
-#+end_src
-*** IVY and Counsel
-:PROPERTIES:
-:ID:       2C08455B-6D25-4334-AE33-8C7AE134B2FE
-:END:
-#+begin_src emacs-lisp :tangle init.el
-  (use-package counsel
-    :ensure t
-    :after ivy
-    :diminish
-    :config
-    (counsel-mode)
-    (setq ivy-initial-inputs-alist nil))
-
-  (use-package ivy
-    :ensure t
-    :bind
-    (("C-c C-r" . ivy-resume)
-     ("C-x B" . ivy-switch-buffer-other-window))
-    :diminish
-    :custom
-    (setq ivy-use-virtual-buffers t
-          ivy-count-format "(%d/%d) "
-          enable-recursive-minibuffers t)
-    :config
-    (ivy-mode))
-
-  (use-package all-the-icons-ivy-rich
-    :ensure t
-    :init (all-the-icons-ivy-rich-mode 1))
-
-  (use-package ivy-rich
-    :ensure t
-    :after ivy
-    :init (ivy-rich-mode 1)
-    :custom (ivy-virtual-abbreviate 'full
-                                    ivy-rich-switch-buffer-align-virtual-buffer t
-                                    ivy-rich-path-style 'abbrev)
-    :config
-    (ivy-set-display-transformer 'ivy-switch-buffer
-                                 'ivy-rich-switch-buffer-transformer))
-#+end_src
-*** General key binding
-:PROPERTIES:
-:ID:       98368A19-6A4D-4D8F-8D83-0AA1C3CC5C6F
-:END:
-[[https://github.com/noctuid/general.el][General]] is a more convenient key definition system in Emacs.
-#+begin_src emacs-lisp :tangle init.el
-  (use-package general
-    :ensure t
-    :config
-    (general-evil-setup)
-    ;; set up "SPC" as the global leader key
-    (general-create-definer my/leader-keys
-                            :states '(normal insert visual emacs)
-                            :keymaps 'override
-                            :prefix "SPC"
-                            :global-prefix "M-SPC") ; access leader key in insert mode
-    (my/leader-keys
-     "SPC" '(counsel-M-x :wk "Counsel M-x")
-     "." '(find-file :wk "Find file")
-     "TAB TAB" '(comment-line :wk "Comment lines")
-     "u" '(universal-argument :wk "Universal argument")
-     )
-
-    (my/leader-keys
-      "b" '(:ignore t :wk "Bookmarks/Buffers")
-      "b b" '(switch-to-buffer :wk "Switch to buffer")
-      "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
-      "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
-      "b d" '(bookmark-delete :wk "Delete bookmark")
-      "b i" '(ibuffer :wk "Ibuffer")
-      "b k" '(kill-current-buffer :wk "Kill current buffer")
-      "b l" '(list-bookmarks :wk "List bookmarks")
-      "b m" '(bookmark-set :wk "Set bookmark")
-      "b n" '(next-buffer :wk "Next buffer")
-      "b p" '(previous-buffer :wk "Previous buffer")
-      "b r" '(revert-buffer :wk "Reload buffer")
-      "b R" '(rename-buffer :wk "Rename buffer")
-      "b s" '(basic-save-buffer :wk "Save buffer")
-      "b S" '(save-some-buffers :wk "Save multiple buffers")
-      "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file")
-      )
-
-    (my/leader-keys
-      "d" '(:ignore t :wk "Dired")
-      "d d" '(dired :wk "Open dired")
-      "d j" '(dired-jump :wk "Dired jump to current")
-      )
-
-    (my/leader-keys
-      "e" '(:ignore t :wk "Eshell/Evaluate")
-      "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
-      "e d" '(eval-defun :wk "Evaluate defun containing or after point")
-      "e e" '(eval-expression :wk "Evaluate and elisp expression")
-      "e h" '(counsel-ssh-history :wk "Eshell history")
-      "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
-      "e r" '(eval-region :wk "Evaluate elisp in region")
-      "e R" '(eww-reload :wk "Reload current page in EWW")
-      "e s" '(eshell :wk "Eshell")
-      "e w" '(eww :wk "EWW emacs web browser")
-      )
-
-    (my/leader-keys
-      "f" '(:ignore t :wk "Files")
-      "f c" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :wk "Open emacs configuration file")
-      "f e" '((lambda () (interactive) (dired "~/.emacs.d/")) :wk "Open user-emacs-directory in dired")
-      "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
-      "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
-      "f l" '(counsel-locate :wk "Locate a file")
-      "f r" '(counsel-recentf :wk "Find recent files")
-      )
-
-    (my/leader-keys
-      "g" '(:ignore t :wk "Git")
-      "g d" '(magit-dispatch :wk "Magit dispatch")
-      "g ." '(magit-file-dispatch :wk "Magit file dispatch")
-      "g b" '(magit-branch-checkout :wk "Switch branch")
-      "g c" '(:ignore t :wk "Create")
-      "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
-      "g c c" '(magit-commit-create :wk "Create commit")
-      "g c f" '(magit-commit-fixup :wk "Create fixup commit")
-      "g C" '(magit-clone :wk "Clone repo")
-      "g f" '(:ignore t :wk "Find")
-      "g f c" '(magit-show-commit :wk "Magit show commit")
-      "g f f" '(magit-find-file :wk "Magit find file")
-      "g f g" '(magit-find-git-config-file :wk "Find gitconfig file")
-      "g F" '(magit-fetch :wk "Git fetch")
-      "g g" '(magit-status :wk "Magit status")
-      "g i" '(magit-init :wk "Initialize git repo")
-      "g l" '(magit-log-buffer-file :wk "Magit buffer log")
-      "g r" '(vc-revert :wk "Git revert file")
-      "g s" '(magit-stage-file :wk "Git stage file")
-      "g u" '(magit-unstage-file :wk "Git unstage file")
-      )
-
-    (my/leader-keys
-      "h" '(:ignore t :wk "Help")
-      "h a" '(counsel-apropos :wk "Apropos")
-      "h b" '(describe-bindings :wk "Desc. bindings")
-      "h c" '(describe-char :wk "Desc. character under cursor")
-      "h d" '(:ignore t :wk "Emacs documentation")
-      "h d a" '(about-emacs :wk "About Emacs")
-      "h d d" '(view-emacs-debugging :wk "View Emacs debugging")
-      "h d f" '(view-emacs-FAQ :wk "View Emacs FAQ")
-      "h d m" '(info-emacs-manual :wk "The Emacs manual")
-      "h d n" '(view-emacs-news :wk "View Emacs News")
-      "h d o" '(describe-distribution :wk "How to obtain Emacs")
-      "h d p" '(view-emacs-problems :wk "View Emacs problems")
-      "h d t" '(view-emacs-todo :wk "View Emacs todo")
-      "h d w" '(describe-no-warranty :wk "Desc. no warranty")
-      "h e" '(view-echo-area-messages :wk "View echo area messages")
-      "h f" '(describe-function :wk "Desc. function")
-      "h F" '(describe-face :wk "Desc. face")
-      "h g" '(describe-gnu-project :wk "Desc. GNU Project")
-      "h i" '(info :wk "Info")
-      "h I" '(describe-input-method :wk "Desc. input method")
-      "h k" '(describe-key :wk "Desc. key")
-      "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
-      "h L" '(describe-language-environment :wk "Desc. language environment")
-      "h m" '(describe-mode :wk "Desc. mode")
-      "h r" '(:ignore t :wk "Reload")
-      "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :wk "Reload emacs config")
-      "h t" '(load-theme :wk "Load theme")
-      "h v" '(describe-variable :wk "Desc. variable")
-      "h w" '(where-is :wk "Prints keybinding for command if set")
-      "h x" '(describe-command :wk "Desc. command")
-      )
-
-    (my/leader-keys
-      "m" '(:ignore t :wk "Org")
-      "m i" '(org-id-get-create :wk "Add org-id")
-      )
-
-    (my/leader-keys
-      "o" '(:ignore t :wk "Open")
-      )
-
-    (my/leader-keys
-      "p" '(projectile-command-map :wk "Projectile")
-      )
-
-    (my/leader-keys
-      "s" '(:ignore t :wk "Search")
-      )
-
-    (my/leader-keys
-      "t" '(:ignore t :wk "Toggle")
-      "t t" '(ef-themes-toggle :wk "Switch light/dark theme")
-      "t e" '(eshell-toggle :wk "Toggle Eshell")
-      )
-
-    (my/leader-keys
-      "w" '(:ignore t :wk "Windows")
-      )
-    
-    ) 
-#+end_src
-*** Helpful
-:PROPERTIES:
-:ID:       7F88630C-0567-4798-8A24-3F47897D0459
-:END:
-[[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
-
-#+begin_src emacs-lisp :tangle init.el
-  (use-package helpful
-    :ensure t
-    :commands (helpful-at-point
-  	     helpful-callable
-  	     helpful-command
-  	     helpful-function
-  	     helpful-key
-  	     helpful-macro
-  	     helpful-variable)
-    :bind
-    ([remap display-local-help] . helpful-at-point)
-    ([remap describe-function] . helpful-callable)
-    ([remap describe-variable] . helpful-variable)
-    ([remap describe-symbol] . helpful-symbol)
-    ([remap describe-key] . helpful-key)
-    ([remap describe-command] . helpful-command))
-#+end_src
-*** Move text
-:PROPERTIES:
-:ID:       100C208D-B7B7-46B8-9532-E88D6D22363E
-:END:
-[[https://github.com/emacsfodder/move-text][MoveText]] allows you to move the current line using M-up / M-down (or any other bindings you choose)
-if a region is marked, it will move the region instead.
-
-#+begin_src emacs-lisp :tangle init.el
-  (use-package move-text
-    :ensure t
-    :defer
-    :init (move-text-default-bindings))
 #+end_src
 ** Minibuffer
 :PROPERTIES:
@@ -915,6 +635,291 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
     :init
     (dashboard-setup-startup-hook))
 #+end_src
+* Keybindings
+:PROPERTIES:
+:ID:       72A6F9BB-1A72-4B97-AA4B-13D2547BB0A1
+:END:
+*** Evil
+:PROPERTIES:
+:ID:       FB3F22F7-AD87-49B3-BD8C-8F4F80E02A09
+:END:
+[[https://github.com/emacs-evil/evil][Evil]] is an extensible *vi* layer for Emacs.
+
+#+begin_src emacs-lisp :tangle init.el
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-integration t
+          evil-want-keybinding nil
+          evil-vsplit-window-right t
+          evil-split-window-below t
+          evil-undo-system 'undo-redo)
+    (evil-mode 1))
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    :config
+    (add-to-list 'evil-collection-mode-list 'help)
+    (evil-collection-init))
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil))
+  (setq org-return-follows-link t)
+#+end_src
+*** My personal key bindings
+:PROPERTIES:
+:ID:       16D646B4-5F9E-4465-837F-B463C73FEADB
+:END:
+I will try to enter all my personal key bindings here... but some are defined
+in the MacOS keyboard settings and some are defined in other places. And there
+are a lot of them in the =General= section below. Oh my.
+
+#+begin_src emacs-lisp :tangle init.el
+  (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
+  (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
+  (global-set-key (kbd "C-c p") 'projectile-command-map) ; projectile command map
+  (global-set-key (kbd "C-+") 'text-scale-increase)      ; increase text size
+  (global-set-key (kbd "C--") 'text-scale-decrease)      ; decrease text size
+  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+  (global-set-key [escape] 'keyboard-escape-quit)        ; be default, Emacs requires you to hit ESC
+                                                         ; three times to escape quit the minibuffer
+#+end_src
+*** IVY and Counsel
+:PROPERTIES:
+:ID:       2C08455B-6D25-4334-AE33-8C7AE134B2FE
+:END:
+#+begin_src emacs-lisp :tangle init.el
+  (use-package counsel
+    :ensure t
+    :after ivy
+    :diminish
+    :config
+    (counsel-mode)
+    (setq ivy-initial-inputs-alist nil))
+
+  (use-package ivy
+    :ensure t
+    :bind
+    (("C-c C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :diminish
+    :custom
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) "
+          enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
+
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
+
+  (use-package ivy-rich
+    :ensure t
+    :after ivy
+    :init (ivy-rich-mode 1)
+    :custom (ivy-virtual-abbreviate 'full
+                                    ivy-rich-switch-buffer-align-virtual-buffer t
+                                    ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+                                 'ivy-rich-switch-buffer-transformer))
+#+end_src
+*** General key binding
+:PROPERTIES:
+:ID:       A1806E5F-CE5B-4D1C-BB4E-64BA60D8E527
+:END:
+[[https://github.com/noctuid/general.el][General]] is a more convenient key definition system in Emacs.
+#+begin_src emacs-lisp :tangle init.el
+  (use-package general
+    :ensure t
+    :config
+    (general-evil-setup)
+    ;; set up "SPC" as the global leader key
+    (general-create-definer my/leader-keys
+                            :states '(normal insert visual emacs)
+                            :keymaps 'override
+                            :prefix "SPC"
+                            :global-prefix "M-SPC") ; access leader key in insert mode
+    (my/leader-keys
+     "SPC" '(counsel-M-x :wk "Counsel M-x")
+     "." '(find-file :wk "Find file")
+     "TAB TAB" '(comment-line :wk "Comment lines")
+     "u" '(universal-argument :wk "Universal argument")
+     )
+
+    (my/leader-keys
+      "b" '(:ignore t :wk "Bookmarks/Buffers")
+      "b b" '(switch-to-buffer :wk "Switch to buffer")
+      "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
+      "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
+      "b d" '(bookmark-delete :wk "Delete bookmark")
+      "b i" '(ibuffer :wk "Ibuffer")
+      "b k" '(kill-current-buffer :wk "Kill current buffer")
+      "b l" '(list-bookmarks :wk "List bookmarks")
+      "b m" '(bookmark-set :wk "Set bookmark")
+      "b n" '(next-buffer :wk "Next buffer")
+      "b p" '(previous-buffer :wk "Previous buffer")
+      "b r" '(revert-buffer :wk "Reload buffer")
+      "b R" '(rename-buffer :wk "Rename buffer")
+      "b s" '(basic-save-buffer :wk "Save buffer")
+      "b S" '(save-some-buffers :wk "Save multiple buffers")
+      "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file")
+      )
+
+    (my/leader-keys
+      "d" '(:ignore t :wk "Dired")
+      "d d" '(dired :wk "Open dired")
+      "d j" '(dired-jump :wk "Dired jump to current")
+      )
+
+    (my/leader-keys
+      "e" '(:ignore t :wk "Eshell/Evaluate")
+      "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
+      "e d" '(eval-defun :wk "Evaluate defun containing or after point")
+      "e e" '(eval-expression :wk "Evaluate and elisp expression")
+      "e h" '(counsel-ssh-history :wk "Eshell history")
+      "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
+      "e r" '(eval-region :wk "Evaluate elisp in region")
+      "e R" '(eww-reload :wk "Reload current page in EWW")
+      "e s" '(eshell :wk "Eshell")
+      "e w" '(eww :wk "EWW emacs web browser")
+      )
+
+    (my/leader-keys
+      "f" '(:ignore t :wk "Files")
+      "f c" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :wk "Open emacs configuration file")
+      "f e" '((lambda () (interactive) (dired "~/.emacs.d/")) :wk "Open user-emacs-directory in dired")
+      "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
+      "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
+      "f l" '(counsel-locate :wk "Locate a file")
+      "f r" '(counsel-recentf :wk "Find recent files")
+      )
+
+    (my/leader-keys
+      "g" '(:ignore t :wk "Git")
+      "g d" '(magit-dispatch :wk "Magit dispatch")
+      "g ." '(magit-file-dispatch :wk "Magit file dispatch")
+      "g b" '(magit-branch-checkout :wk "Switch branch")
+      "g c" '(:ignore t :wk "Create")
+      "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
+      "g c c" '(magit-commit-create :wk "Create commit")
+      "g c f" '(magit-commit-fixup :wk "Create fixup commit")
+      "g C" '(magit-clone :wk "Clone repo")
+      "g f" '(:ignore t :wk "Find")
+      "g f c" '(magit-show-commit :wk "Magit show commit")
+      "g f f" '(magit-find-file :wk "Magit find file")
+      "g f g" '(magit-find-git-config-file :wk "Find gitconfig file")
+      "g F" '(magit-fetch :wk "Git fetch")
+      "g g" '(magit-status :wk "Magit status")
+      "g i" '(magit-init :wk "Initialize git repo")
+      "g l" '(magit-log-buffer-file :wk "Magit buffer log")
+      "g r" '(vc-revert :wk "Git revert file")
+      "g s" '(magit-stage-file :wk "Git stage file")
+      "g u" '(magit-unstage-file :wk "Git unstage file")
+      )
+
+    (my/leader-keys
+      "h" '(:ignore t :wk "Help")
+      "h a" '(counsel-apropos :wk "Apropos")
+      "h b" '(describe-bindings :wk "Desc. bindings")
+      "h c" '(describe-char :wk "Desc. character under cursor")
+      "h d" '(:ignore t :wk "Emacs documentation")
+      "h d a" '(about-emacs :wk "About Emacs")
+      "h d d" '(view-emacs-debugging :wk "View Emacs debugging")
+      "h d f" '(view-emacs-FAQ :wk "View Emacs FAQ")
+      "h d m" '(info-emacs-manual :wk "The Emacs manual")
+      "h d n" '(view-emacs-news :wk "View Emacs News")
+      "h d o" '(describe-distribution :wk "How to obtain Emacs")
+      "h d p" '(view-emacs-problems :wk "View Emacs problems")
+      "h d t" '(view-emacs-todo :wk "View Emacs todo")
+      "h d w" '(describe-no-warranty :wk "Desc. no warranty")
+      "h e" '(view-echo-area-messages :wk "View echo area messages")
+      "h f" '(describe-function :wk "Desc. function")
+      "h F" '(describe-face :wk "Desc. face")
+      "h g" '(describe-gnu-project :wk "Desc. GNU Project")
+      "h i" '(info :wk "Info")
+      "h I" '(describe-input-method :wk "Desc. input method")
+      "h k" '(describe-key :wk "Desc. key")
+      "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
+      "h L" '(describe-language-environment :wk "Desc. language environment")
+      "h m" '(describe-mode :wk "Desc. mode")
+      "h r" '(:ignore t :wk "Reload")
+      "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :wk "Reload emacs config")
+      "h t" '(load-theme :wk "Load theme")
+      "h v" '(describe-variable :wk "Desc. variable")
+      "h w" '(where-is :wk "Prints keybinding for command if set")
+      "h x" '(describe-command :wk "Desc. command")
+      )
+
+    (my/leader-keys
+      "m" '(:ignore t :wk "Org")
+      "m i" '(org-id-get-create :wk "Add org-id")
+      )
+
+    (my/leader-keys
+      "o" '(:ignore t :wk "Open")
+      )
+
+    (my/leader-keys
+      "p" '(projectile-command-map :wk "Projectile")
+      )
+
+    (my/leader-keys
+      "s" '(:ignore t :wk "Search")
+      )
+
+    (my/leader-keys
+      "t" '(:ignore t :wk "Toggle")
+      "t t" '(ef-themes-toggle :wk "Switch light/dark theme")
+      "t e" '(eshell-toggle :wk "Toggle Eshell")
+      )
+
+    (my/leader-keys
+      "w" '(:ignore t :wk "Windows")
+      )
+    
+    ) 
+#+end_src
+*** Helpful
+:PROPERTIES:
+:ID:       7F88630C-0567-4798-8A24-3F47897D0459
+:END:
+[[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
+
+#+begin_src emacs-lisp :tangle init.el
+  (use-package helpful
+    :ensure t
+    :commands (helpful-at-point
+  	     helpful-callable
+  	     helpful-command
+  	     helpful-function
+  	     helpful-key
+  	     helpful-macro
+  	     helpful-variable)
+    :bind
+    ([remap display-local-help] . helpful-at-point)
+    ([remap describe-function] . helpful-callable)
+    ([remap describe-variable] . helpful-variable)
+    ([remap describe-symbol] . helpful-symbol)
+    ([remap describe-key] . helpful-key)
+    ([remap describe-command] . helpful-command))
+#+end_src
+*** Move text
+:PROPERTIES:
+:ID:       100C208D-B7B7-46B8-9532-E88D6D22363E
+:END:
+[[https://github.com/emacsfodder/move-text][MoveText]] allows you to move the current line using M-up / M-down (or any other bindings you choose)
+if a region is marked, it will move the region instead.
+
+#+begin_src emacs-lisp :tangle init.el
+  (use-package move-text
+    :ensure t
+    :defer
+    :init (move-text-default-bindings))
+#+end_src
 * Programming
 :PROPERTIES:
 :ID:       8709FAA7-0C31-4A4A-A9B6-66657F6E64CE
@@ -981,7 +986,7 @@ This configuration file is writen with org-mode.
 
 ** Org make-toc
 :PROPERTIES:
-:ID:       FB3CAA51-BE89-404D-A764-E4EBE5B8D71C
+:ID:       A15DEAD6-7CE9-4F4D-871A-A91ADB0E0475
 :END:
 [[https://github.com/alphapapa/org-make-toc][Org-make-toc]] creates tables of contents for org-mode files.
 
@@ -1001,14 +1006,22 @@ Use command =org-make-toc-set= to change TOC properties for the entry at point w
   (use-package org-make-toc
     :ensure t)
 
-  (defun my-update-toc-before-save-hook ()
+  (defun my/update-toc-before-save-hook ()
     "Update TOC before saving buffer in org-mode"
     (when (eq major-mode 'org-mode)
       (message "Updateing TOC")
       (org-make-toc)
       ))
 
-  (add-hook 'before-save-hook #'my-update-toc-before-save-hook)
+  (add-hook 'before-save-hook #'my/update-toc-before-save-hook)
+
+  (defun my/org-add-ids-to-headlines-in-file ()
+    "Add ID properites to all headlines in the current file which do not already have one."
+    (interactive)
+    (org-map-entries 'org-id-get-create))
+
+  (add-hook 'org-mode-hook
+            (lambda () (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
 #+end_src
 
 ** Org tempo
@@ -1040,6 +1053,18 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
     (add-to-list 'org-structure-template-alist
   	       '("el" . "src emacs-lisp")))
 #+end_src
+
+** Org bullets
+:PROPERTIES:
+:ID:       95F6F7DF-ECAC-44C5-942C-E4C6B9566812
+:END:
+#+begin_src emacs-lisp :tangle init.el
+  (use-package org-bullets
+    :ensure t
+    )
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+end_src
+
 * Internet
 :PROPERTIES:
 :ID:       8DDCFFD3-145A-4C90-93C7-24C46C9D7C27
