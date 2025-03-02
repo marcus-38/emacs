@@ -537,3 +537,26 @@
                       (("https://www.reddit.com/r/emacs.rss" reddit emacs)
                        ("https://sachachua.com/blog/category/emacs-news/feed" sacha emacs)
                        ))))
+
+(use-package eshell-toggle
+  :ensure t
+  :custom
+  (eshell-toggle-size-fraction 3)
+  (ehsell-toggle-use-projectile-root t)
+  (eshell-toggle-run-command nil)
+  (ehsell-toggle-init-function #'eshell-toggle-init-ansi-term))
+
+(use-package eshell-syntax-highlighting
+  :ensure t
+  :after esh-mode
+  :config
+  (eshell-syntax-highlighting-global-mode +1))
+
+(setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
+      eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
+      eshell-history-size 5000
+      eshell-buffer-maximum-lines 5000
+      eshell-hist-ignoredups t
+      eshell-scroll-to-bottom-on-input t
+      eshell-destroy-buffer-when-process-dies t
+      eshell-visual-commands '("bash" "fish" "htop" "ssh" "top" "zsh"))

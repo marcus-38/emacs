@@ -132,6 +132,32 @@ I use this literate org-file but I like to separate the preferences all the same
     (load custom-file))
 #+end_src
 
+** Aliases
+#+begin_src bash :tangle eshell/aliases
+  # alias for emacs commands
+  alias ff find-file $1
+
+  # aliasing standard shell commands to better emacs alternatives
+  alias less view-file $1
+
+  # using exa instead of ls
+  alias ls exa -al --color-always --group-directories-first $*   # my prefered listing
+  alias la exa -a --color-always --group-directories-first $*    # all files and directories
+  alias ll exa -l --color-always --group-directories-first $*    # long format
+  alias lt exa -aT --color-always --group-directories-first $*   # tree listing
+  alias l. exa -a1 $* | grep "^\."                               # list hidden files
+
+  # confirm before overwriting files
+  alias cp cp -i $1
+  alias mv mv -i $1
+  alias rm rm -i $1
+#+end_src
+
+** Profile
+#+begin_src bash :tangle eshell/profiles
+  # I had a thought what to put in here but it eluded me
+#+end_src
+
 * Package Manager
 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html][Package installation]] are usually installed using =use-package=. Some packages
 are downloaded or cloned from sources outside of the ones listed below. These
@@ -880,4 +906,31 @@ TODO work in progress
                         (("https://www.reddit.com/r/emacs.rss" reddit emacs)
                          ("https://sachachua.com/blog/category/emacs-news/feed" sacha emacs)
                          ))))
+#+end_src
+* Shells and terminals
+** Eshell
+Eshell is an Emacs shell written in Elisp.
+#+begin_src emacs-lisp :tangle init.el
+  (use-package eshell-toggle
+    :ensure t
+    :custom
+    (eshell-toggle-size-fraction 3)
+    (ehsell-toggle-use-projectile-root t)
+    (eshell-toggle-run-command nil)
+    (ehsell-toggle-init-function #'eshell-toggle-init-ansi-term))
+
+  (use-package eshell-syntax-highlighting
+    :ensure t
+    :after esh-mode
+    :config
+    (eshell-syntax-highlighting-global-mode +1))
+
+  (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
+        eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
+        eshell-history-size 5000
+        eshell-buffer-maximum-lines 5000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input t
+        eshell-destroy-buffer-when-process-dies t
+        eshell-visual-commands '("bash" "fish" "htop" "ssh" "top" "zsh"))
 #+end_src

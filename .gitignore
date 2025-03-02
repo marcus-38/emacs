@@ -21,3 +21,4 @@ packages/
 transient/
 auto-save-list/
 elpa/
+eshell/
