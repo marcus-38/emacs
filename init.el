@@ -79,6 +79,8 @@
 (delete-selection-mode 1)          ; select text and delete it by typing.
 (setq org-support-shift-select t)  ; Non-nil means make shift-cursor select text when possible.
 
+(global-hl-line-mode 1)            ; Highlight the current line in Emacs.
+
 (use-package which-key
   :ensure t
   :delight
@@ -198,10 +200,13 @@
 (require 'pulsar)
 (setq pulsar-pulse t
       pulsar-delay 0.055
-      pulsar-iterations 10
+      pulsar-iterations 15
       pulsar-face 'pulsar-magenta
       pulsar-highlight-face 'pulsar-yellow
       )
+(let ((map global-map))
+  (define-key map (kbd "C-c h p") #'pulsar-pulse-line)
+  (define-key map (kbd "C-c h h") #'pulsar-highlight-line))
 (pulsar-global-mode 1)
 
 (use-package all-the-icons
