@@ -266,6 +266,7 @@
 
   (my/leader-keys
     "m" '(:ignore t :wk "Org")
+    "m i" '(org-id-get-create :wk "Add org-id")
     )
 
   (my/leader-keys
