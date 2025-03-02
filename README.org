@@ -290,6 +290,8 @@ Settings that doesn't fit in anywhere else.
   (setq org-support-shift-select t)  ; Non-nil means make shift-cursor select text when possible.
 
   (global-hl-line-mode 1)            ; Highlight the current line in Emacs.
+
+  (setq display-line-numbers 'relative) ; Show relative line numbers
 #+end_src
 ** Minibuffer
 :PROPERTIES:

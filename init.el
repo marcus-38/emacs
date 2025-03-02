@@ -82,6 +82,8 @@
 
 (global-hl-line-mode 1)            ; Highlight the current line in Emacs.
 
+(setq display-line-numbers 'relative) ; Show relative line numbers
+
 (use-package which-key
   :ensure t
   :delight
