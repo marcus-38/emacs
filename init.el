@@ -515,12 +515,14 @@
 (use-package org-make-toc
   :ensure t)
 
-(add-to-list 'load-path "~/.emacs.d/manual-packages/toc-org/")
-(if (require 'toc-org nil t)
-  (progn
-    (add-hook 'org-mode-hook 'toc-org-mode)
-    )
-(warn "toc-org not found"))
+(defun my-update-toc-before-save-hook ()
+  "Update TOC before saving buffer in org-mode"
+  (when (eq major-mode 'org-mode)
+    (message "Updateing TOC")
+    (org-make-toc)
+    ))
+
+(add-hook 'before-save-hook #'my-update-toc-before-save-hook)
 
 (use-package org-tempo
   :config

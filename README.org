@@ -145,11 +145,11 @@ I use this literate org-file but I like to separate the preferences all the same
   alias less view-file $1
 
   # using exa instead of ls
-  alias ls exa -al --color-always --group-directories-first $*   # my prefered listing
-  alias la exa -a --color-always --group-directories-first $*    # all files and directories
-  alias ll exa -l --color-always --group-directories-first $*    # long format
-  alias lt exa -aT --color-always --group-directories-first $*   # tree listing
-  alias l. exa -a1 $* | grep "^\."                               # list hidden files
+  alias ls eza -al --color=always --group-directories-first $*   # my prefered listing
+  alias la eza -a --color=always --group-directories-first $*    # all files and directories
+  alias ll eza -l --color=always --group-directories-first $*    # long format
+  alias lt eza -aT --color=always --group-directories-first $*   # tree listing
+  alias l. eza -a1 $* | grep "^\."                               # list hidden files
 
   # confirm before overwriting files
   alias cp cp -i $1
