@@ -954,7 +954,8 @@ are a lot of them in the =General= section below. Oh my.
     (my/leader-keys
       "o" '(:ignore t :wk "Open")
       "o d" '(dashboard-open :wk "Dashboard")
-      "o e" '(elfeed :wk "Elfeed")
+      "o e" '(elfeed :wk "Open Elfeed")
+      "o u" '(elfeed-update :wk "Elfeed update")
       )
 
     (my/leader-keys
@@ -1232,6 +1233,16 @@ TODO work in progress
           elfeed-feeds (quote
                         (("https://www.reddit.com/r/emacs.rss" reddit emacs)
                          ("https://sachachua.com/blog/category/emacs-news/feed" sacha emacs)
+                         ("https://protesilaos.com/codelog.xml" prot emacs)
+                         ("https://planet.emacslife.com/atom.xml" planet emacs)
+                         ("http://irreal.org/blog/?tag=emacs&feed=rss2" irreal emacs)
+                         ("https://taonaw.com/categories/emacs-org-mode/feed.xml" TAONAW emacs)
+                         ("https://www.cppstories.com/index.xml" Stories cpp)
+                         ("http://feeds.bbci.co.uk/news/world/rss.xml" bbc news)
+                         ("https://data.riksdagen.se/dokumentlista/?avd=dokument&doktyp=bet&beslutad=1&sort=beslutsdag&sortorder=desc&utformat=rss" beslut riksdagen)
+                         ("https://www.msb.se/sv/rss-floden/rss-alla-nyheter-fran-msb/" news msb)
+                         ("https://feeds.feedburner.com/TheHackersNews?format=xml" hacker news)
+                         ("https://www.dpreview.com/feeds/news/latest" photography dpreview)
                          ))))
 #+end_src
 * Shells and terminals
