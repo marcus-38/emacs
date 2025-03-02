@@ -492,6 +492,7 @@
     "t" '(:ignore t :wk "Toggle")
     "t t" '(ef-themes-toggle :wk "Switch light/dark theme")
     "t e" '(eshell-toggle :wk "Toggle Eshell")
+    "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
     )
 
   (my/leader-keys
