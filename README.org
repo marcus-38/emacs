@@ -496,8 +496,9 @@ Setting the font faces.
 :CUSTOM_ID: where-is-my-cursor
 :END:
 **** Beacon
-[[https://github.com/Malabarba/beacon][Beacon]] is a light that follows your cursor around so you don't lose it.
-#+begin_src emacs-lisp :tangle init.el
+[[https://github.com/Malabarba/beacon][Beacon]] is a light that follows your cursor around so you don't lose it. Currently not used in
+my config. To enable it add =:tangle init.el= in the source code block.
+#+begin_src emacs-lisp  
   (use-package beacon
     :ensure t
     :config

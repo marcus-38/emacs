@@ -189,16 +189,6 @@
 (set-face-attribute 'font-lock-keyword-face nil
                     :slant 'italic)
 
-(use-package beacon
-  :ensure t
-  :config
-  (setq beacon-blink-duration 0.5
-        beacon-blink-when-window-scrolls t
-        beacon-blink-when-window-changes t
-        beacon-blink-when-point-moves t)
-  :init
-  (beacon-mode 1))
-
 (add-to-list 'load-path "~/.emacs.d/manual-packages/pulsar")
 (require 'pulsar)
 (setq pulsar-pulse t
