@@ -514,7 +514,9 @@
   :ensure t)
 
 (use-package org-make-toc
-  :ensure t)
+  :ensure t
+  :config
+  (setq org-make-toc-insert-custom-ids t))
 
 (defun my/update-toc-before-save-hook ()
   "Update TOC before saving buffer in org-mode"
