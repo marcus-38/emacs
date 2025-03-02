@@ -515,6 +515,13 @@
 (use-package org-make-toc
   :ensure t)
 
+(add-to-list 'load-path "~/.emacs.d/manual-packages/toc-org/")
+(if (require 'toc-org nil t)
+  (progn
+    (add-hook 'org-mode-hook 'toc-org-mode)
+    )
+(warn "toc-org not found"))
+
 (use-package org-tempo
   :config
   (add-to-list 'org-structure-template-alist

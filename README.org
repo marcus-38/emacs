@@ -822,7 +822,7 @@ by using Magit.
     )
 #+end_src
 * Org
-** Org                                                              
+** Org
 Why usse Emacs? Because [[https://orgmode.org/][Org-mode]] exists. Org-mode is a  GNU Emacs major mode for
 keeping notes, authoring documents, computational notebooks, literate programming,
 maintaining to-do lists, planning projects, and more — in a fast and effective
@@ -853,6 +853,17 @@ Use command =org-make-toc-set= to change TOC properties for the entry at point w
 #+begin_src emacs-lisp :tangle init.el
   (use-package org-make-toc
     :ensure t)
+#+end_src
+
+** TOC-ORG
+[[https://github.com/snosov1/toc-org][toc-org]] helps you to have an up-to-date table of contents in org files without exporting.
+#+begin_src emacs-lisp :tangle init.el
+  (add-to-list 'load-path "~/.emacs.d/manual-packages/toc-org/")
+  (if (require 'toc-org nil t)
+    (progn
+      (add-hook 'org-mode-hook 'toc-org-mode)
+      )
+  (warn "toc-org not found"))
 #+end_src
 
 ** Org tempo
