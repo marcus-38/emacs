@@ -16,6 +16,7 @@ tramp
 recentf
 custom.el
 history
+.org-id-locations
 url/
 tldr/
 manual-packages/

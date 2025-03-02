@@ -4,6 +4,7 @@
 * Emacs Configuration 
 :PROPERTIES:
 :CUSTOM_ID: emacs-configuration
+:ID:       87291F55-9407-4438-9CE4-67DFC36DACB5
 :END:
 =WARNING=
 
@@ -31,6 +32,7 @@ If you want to learn more about Org:
 * Table of Contents
 :PROPERTIES:
 :TOC:      :include all :depth 4 :ignore (this) 
+:ID:       C7943AE1-FE55-46C9-AEC1-F28F84970B23
 :END:
 :CONTENTS:
 - [[#emacs-configuration][Emacs Configuration]]
@@ -44,8 +46,8 @@ If you want to learn more about Org:
 - [[#macos-specifics][MacOS Specifics]]
   - [[#exec-path-from-shell][Exec path from shell]]
   - [[#macos-keyboard-settings][MacOS keyboard settings]]
+- [[#misc-settings][Misc settings]]
 - [[#look-and-feel][Look and Feel]]
-  - [[#misc-settings][Misc settings]]
   - [[#minibuffer][Minibuffer]]
     - [[#which-key][Which key]]
     - [[#vertico][Vertico]]
@@ -89,6 +91,7 @@ If you want to learn more about Org:
 * Generate files and file headers
 :PROPERTIES:
 :CUSTOM_ID: generate-files-and-file-headers
+:ID:       15430D8A-669B-4FAD-A3A5-E7EF438CFD33
 :END:
 The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
 use this configuration as is.
@@ -98,6 +101,7 @@ use this configuration as is.
 ** init.el
 :PROPERTIES:
 :CUSTOM_ID: initel
+:ID:       C784E801-08CA-4669-8BBD-E79995DA6869
 :END:
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
@@ -120,6 +124,7 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 ** early-init.el
 :PROPERTIES:
 :CUSTOM_ID: early-initel
+:ID:       40842719-67BD-4940-B894-61C927D529B3
 :END:
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
@@ -142,6 +147,7 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 ** custom.el
 :PROPERTIES:
 :CUSTOM_ID: customel
+:ID:       C8237143-D3B4-4A1F-AD20-F1B6A0B9324D
 :END:
 In Emacs, a custom file is used to store customization settings seperately
 from the main init file, allowing for easier management of user preferences.
@@ -156,6 +162,7 @@ I use this literate org-file but I like to separate the preferences all the same
 ** Aliases
 :PROPERTIES:
 :CUSTOM_ID: aliases
+:ID:       F5DE7D60-F62C-4EE4-91FF-F3A22DD8AD2B
 :END:
 #+begin_src bash :tangle eshell/aliases
   # alias for emacs commands
@@ -175,6 +182,7 @@ I use this literate org-file but I like to separate the preferences all the same
 ** Profile
 :PROPERTIES:
 :CUSTOM_ID: profile
+:ID:       83FC4DED-47A6-40B8-BEE4-95AFCBAC73FF
 :END:
 #+begin_src bash :tangle eshell/profiles
   # I had a thought what to put in here but it eluded me
@@ -183,6 +191,7 @@ I use this literate org-file but I like to separate the preferences all the same
 * Package Manager
 :PROPERTIES:
 :CUSTOM_ID: package-manager
+:ID:       57431B1C-2313-47DC-85FD-E5787A494314
 :END:
 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html][Package installation]] are usually installed using =use-package=. Some packages
 are downloaded or cloned from sources outside of the ones listed below. These
@@ -206,6 +215,7 @@ manager, adds sources and initialize the packages manager.
 * MacOS Specifics
 :PROPERTIES:
 :CUSTOM_ID: macos-specifics
+:ID:       B61BF246-5E1F-4AAE-9CB3-1CC59670A49E
 :END:
 I use a MacBook (arm) for my main laptop. I *try* to keep all the MacOS stuff
 behind =when= so I can use this configuration on my Linux machines as well.
@@ -213,6 +223,7 @@ behind =when= so I can use this configuration on my Linux machines as well.
 ** Exec path from shell
 :PROPERTIES:
 :CUSTOM_ID: exec-path-from-shell
+:ID:       73F551DD-200B-4DF2-AD3C-4C01903A44E4
 :END:
 A GNU Emacs library to ensure environment variables inside Emacs look the same
 as in the user's shell.
@@ -228,6 +239,7 @@ as in the user's shell.
 ** MacOS keyboard settings
 :PROPERTIES:
 :CUSTOM_ID: macos-keyboard-settings
+:ID:       AD2CB2D1-9217-43A0-A0D2-555B72F4C5C9
 :END:
 My prefered keyboard settings when on a Mac.
 
@@ -261,13 +273,10 @@ My prefered keyboard settings when on a Mac.
     (global-set-key [(meta up)] 'backward-paragraph)
     )
 #+end_src
-* Look and Feel
-:PROPERTIES:
-:CUSTOM_ID: look-and-feel
-:END:
-** Misc settings
+* Misc settings
 :PROPERTIES:
 :CUSTOM_ID: misc-settings
+:ID:       0836D54C-E325-4709-84E3-692BB7F718EE
 :END:
 Settings that doesn't fit in anywhere else.
 
@@ -293,13 +302,20 @@ Settings that doesn't fit in anywhere else.
 
   (setq display-line-numbers 'relative) ; Show relative line numbers
 #+end_src
+* Look and Feel
+:PROPERTIES:
+:CUSTOM_ID: look-and-feel
+:ID:       74E7C440-49F1-4C6A-B8E7-D0F706B9FCCC
+:END:
 ** Minibuffer
 :PROPERTIES:
 :CUSTOM_ID: minibuffer
+:ID:       E53B959F-383A-4358-830D-775ED30F6878
 :END:
 *** Which key
 :PROPERTIES:
 :CUSTOM_ID: which-key
+:ID:       8426C530-0A1E-4EE2-BEF4-51867EAF7B59
 :END:
 [[https://github.com/justbur/emacs-which-key][which-key]] is a minor mode for Emacs that displays the key bindings following your currently entered incomplete
 command (a prefix) in a popup. 
@@ -314,6 +330,7 @@ command (a prefix) in a popup.
 *** Vertico
 :PROPERTIES:
 :CUSTOM_ID: vertico
+:ID:       2FB254F4-A6DB-4450-8923-CABD6D949E48
 :END:
 [[https://github.com/minad/vertico][Vertico]] provides a performant and minimalistic vertical completion UI based on the default completion system. 
 
@@ -331,6 +348,7 @@ command (a prefix) in a popup.
 *** Save history
 :PROPERTIES:
 :CUSTOM_ID: save-history
+:ID:       32FA4BA0-A438-402A-8984-E739CEA64453
 :END:
 Vertico sorts by history position.
 
@@ -342,6 +360,7 @@ Vertico sorts by history position.
 *** Marginalia
 :PROPERTIES:
 :CUSTOM_ID: marginalia
+:ID:       2BC7F539-41DA-4BD5-91A3-A5C31559404B
 :END:
 [[https://github.com/minad/marginalia][Marginalia]] are marks or annotations placed at the margin of the page of a book or in this case helpful colorful
 annotations placed at the margin of the minibuffer for your completion candidates.
@@ -357,6 +376,7 @@ annotations placed at the margin of the minibuffer for your completion candidate
 *** Orderless
 :PROPERTIES:
 :CUSTOM_ID: orderless
+:ID:       63F6F48E-4EBB-46A6-9AE1-0E2E0DC37653
 :END:
 This package provides an [[https://github.com/oantolin/orderless][orderless]] completion style that divides the pattern into space-separated components,
 and matches candidates that match all of the components in any order. Each component can match in any one of several
@@ -374,6 +394,7 @@ and literal matches are enabled.
 *** Emacs minibuffer configurations
 :PROPERTIES:
 :CUSTOM_ID: emacs-minibuffer-configurations
+:ID:       71A0D34E-5259-4249-838C-FF3004A53793
 :END:
 
 #+begin_src emacs-lisp :tangle init.el
@@ -387,6 +408,7 @@ and literal matches are enabled.
 ** Themes, modeline and Fonts
 :PROPERTIES:
 :CUSTOM_ID: themes-modeline-and-fonts
+:ID:       339241CE-AE87-471A-9E22-D5CBA0ADBADA
 :END:
 Some packages, such as EF-themes, I download myself into =~/.emacs.d/manual-packages/<package>=.
 To be able to use these packages I first add the path to the =load-path= list and then =require=
@@ -398,6 +420,7 @@ I can switch between these themes using =M-x ef-themes-toggle= or with keybindin
 *** EF-themes
 :PROPERTIES:
 :CUSTOM_ID: ef-themes
+:ID:       DFFB7E31-6684-412F-9BDF-9C7829EBCEE5
 :END:
 The [[https://github.com/protesilaos/ef-themes][ef-themes]] are a collection of light and dark themes for GNU Emacs whose
 goal is to provide colorful ("pretty") yet legible options for users who want
@@ -425,6 +448,7 @@ something with a bit more flair than the [[https://github.com/protesilaos/modus-
 *** Doom Themes
 :PROPERTIES:
 :CUSTOM_ID: doom-themes
+:ID:       6D247877-927E-4B1F-85BF-D38000573E64
 :END:
 A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspired by community favorites.
 
@@ -436,6 +460,7 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
 *** Modeline
 :PROPERTIES:
 :CUSTOM_ID: modeline
+:ID:       F4974265-8360-4042-8229-622A69400DE9
 :END:
 [[https://github.com/seagle0128/doom-modeline][Doom modeline]] is used to cleanup and configure the modeline.
 
@@ -470,6 +495,7 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
 *** Fonts
 :PROPERTIES:
 :CUSTOM_ID: fonts
+:ID:       61D8C5B1-D4AE-4034-92A6-6F26C1728114
 :END:
 Setting the font faces.
 #+begin_src emacs-lisp :tangle init.el
@@ -494,8 +520,12 @@ Setting the font faces.
 *** Where is my cursor
 :PROPERTIES:
 :CUSTOM_ID: where-is-my-cursor
+:ID:       B0A198EA-4662-4C5E-BE4B-80FC2B8F5291
 :END:
 **** Beacon
+:PROPERTIES:
+:ID:       4004A920-C15D-4ED6-A047-C7E467DA0D53
+:END:
 [[https://github.com/Malabarba/beacon][Beacon]] is a light that follows your cursor around so you don't lose it. Currently not used in
 my config. To enable it add =:tangle init.el= in the source code block.
 #+begin_src emacs-lisp  
@@ -510,6 +540,9 @@ my config. To enable it add =:tangle init.el= in the source code block.
     (beacon-mode 1))
 #+end_src
 **** Pulsar
+:PROPERTIES:
+:ID:       92700793-A40B-4D12-ADC8-D7CBC7D11D4C
+:END:
 [[https://github.com/protesilaos/pulsar][Pulsar]] is an Emacs package that pulse the current line after running select functions.
 #+begin_src emacs-lisp :tangle init.el
   (add-to-list 'load-path "~/.emacs.d/manual-packages/pulsar")
@@ -528,8 +561,12 @@ my config. To enable it add =:tangle init.el= in the source code block.
 *** Icons
 :PROPERTIES:
 :CUSTOM_ID: icons
+:ID:       FDD7A7C7-33EA-4289-BFB0-22FE7CDA6C77
 :END:
 **** All-the-icons
+:PROPERTIES:
+:ID:       9606C0D9-5601-423F-8AC6-50BF7397AFBA
+:END:
 [[https://github.com/domtronn/all-the-icons.el][All-the-icons]] is a utility package to collect various Icon Fonts and propertize them within Emacs.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -538,6 +575,9 @@ my config. To enable it add =:tangle init.el= in the source code block.
     :if (display-graphic-p))
 #+end_src
 **** All-the-icons-completion
+:PROPERTIES:
+:ID:       B07244C7-32BE-452D-B637-8289F257F72B
+:END:
 [[https://github.com/iyefrat/all-the-icons-completion][All-the-icons-completion]] adds icons to completion candidates in Emacs.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -549,6 +589,9 @@ my config. To enable it add =:tangle init.el= in the source code block.
     (all-the-icons-completion-mode))
 #+end_src
 **** Nerd icons
+:PROPERTIES:
+:ID:       0D81B940-D772-49D4-984A-4A71C28D3770
+:END:
 [[https://github.com/emacsmirror/nerd-icons][Nerd-icons]] - Emacs Nerd Font Icons Library.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -558,8 +601,12 @@ my config. To enable it add =:tangle init.el= in the source code block.
 *** Windows
 :PROPERTIES:
 :CUSTOM_ID: windows
+:ID:       76990538-E1FE-4D1F-A94F-B6A5F594140A
 :END:
 **** Window
+:PROPERTIES:
+:ID:       E4922E07-5BB7-4920-88AF-427DFC123E4F
+:END:
 Setup how to split windows in Emacs.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -581,6 +628,9 @@ Setup how to split windows in Emacs.
       (other-window 1)))
 #+end_src
 **** Switch window
+:PROPERTIES:
+:ID:       8634A72C-DFC0-4DD6-AE13-91BC22A9B66B
+:END:
 [[https://github.com/dimitri/switch-window][Switch-window]] offer a visual way to choose a window to switch to.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -590,6 +640,9 @@ Setup how to split windows in Emacs.
            ("C-x w" . switch-window-then-swap-buffer)))
 #+end_src
 **** Winner
+:PROPERTIES:
+:ID:       D61E84D9-1733-483C-B0AA-28E3E2645D24
+:END:
 Winner mode in Emacs allows you to restore previous window configurations after
 they have been changed, making it easier to manage your layout.
 
@@ -599,6 +652,9 @@ they have been changed, making it easier to manage your layout.
     :config (winner-mode))
 #+end_src
 **** Ibuffer
+:PROPERTIES:
+:ID:       6C09128F-D990-4CBB-AD15-EBB93ED8E310
+:END:
 I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-life/][ibuffer changed my life]] from Tony Ballantyne Tech.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -620,6 +676,9 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
                                  (ibuffer-switch-to-saved-filter-groups "default")))
 #+end_src
 **** Dashboard
+:PROPERTIES:
+:ID:       FD102CAC-728C-4EC9-9126-264619072CE5
+:END:
 [[https://github.com/emacs-dashboard/emacs-dashboard][Dashboard]] is an extensible emacs startup screen showing you what’s most important.
 
 #+begin_src emacs-lisp :tangle init.el
@@ -656,10 +715,12 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
 * Keybindings
 :PROPERTIES:
 :CUSTOM_ID: keybindings
+:ID:       CAC3197F-094A-4657-8CC8-5B86175271C3
 :END:
 *** Evil
 :PROPERTIES:
 :CUSTOM_ID: evil
+:ID:       80611870-A047-4A1E-9BC4-4D4DDBFF39F9
 :END:
 [[https://github.com/emacs-evil/evil][Evil]] is an extensible *vi* layer for Emacs.
 
@@ -688,6 +749,7 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
 *** My personal key bindings
 :PROPERTIES:
 :CUSTOM_ID: my-personal-key-bindings
+:ID:       BA6DEAEB-9E41-41C9-BEB1-0CB34B15E9D7
 :END:
 I will try to enter all my personal key bindings here... but some are defined
 in the MacOS keyboard settings and some are defined in other places. And there
@@ -707,6 +769,7 @@ are a lot of them in the =General= section below. Oh my.
 *** IVY and Counsel
 :PROPERTIES:
 :CUSTOM_ID: ivy-and-counsel
+:ID:       E418697D-1872-4BEB-B20A-962B42F57CA1
 :END:
 #+begin_src emacs-lisp :tangle init.el
   (use-package counsel
@@ -748,6 +811,7 @@ are a lot of them in the =General= section below. Oh my.
 *** General key binding
 :PROPERTIES:
 :CUSTOM_ID: general-key-binding
+:ID:       8C1D41DB-BC1B-4541-864B-625961940AD9
 :END:
 [[https://github.com/noctuid/general.el][General]] is a more convenient key definition system in Emacs.
 #+begin_src emacs-lisp :tangle init.el
@@ -931,6 +995,7 @@ are a lot of them in the =General= section below. Oh my.
 *** Helpful
 :PROPERTIES:
 :CUSTOM_ID: helpful
+:ID:       077B8588-874C-47A3-8EDB-56877C71DA60
 :END:
 [[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
 
@@ -955,6 +1020,7 @@ are a lot of them in the =General= section below. Oh my.
 *** Move text
 :PROPERTIES:
 :CUSTOM_ID: move-text
+:ID:       5BD7A0C2-8D6D-4974-BCDC-10B4C29BE203
 :END:
 [[https://github.com/emacsfodder/move-text][MoveText]] allows you to move the current line using M-up / M-down (or any other bindings you choose)
 if a region is marked, it will move the region instead.
@@ -968,6 +1034,7 @@ if a region is marked, it will move the region instead.
 *** TLDR
 :PROPERTIES:
 :CUSTOM_ID: tldr
+:ID:       49ABCA44-9D3B-4933-A53D-BC3697EA8CC3
 :END:
 #+begin_src emacs-lisp :tangle init.el
   (use-package tldr
@@ -976,14 +1043,17 @@ if a region is marked, it will move the region instead.
 * Programming
 :PROPERTIES:
 :CUSTOM_ID: programming
+:ID:       6B683060-B2A3-47FF-8FC2-F87351A4BD0F
 :END:
 ** Version control
 :PROPERTIES:
 :CUSTOM_ID: version-control
+:ID:       50CCEE1D-FA4D-47D0-BF75-7577CE8F4662
 :END:
 *** Magit
 :PROPERTIES:
 :CUSTOM_ID: magit
+:ID:       FD662F5E-B9FA-4C4A-BB4B-A4001A401DCA
 :END:
 [[https://magit.vc/][Magit]] is a complete text-based user interface to Git. It fills the glaring gap between
 the Git command-line interface and various GUIs, letting you perform trivial as well as
@@ -1003,10 +1073,12 @@ by using Magit.
 ** Project management
 :PROPERTIES:
 :CUSTOM_ID: project-management
+:ID:       B5954506-B844-4846-A4D6-0134C726EE1B
 :END:
 *** Projectile
 :PROPERTIES:
 :CUSTOM_ID: projectile
+:ID:       E8C38F8E-2F20-43C1-BF72-FE14BC6003B3
 :END:
 [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction Library for Emacs.
 
@@ -1020,10 +1092,12 @@ by using Magit.
 * Org
 :PROPERTIES:
 :CUSTOM_ID: org
+:ID:       301AFB02-C777-47B8-811F-AB23BAD48BD8
 :END:
 ** Org
 :PROPERTIES:
 :CUSTOM_ID: org-0
+:ID:       E63EFD3D-706E-4EAB-8C44-1F5CB23A89E2
 :END:
 Why usse Emacs? Because [[https://orgmode.org/][Org-mode]] exists. Org-mode is a  GNU Emacs major mode for
 keeping notes, authoring documents, computational notebooks, literate programming,
@@ -1040,6 +1114,7 @@ This configuration file is writen with org-mode.
 ** Org make-toc
 :PROPERTIES:
 :CUSTOM_ID: org-make-toc
+:ID:       B2E0D829-8524-4BB0-8DBF-E1D96A77CF20
 :END:
 [[https://github.com/alphapapa/org-make-toc][Org-make-toc]] creates tables of contents for org-mode files.
 
@@ -1081,6 +1156,7 @@ Use command =org-make-toc-set= to change TOC properties for the entry at point w
 ** Org tempo
 :PROPERTIES:
 :CUSTOM_ID: org-tempo
+:ID:       03CBC294-7BE4-48A8-A742-4DD2D3A9F8BD
 :END:
 With [[https://orgmode.org/manual/Structure-Templates.html][structure templates]] it is possible to insert empty structural blocks,
 such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such a block.
@@ -1111,6 +1187,7 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
 ** Org bullets
 :PROPERTIES:
 :CUSTOM_ID: org-bullets
+:ID:       15A7A547-A4F5-4B0B-9F9C-023B906799ED
 :END:
 #+begin_src emacs-lisp :tangle init.el
   (use-package org-bullets
@@ -1122,10 +1199,12 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
 * Internet
 :PROPERTIES:
 :CUSTOM_ID: internet
+:ID:       B74CB804-F0C5-41A8-92F8-9075E20E0F3E
 :END:
 ** Browse URL
 :PROPERTIES:
 :CUSTOM_ID: browse-url
+:ID:       19A04E3F-27D1-4003-9DA9-1F86BCA9085F
 :END:
 TODO work in progress
 
@@ -1142,6 +1221,7 @@ TODO work in progress
 ** Elfeed
 :PROPERTIES:
 :CUSTOM_ID: elfeed
+:ID:       4D5A1602-9550-4BEF-B09B-6895EC308A63
 :END:
 [[https://github.com/skeeto/elfeed][An Emacs web feeds client]].
 #+begin_src emacs-lisp :tangle init.el
@@ -1157,10 +1237,12 @@ TODO work in progress
 * Shells and terminals
 :PROPERTIES:
 :CUSTOM_ID: shells-and-terminals
+:ID:       64CFFC69-182E-420E-AFA2-74053A7CF939
 :END:
 ** Eshell
 :PROPERTIES:
 :CUSTOM_ID: eshell
+:ID:       26D21080-CD8B-425D-9588-FD4E01D2011D
 :END:
 Eshell is an Emacs shell written in Elisp.
 #+begin_src emacs-lisp :tangle init.el
