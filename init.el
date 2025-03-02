@@ -63,11 +63,11 @@
   (global-set-key [(meta up)] 'backward-paragraph)
   )
 
-(setq-default c-basic-offset 4
-	      c-default-style "linux"
-	      indent-tabs-mode nil
-	      fill-column 80
-	      tab-width 4)
+(setq-default c-basic-offset 4     ; Amount of basic offset used by + and - symbols in 'c-offsets-alist'. 
+	      c-default-style "linux"  ; Style which gets installed by default when a file is visited.
+	      indent-tabs-mode nil     ; Don't insert tabs
+	      fill-column 80           ; Column beyond which automatic line-wrapping should happen.
+	      tab-width 4)             ; Distance between tab stops, in columns.
 
 (tool-bar-mode -1)                 ; Disable the tool-bar.
 (scroll-bar-mode -1)               ; Specify whether to have vertical scroll bars, and on which side.
