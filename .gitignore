@@ -17,6 +17,8 @@ recentf
 custom.el
 history
 .org-id-locations
+*.html
+*.tex
 url/
 tldr/
 manual-packages/

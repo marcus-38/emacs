@@ -509,7 +509,7 @@ Setting the font faces.
                       :weight 'medium)
   (set-face-attribute 'fixed-pitch nil
                       :font "Iosevka Fixed"
-                      :height 160
+                      :height 170
                       :weight 'medium)
   (set-face-attribute 'font-lock-comment-face nil
                       :slant 'italic)
@@ -999,6 +999,7 @@ are a lot of them in the =General= section below. Oh my.
 :ID:       077B8588-874C-47A3-8EDB-56877C71DA60
 :END:
 [[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
+
 
 #+begin_src emacs-lisp :tangle init.el
   (use-package helpful
