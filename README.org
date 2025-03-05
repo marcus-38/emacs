@@ -42,7 +42,8 @@ If you want to learn more about Org:
   - [[#customel][custom.el]]
   - [[#aliases][Aliases]]
   - [[#profile][Profile]]
-- [[#faster-startup][Faster startup]]
+- [[#put-stuff-in-early-inite][Put stuff in early-init.e]]
+  - [[#garbage-collection][Garbage collection]]
 - [[#package-manager][Package Manager]]
 - [[#macos-specifics][MacOS Specifics]]
   - [[#exec-path-from-shell][Exec path from shell]]
@@ -189,10 +190,15 @@ I use this literate org-file but I like to separate the preferences all the same
   # I had a thought what to put in here but it eluded me
 #+end_src
 
-* Faster startup
+* Put stuff in early-init.e
+:PROPERTIES:
+:ID:       F46F08A4-309D-47DA-B246-23E70D9B935D
+:CUSTOM_ID: put-stuff-in-early-inite
+:END:
+** Garbage collection
 :PROPERTIES:
 :ID:       6E4C54B3-EEB2-4F4D-B34F-FCDFD1D0C789
-:CUSTOM_ID: faster-startup
+:CUSTOM_ID: garbage-collection
 :END:
 #+begin_src emacs-lisp :tangle early-init.el
   (setq gc-cons-theshold 64000000)
