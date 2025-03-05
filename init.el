@@ -182,7 +182,7 @@
                     :weight 'medium)
 (set-face-attribute 'fixed-pitch nil
                     :font "Iosevka Fixed"
-                    :height 160
+                    :height 170
                     :weight 'medium)
 (set-face-attribute 'font-lock-comment-face nil
                     :slant 'italic)
@@ -561,6 +561,30 @@
 
 (use-package magit
   :ensure t)
+
+(use-package corfu
+  :ensure t
+  :defer t
+  :commands (corfu-mode global-corfu-mode)
+  :hook ((prog-mode . corfu-mode)
+         (shell-mode .corfu-mode)
+         (eshell-mode . corfu-mode))
+  :custom
+  (read-extended-command-predicate #'command-completion-default-include p)
+  (text-mode-ispell-word-completion nil)
+  (tab-always-indent 'complete)
+  :config
+  (global-corfu-mode))
+
+(use-package cape
+  :ensure t
+  :defer t
+  :commands (cape-dabbrev cape-file cape-elisp-block)
+  :bind ("C-c p" . cape-prefix-map)
+  :init
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
 (use-package org
   :ensure t)

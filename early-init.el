@@ -11,3 +11,6 @@
 ;; Here be dragons
 
 ;; Code:
+
+(setq gc-cons-theshold 64000000)
+(add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))

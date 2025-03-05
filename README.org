@@ -76,6 +76,9 @@ If you want to learn more about Org:
 - [[#programming][Programming]]
   - [[#version-control][Version control]]
     - [[#magit][Magit]]
+  - [[#code-completion][Code completion]]
+    - [[#corfu][Corfu]]
+    - [[#cape][Cape]]
   - [[#project-management][Project management]]
     - [[#projectile][Projectile]]
 - [[#org][Org]]
@@ -1088,6 +1091,47 @@ by using Magit.
 #+begin_src emacs-lisp :tangle init.el
   (use-package magit
     :ensure t)
+#+end_src
+** Code completion
+:PROPERTIES:
+:ID:       67EE4C12-C335-4C7F-A3E5-A934150B999D
+:CUSTOM_ID: code-completion
+:END:
+*** Corfu
+:PROPERTIES:
+:ID:       0D468204-32B8-41BB-B29B-8DDD2F9A6FD2
+:CUSTOM_ID: corfu
+:END:
+#+begin_src emacs-lisp :tangle init.el
+  (use-package corfu
+    :ensure t
+    :defer t
+    :commands (corfu-mode global-corfu-mode)
+    :hook ((prog-mode . corfu-mode)
+           (shell-mode .corfu-mode)
+           (eshell-mode . corfu-mode))
+    :custom
+    (read-extended-command-predicate #'command-completion-default-include p)
+    (text-mode-ispell-word-completion nil)
+    (tab-always-indent 'complete)
+    :config
+    (global-corfu-mode))
+#+end_src
+*** Cape
+:PROPERTIES:
+:ID:       FEC3E5EA-ABBF-44DD-9526-10CFE0AB9ABC
+:CUSTOM_ID: cape
+:END:
+#+begin_src emacs-lisp :tangle init.el
+  (use-package cape
+    :ensure t
+    :defer t
+    :commands (cape-dabbrev cape-file cape-elisp-block)
+    :bind ("C-c p" . cape-prefix-map)
+    :init
+    (add-hook 'completion-at-point-functions #'cape-dabbrev)
+    (add-hook 'completion-at-point-functions #'cape-file)
+    (add-hook 'completion-at-point-functions #'cape-elisp-block))
 #+end_src
 ** Project management
 :PROPERTIES:
