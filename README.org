@@ -42,6 +42,7 @@ If you want to learn more about Org:
   - [[#customel][custom.el]]
   - [[#aliases][Aliases]]
   - [[#profile][Profile]]
+- [[#faster-startup][Faster startup]]
 - [[#package-manager][Package Manager]]
 - [[#macos-specifics][MacOS Specifics]]
   - [[#exec-path-from-shell][Exec path from shell]]
@@ -186,6 +187,16 @@ I use this literate org-file but I like to separate the preferences all the same
 :END:
 #+begin_src bash :tangle eshell/profiles
   # I had a thought what to put in here but it eluded me
+#+end_src
+
+* Faster startup
+:PROPERTIES:
+:ID:       6E4C54B3-EEB2-4F4D-B34F-FCDFD1D0C789
+:CUSTOM_ID: faster-startup
+:END:
+#+begin_src emacs-lisp :tangle early-init.el
+  (setq gc-cons-theshold 64000000)
+  (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 #+end_src
 
 * Package Manager
