@@ -16,6 +16,7 @@ tramp
 recentf
 custom.el
 history
+bookmarks
 .org-id-locations
 *.html
 *.tex
