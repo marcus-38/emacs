@@ -610,6 +610,23 @@
 (add-hook 'org-mode-hook
           (lambda () (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
 
+(add-to-list 'load-path "~/.emacs.d/manual-packages/org-present/")
+(autoload 'org-present "org-present" nil t)
+
+(eval-after-load "org-present"
+  '(progn
+     (add-hook 'org-present-mode-hook
+               (lambda ()
+                 (org-present-big)
+                 (org-display-inline-images)
+                 (org-present-read-only)))
+     (add-hook 'org-present-mode-quit-hook
+               (lambda ()
+                 (org-present-small)
+                 (org-remove-inline-images)
+                 (org-present-show-cursor)
+                 (org-present-read-write)))))
+
 (use-package org-tempo
   :config
   (add-to-list 'org-structure-template-alist
