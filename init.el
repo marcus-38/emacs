@@ -116,7 +116,7 @@
   :custom
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles . (partial-completion)))))
-  (completion-styles '(orderless)))
+  (completion-styles '(orderless basic)))
 
 (use-package emacs
   :custom
@@ -555,6 +555,25 @@
 
 (use-package magit
   :ensure t)
+
+(use-package corfu
+  :ensure t
+  :defer t
+  :init (global-corfu-mode))
+(use-package emacs
+  :custom
+  (tab-always-indent 'complete)
+  (text-mode-ispell-word-completion nil)
+  (read-extended-command-predicate #'command-completion-default-include-p))
+(use-package dabbrev
+  :ensure t
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
 
 (use-package cape
   :ensure t

@@ -415,7 +415,7 @@ and literal matches are enabled.
     :custom
     (completion-category-defaults nil)
     (completion-category-overrides '((file (styles . (partial-completion)))))
-    (completion-styles '(orderless)))
+    (completion-styles '(orderless basic)))
 #+end_src
 *** Emacs minibuffer configurations
 :PROPERTIES:
@@ -1102,6 +1102,26 @@ by using Magit.
 :ID:       0D468204-32B8-41BB-B29B-8DDD2F9A6FD2
 :CUSTOM_ID: corfu
 :END:
+#+begin_src emacs-lisp :tangle init.el
+  (use-package corfu
+    :ensure t
+    :defer t
+    :init (global-corfu-mode))
+  (use-package emacs
+    :custom
+    (tab-always-indent 'complete)
+    (text-mode-ispell-word-completion nil)
+    (read-extended-command-predicate #'command-completion-default-include-p))
+  (use-package dabbrev
+    :ensure t
+    :bind (("M-/" . dabbrev-completion)
+           ("C-M-/" . dabbrev-expand))
+    :config
+    (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+    (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+    (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+    (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
+#+end_src
 #+begin_src emacs-lisp
 ;;; This setting makes M-x useless for some reason
   (use-package corfu
