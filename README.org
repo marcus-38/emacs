@@ -1,6 +1,10 @@
 #+TITLE: My literate Emacs Configuration
 #+AUTHOR: Marcus
-#+REVEAL_ROOT: file:///~/.emacs.d/manual-packages/reveal.js/js/reveal.js
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_INIT_OPTIONS: slideNumber:true
+#+REVEAL_THEME: league
+#+REVEAL_HIGHLIGHT_CSS: https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/nord.css
+#+REVEAL_PLUGINS: (highlight)
 
 * Emacs Configuration 
 :PROPERTIES:
@@ -43,7 +47,7 @@ If you want to learn more about Org:
   - [[#customel][custom.el]]
   - [[#aliases][Aliases]]
   - [[#profile][Profile]]
-- [[#put-stuff-in-early-inite][Put stuff in early-init.e]]
+- [[#put-stuff-in-early-initel][Put stuff in early-init.el]]
   - [[#garbage-collection][Garbage collection]]
 - [[#package-manager][Package Manager]]
 - [[#macos-specifics][MacOS Specifics]]
@@ -196,10 +200,10 @@ I use this literate org-file but I like to separate the preferences all the same
   # I had a thought what to put in here but it eluded me
 #+end_src
 
-* Put stuff in early-init.e
+* Put stuff in early-init.el
 :PROPERTIES:
 :ID:       F46F08A4-309D-47DA-B246-23E70D9B935D
-:CUSTOM_ID: put-stuff-in-early-inite
+:CUSTOM_ID: put-stuff-in-early-initel
 :END:
 ** Garbage collection
 :PROPERTIES:
@@ -1254,9 +1258,6 @@ Use command =org-make-toc-set= to change TOC properties for the entry at point w
   (setq org-reveal-root "file:///~/.emacs.d/manual-packages/reveal.js/js/reveal.js")
   
 #+end_src
-
-#+RESULTS:
-: file:///~/.emacs.d/manual-packages/reveal.js/js/reveal.js
 
 *** Htmlize
 :PROPERTIES:
