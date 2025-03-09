@@ -1087,7 +1087,6 @@ it becomes outdated. In the background Magit just runs Git commands and if you w
 can see what exactly is being run, making it possible for you to learn the git command-line
 by using Magit.
 
-
 #+begin_src emacs-lisp :tangle init.el
   (use-package magit
     :ensure t)
@@ -1102,6 +1101,8 @@ by using Magit.
 :ID:       0D468204-32B8-41BB-B29B-8DDD2F9A6FD2
 :CUSTOM_ID: corfu
 :END:
+[[https://github.com/minad/corfu][Corfu]] enhances in-buffer completion with a small completion popup.
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package corfu
     :ensure t
