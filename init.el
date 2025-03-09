@@ -414,6 +414,7 @@
     "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
     "f l" '(counsel-locate :wk "Locate a file")
     "f r" '(counsel-recentf :wk "Find recent files")
+    "f D" '(dashboard-open :wk "Dashboard")
     )
 
   (my/leader-keys
@@ -473,26 +474,25 @@
     )
 
   (my/leader-keys
-    "m" '(:ignore t :wk "Org")
-    "m a" '(org-agenda :wk "Org agenda")
-    "m e" '(org-export-dispatch :wk "Org export dispatch")
-    "m i" '(org-toggle-item :wk "Org toggle item")
-    "m t" '(org-todo :wk "Org todo")
-    "m B" '(org-babel-tangle :wk "Org babel tangle")
-    "m T" '(org-todo-list :wk "Org todo list")
-    "m b" '(:ignore t :wk "Tables")
-    "m b -" '(org-table-insert-hline :wk "Insert hline in table")
-    "m d" '(:ignore t :wk "Date/deadline")
-    "m d t" '(org-time-stamp :wk "Org time stamp")
-    "m p" '(org-present :wk "Org present")
+    "o" '(:ignore t :wk "Org")
+    "o a" '(org-agenda :wk "Org agenda")
+    "o e" '(org-export-dispatch :wk "Org export dispatch")
+    "o i" '(org-toggle-item :wk "Org toggle item")
+    "o t" '(org-todo :wk "Org todo")
+    "o B" '(org-babel-tangle :wk "Org babel tangle")
+    "o T" '(org-todo-list :wk "Org todo list")
+    "o b" '(:ignore t :wk "Tables")
+    "o b -" '(org-table-insert-hline :wk "Insert hline in table")
+    "o d" '(:ignore t :wk "Date/deadline")
+    "o s" '(org-time-stamp :wk "Org time stamp")
+    "o p" '(org-present :wk "Org present")
     )
   
 
   (my/leader-keys
-    "o" '(:ignore t :wk "Open")
-    "o d" '(dashboard-open :wk "Dashboard")
-    "o e" '(elfeed :wk "Open Elfeed")
-    "o u" '(elfeed-update :wk "Elfeed update")
+    "i" '(:ignore t :wk "Internet")
+    "i e" '(elfeed :wk "Open Elfeed")
+    "i u" '(elfeed-update :wk "Elfeed update")
     )
 
   (my/leader-keys
