@@ -489,6 +489,7 @@
     "m b -" '(org-table-insert-hline :wk "Insert hline in table")
     "m d" '(:ignore t :wk "Date/deadline")
     "m d t" '(org-time-stamp :wk "Org time stamp")
+    "m p" '(org-present :wk "Org present")
     )
   
 
@@ -609,6 +610,13 @@
 
 (add-hook 'org-mode-hook
           (lambda () (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
+
+(add-to-list 'load-path "~/.emacs.d/manual-packages/org-reveal/")
+(require 'ox-reveal)
+(setq org-reveal-root "file:///~/.emacs.d/manual-packages/reveal.js/js/reveal.js")
+
+(add-to-list 'load-path "~/.emacs.d/manual-packages/emacs-htmlize/")
+(require 'htmlize)
 
 (add-to-list 'load-path "~/.emacs.d/manual-packages/org-present/")
 (autoload 'org-present "org-present" nil t)

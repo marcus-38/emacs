@@ -1,17 +1,10 @@
-# Compiled
 *.elc
-
-# Packaging
 .cask
-
-# Backup files
 *~
-
-# Undo-tree save-files
+*#
 *.~undo-tree
 .#README.org
 #README.org#
-
 tramp
 recentf
 custom.el
@@ -28,3 +21,4 @@ transient/
 auto-save-list/
 elpa/
 eshell/
+.DS_Store

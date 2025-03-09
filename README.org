@@ -1,5 +1,6 @@
 #+TITLE: My literate Emacs Configuration
 #+AUTHOR: Marcus
+#+REVEAL_ROOT: file:///~/.emacs.d/manual-packages/reveal.js/js/reveal.js
 
 * Emacs Configuration 
 :PROPERTIES:
@@ -84,7 +85,8 @@ If you want to learn more about Org:
 - [[#org][Org]]
   - [[#org-0][Org]]
   - [[#org-make-toc][Org make-toc]]
-  - [[#org-present][Org present]]
+  - [[#org-reveal][Org reveal]]
+    - [[#htmlize][Htmlize]]
   - [[#org-tempo][Org tempo]]
   - [[#org-bullets][Org bullets]]
 - [[#internet][Internet]]
@@ -969,6 +971,7 @@ are a lot of them in the =General= section below. Oh my.
       "m b -" '(org-table-insert-hline :wk "Insert hline in table")
       "m d" '(:ignore t :wk "Date/deadline")
       "m d t" '(org-time-stamp :wk "Org time stamp")
+      "m p" '(org-present :wk "Org present")
       )
     
 
@@ -1217,14 +1220,34 @@ Use command =org-make-toc-set= to change TOC properties for the entry at point w
             (lambda () (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
 #+end_src
 
-** Org present
+** Org reveal
 :PROPERTIES:
 :ID:       05914648-15E4-40FD-B942-5B41EB7FBFDC
-:CUSTOM_ID: org-present
+:CUSTOM_ID: org-reveal
 :END:
-[[https://github.com/rlister/org-present][Org-present]] is meant to be an extremely minimalist presentation tool for Emacs org-mode. Simply layout
-your presentation with each slide under a top-level header, start the minor mode with 'org-present, and
-page through each slide with left/right keys.
+[[https://github.com/yjwen/org-reveal][Org-reveal]] exports your org documents to reaveal.js presentations.
+
+#+begin_src emacs-lisp :tangle init.el
+  (add-to-list 'load-path "~/.emacs.d/manual-packages/org-reveal/")
+  (require 'ox-reveal)
+  (setq org-reveal-root "file:///~/.emacs.d/manual-packages/reveal.js/js/reveal.js")
+  
+#+end_src
+
+#+RESULTS:
+: file:///~/.emacs.d/manual-packages/reveal.js/js/reveal.js
+
+*** Htmlize
+:PROPERTIES:
+:ID:       073835A7-1907-4EB4-806F-D7305D6BE36A
+:CUSTOM_ID: htmlize
+:END:
+[[https://github.com/hniksic/emacs-htmlize][Htmlize]] convert buffer text and decoreations to HTML.
+
+#+begin_src emacs-lisp :tangle init.el
+  (add-to-list 'load-path "~/.emacs.d/manual-packages/emacs-htmlize/")
+  (require 'htmlize)
+#+end_src
 
 #+begin_src emacs-lisp :tangle init.el
   (add-to-list 'load-path "~/.emacs.d/manual-packages/org-present/")
