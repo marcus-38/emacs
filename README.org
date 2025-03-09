@@ -1144,6 +1144,9 @@ by using Magit.
 :ID:       FEC3E5EA-ABBF-44DD-9526-10CFE0AB9ABC
 :CUSTOM_ID: cape
 :END:
+[[https://github.com/minad/cape][Cape]] provides completion at point extensions which can be used in comlbination with
+[[https://github.com/minad/corfu][Corfu]], [[https://github.com/company-mode/company-mode][Company]] or the default completion UI.
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package cape
     :ensure t
