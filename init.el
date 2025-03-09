@@ -19,7 +19,7 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")
 			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-			 ("gnu" . "https://elpa.gnu.org/packgages/")))
+			 ("gnu" . "https://elpa.gnu.org/packages/")))
 (setq package-user-dir (expand-file-name "~/.emacs.d/packages"))
 (require 'package)
 (package-initialize)
@@ -279,14 +279,7 @@
                                    (registers . "e")))
   (setq dashboard-navigation-cycle t
         dashboard-display-icons-p t)
-        ;dashboard-icon-type 'nerd-icons
-        ;dashboard-set-heading-icons t
-        ;dashboard-set-file-icons t
-        ;dashboard-icon-file-height 1.75
-        ;dashboard-icon-file-v-adjust -0.125
-        ;dashboard-heading-icon-height 1.75
-        ;dashboard-heading-icon-v-adjust -0.125)
-  :init
+   :init
   (dashboard-setup-startup-hook))
 
 (use-package evil
@@ -562,20 +555,6 @@
 
 (use-package magit
   :ensure t)
-
-(use-package corfu
-  :ensure t
-  :defer t
-  :commands (corfu-mode global-corfu-mode)
-  :hook ((prog-mode . corfu-mode)
-         (shell-mode .corfu-mode)
-         (eshell-mode . corfu-mode))
-  :custom
-  (read-extended-command-predicate #'command-completion-default-include p)
-  (text-mode-ispell-word-completion nil)
-  (tab-always-indent 'complete)
-  :config
-  (global-corfu-mode))
 
 (use-package cape
   :ensure t

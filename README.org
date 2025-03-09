@@ -225,7 +225,7 @@ manager, adds sources and initialize the packages manager.
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
   			 ("melpa-stable" . "https://stable.melpa.org/packages/")
   			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-  			 ("gnu" . "https://elpa.gnu.org/packgages/")))
+  			 ("gnu" . "https://elpa.gnu.org/packages/")))
   (setq package-user-dir (expand-file-name "~/.emacs.d/packages"))
   (require 'package)
   (package-initialize)
@@ -234,6 +234,9 @@ manager, adds sources and initialize the packages manager.
   (package-install-selected-packages)
   (require 'use-package)
 #+end_src
+
+#+RESULTS:
+: use-package
 
 * MacOS Specifics
 :PROPERTIES:
@@ -725,14 +728,7 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
                                      (registers . "e")))
     (setq dashboard-navigation-cycle t
           dashboard-display-icons-p t)
-          ;dashboard-icon-type 'nerd-icons
-          ;dashboard-set-heading-icons t
-          ;dashboard-set-file-icons t
-          ;dashboard-icon-file-height 1.75
-          ;dashboard-icon-file-v-adjust -0.125
-          ;dashboard-heading-icon-height 1.75
-          ;dashboard-heading-icon-v-adjust -0.125)
-    :init
+     :init
     (dashboard-setup-startup-hook))
 #+end_src
 * Keybindings
@@ -1106,20 +1102,21 @@ by using Magit.
 :ID:       0D468204-32B8-41BB-B29B-8DDD2F9A6FD2
 :CUSTOM_ID: corfu
 :END:
-#+begin_src emacs-lisp :tangle init.el
+#+begin_src emacs-lisp
+;;; This setting makes M-x useless for some reason
   (use-package corfu
-    :ensure t
-    :defer t
-    :commands (corfu-mode global-corfu-mode)
-    :hook ((prog-mode . corfu-mode)
-           (shell-mode .corfu-mode)
-           (eshell-mode . corfu-mode))
-    :custom
-    (read-extended-command-predicate #'command-completion-default-include p)
-    (text-mode-ispell-word-completion nil)
-    (tab-always-indent 'complete)
-    :config
-    (global-corfu-mode))
+      :ensure t
+      :defer t
+      :commands (corfu-mode global-corfu-mode)
+      :hook ((prog-mode . corfu-mode)
+             (shell-mode .corfu-mode)
+             (eshell-mode . corfu-mode))
+      :custom
+      (read-extended-command-predicate #'command-completion-default-include p)
+      (text-mode-ispell-word-completion nil)
+      (tab-always-indent 'complete)
+      :config
+      (global-corfu-mode))
 #+end_src
 *** Cape
 :PROPERTIES:
