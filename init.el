@@ -291,12 +291,14 @@
         evil-split-window-below t
         evil-undo-system 'undo-redo)
   (evil-mode 1))
+
 (use-package evil-collection
   :ensure t
   :after evil
   :config
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
+
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "SPC") nil)
   (define-key evil-motion-state-map (kbd "RET") nil)
@@ -560,11 +562,13 @@
   :ensure t
   :defer t
   :init (global-corfu-mode))
+
 (use-package emacs
   :custom
   (tab-always-indent 'complete)
   (text-mode-ispell-word-completion nil)
   (read-extended-command-predicate #'command-completion-default-include-p))
+
 (use-package dabbrev
   :ensure t
   :bind (("M-/" . dabbrev-completion)

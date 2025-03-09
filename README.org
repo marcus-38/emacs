@@ -176,6 +176,8 @@ I use this literate org-file but I like to separate the preferences all the same
 :CUSTOM_ID: aliases
 :ID:       F5DE7D60-F62C-4EE4-91FF-F3A22DD8AD2B
 :END:
+Here I set my aliases I like to use.
+
 #+begin_src bash :tangle eshell/aliases
   # alias for emacs commands
   alias ff find-file $1
@@ -196,6 +198,9 @@ I use this literate org-file but I like to separate the preferences all the same
 :CUSTOM_ID: profile
 :ID:       83FC4DED-47A6-40B8-BEE4-95AFCBAC73FF
 :END:
+I really had a thought of what to put in here but I can't remeber what it was. I keep it as a
+reminder to myself I can put stuff in the profiles file for eshell later.
+
 #+begin_src bash :tangle eshell/profiles
   # I had a thought what to put in here but it eluded me
 #+end_src
@@ -210,6 +215,9 @@ I use this literate org-file but I like to separate the preferences all the same
 :ID:       6E4C54B3-EEB2-4F4D-B34F-FCDFD1D0C789
 :CUSTOM_ID: garbage-collection
 :END:
+I set a large threshold for garbage collection at start. After the =after-init-hook= I set it
+to a lower number. This needs more work.
+
 #+begin_src emacs-lisp :tangle early-init.el
   (setq gc-cons-theshold 64000000)
   (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
@@ -238,9 +246,6 @@ manager, adds sources and initialize the packages manager.
   (package-install-selected-packages)
   (require 'use-package)
 #+end_src
-
-#+RESULTS:
-: use-package
 
 * MacOS Specifics
 :PROPERTIES:
@@ -332,16 +337,19 @@ Settings that doesn't fit in anywhere else.
 
   (setq display-line-numbers 'relative) ; Show relative line numbers
 #+end_src
+
 * Look and Feel
 :PROPERTIES:
 :CUSTOM_ID: look-and-feel
 :ID:       74E7C440-49F1-4C6A-B8E7-D0F706B9FCCC
 :END:
+
 ** Minibuffer
 :PROPERTIES:
 :CUSTOM_ID: minibuffer
 :ID:       E53B959F-383A-4358-830D-775ED30F6878
 :END:
+
 *** Which key
 :PROPERTIES:
 :CUSTOM_ID: which-key
@@ -357,6 +365,7 @@ command (a prefix) in a popup.
     :custom (which-key-idle-delay 0.5)
     :config (which-key-mode))
 #+end_src
+
 *** Vertico
 :PROPERTIES:
 :CUSTOM_ID: vertico
@@ -387,6 +396,7 @@ Vertico sorts by history position.
     :init
     (savehist-mode))
 #+end_src
+
 *** Marginalia
 :PROPERTIES:
 :CUSTOM_ID: marginalia
@@ -403,6 +413,7 @@ annotations placed at the margin of the minibuffer for your completion candidate
     :custom
     (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
 #+end_src
+
 *** Orderless
 :PROPERTIES:
 :CUSTOM_ID: orderless
@@ -421,6 +432,7 @@ and literal matches are enabled.
     (completion-category-overrides '((file (styles . (partial-completion)))))
     (completion-styles '(orderless basic)))
 #+end_src
+
 *** Emacs minibuffer configurations
 :PROPERTIES:
 :CUSTOM_ID: emacs-minibuffer-configurations
@@ -435,6 +447,7 @@ and literal matches are enabled.
     (minibuffer-prompt-properties
      '(read-only t cursor-intangible t face minibuffer-prompt)))
 #+end_src
+
 ** Themes, modeline and Fonts
 :PROPERTIES:
 :CUSTOM_ID: themes-modeline-and-fonts
@@ -475,6 +488,7 @@ something with a bit more flair than the [[https://github.com/protesilaos/modus-
   (mapc #'disable-theme custom-enabled-themes) ; disable all other themes to avoid awkward blending
   (load-theme 'ef-arbutus :no-confirm)
 #+end_src
+
 *** Doom Themes
 :PROPERTIES:
 :CUSTOM_ID: doom-themes
@@ -528,6 +542,7 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
 :ID:       61D8C5B1-D4AE-4034-92A6-6F26C1728114
 :END:
 Setting the font faces.
+
 #+begin_src emacs-lisp :tangle init.el
   (set-face-attribute 'default nil
                       :font "Iosevka Fixed"
@@ -558,6 +573,7 @@ Setting the font faces.
 :END:
 [[https://github.com/Malabarba/beacon][Beacon]] is a light that follows your cursor around so you don't lose it. Currently not used in
 my config. To enable it add =:tangle init.el= in the source code block.
+
 #+begin_src emacs-lisp  
   (use-package beacon
     :ensure t
@@ -569,11 +585,13 @@ my config. To enable it add =:tangle init.el= in the source code block.
     :init
     (beacon-mode 1))
 #+end_src
+
 **** Pulsar
 :PROPERTIES:
 :ID:       92700793-A40B-4D12-ADC8-D7CBC7D11D4C
 :END:
 [[https://github.com/protesilaos/pulsar][Pulsar]] is an Emacs package that pulse the current line after running select functions.
+
 #+begin_src emacs-lisp :tangle init.el
   (add-to-list 'load-path "~/.emacs.d/manual-packages/pulsar")
   (require 'pulsar)
@@ -588,11 +606,13 @@ my config. To enable it add =:tangle init.el= in the source code block.
     (define-key map (kbd "C-c h h") #'pulsar-highlight-line))
   (pulsar-global-mode 1)
 #+end_src
+
 *** Icons
 :PROPERTIES:
 :CUSTOM_ID: icons
 :ID:       FDD7A7C7-33EA-4289-BFB0-22FE7CDA6C77
 :END:
+
 **** All-the-icons
 :PROPERTIES:
 :ID:       9606C0D9-5601-423F-8AC6-50BF7397AFBA
@@ -604,6 +624,7 @@ my config. To enable it add =:tangle init.el= in the source code block.
     :ensure t
     :if (display-graphic-p))
 #+end_src
+
 **** All-the-icons-completion
 :PROPERTIES:
 :ID:       B07244C7-32BE-452D-B637-8289F257F72B
@@ -618,6 +639,7 @@ my config. To enable it add =:tangle init.el= in the source code block.
     :init
     (all-the-icons-completion-mode))
 #+end_src
+
 **** Nerd icons
 :PROPERTIES:
 :ID:       0D81B940-D772-49D4-984A-4A71C28D3770
@@ -628,6 +650,7 @@ my config. To enable it add =:tangle init.el= in the source code block.
   (use-package nerd-icons
     :ensure t)
 #+end_src
+
 *** Windows
 :PROPERTIES:
 :CUSTOM_ID: windows
@@ -657,6 +680,7 @@ Setup how to split windows in Emacs.
       (split-window-vertically)
       (other-window 1)))
 #+end_src
+
 **** Switch window
 :PROPERTIES:
 :ID:       8634A72C-DFC0-4DD6-AE13-91BC22A9B66B
@@ -669,6 +693,7 @@ Setup how to split windows in Emacs.
     :bind (("C-x o" . switch-window)
            ("C-x w" . switch-window-then-swap-buffer)))
 #+end_src
+
 **** Winner
 :PROPERTIES:
 :ID:       D61E84D9-1733-483C-B0AA-28E3E2645D24
@@ -681,6 +706,7 @@ they have been changed, making it easier to manage your layout.
     :ensure nil
     :config (winner-mode))
 #+end_src
+
 **** Ibuffer
 :PROPERTIES:
 :ID:       6C09128F-D990-4CBB-AD15-EBB93ED8E310
@@ -705,6 +731,7 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
   (add-hook 'ibuffer-mode-hook (lambda ()
                                  (ibuffer-switch-to-saved-filter-groups "default")))
 #+end_src
+
 **** Dashboard
 :PROPERTIES:
 :ID:       FD102CAC-728C-4EC9-9126-264619072CE5
@@ -735,11 +762,13 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
      :init
     (dashboard-setup-startup-hook))
 #+end_src
+
 * Keybindings
 :PROPERTIES:
 :CUSTOM_ID: keybindings
 :ID:       CAC3197F-094A-4657-8CC8-5B86175271C3
 :END:
+
 *** Evil
 :PROPERTIES:
 :CUSTOM_ID: evil
@@ -757,18 +786,21 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
           evil-split-window-below t
           evil-undo-system 'undo-redo)
     (evil-mode 1))
+
   (use-package evil-collection
     :ensure t
     :after evil
     :config
     (add-to-list 'evil-collection-mode-list 'help)
     (evil-collection-init))
+
   (with-eval-after-load 'evil-maps
     (define-key evil-motion-state-map (kbd "SPC") nil)
     (define-key evil-motion-state-map (kbd "RET") nil)
     (define-key evil-motion-state-map (kbd "TAB") nil))
   (setq org-return-follows-link t)
 #+end_src
+
 *** My personal key bindings
 :PROPERTIES:
 :CUSTOM_ID: my-personal-key-bindings
@@ -789,11 +821,13 @@ are a lot of them in the =General= section below. Oh my.
   (global-set-key [escape] 'keyboard-escape-quit)        ; be default, Emacs requires you to hit ESC
                                                          ; three times to escape quit the minibuffer
 #+end_src
+
 *** IVY and Counsel
 :PROPERTIES:
 :CUSTOM_ID: ivy-and-counsel
 :ID:       E418697D-1872-4BEB-B20A-962B42F57CA1
 :END:
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package counsel
     :ensure t
@@ -831,12 +865,14 @@ are a lot of them in the =General= section below. Oh my.
     (ivy-set-display-transformer 'ivy-switch-buffer
                                  'ivy-rich-switch-buffer-transformer))
 #+end_src
+
 *** General key binding
 :PROPERTIES:
 :CUSTOM_ID: general-key-binding
 :ID:       8C1D41DB-BC1B-4541-864B-625961940AD9
 :END:
 [[https://github.com/noctuid/general.el][General]] is a more convenient key definition system in Emacs.
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package general
     :ensure t
@@ -1017,13 +1053,13 @@ are a lot of them in the =General= section below. Oh my.
     
     ) 
 #+end_src
+
 *** Helpful
 :PROPERTIES:
 :CUSTOM_ID: helpful
 :ID:       077B8588-874C-47A3-8EDB-56877C71DA60
 :END:
 [[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
-
 
 #+begin_src emacs-lisp :tangle init.el
   (use-package helpful
@@ -1043,6 +1079,7 @@ are a lot of them in the =General= section below. Oh my.
     ([remap describe-key] . helpful-key)
     ([remap describe-command] . helpful-command))
 #+end_src
+
 *** Move text
 :PROPERTIES:
 :CUSTOM_ID: move-text
@@ -1057,25 +1094,30 @@ if a region is marked, it will move the region instead.
     :defer
     :init (move-text-default-bindings))
 #+end_src
+
 *** TLDR
 :PROPERTIES:
 :CUSTOM_ID: tldr
 :ID:       49ABCA44-9D3B-4933-A53D-BC3697EA8CC3
 :END:
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package tldr
     :ensure t)
 #+end_src
+
 * Programming
 :PROPERTIES:
 :CUSTOM_ID: programming
 :ID:       6B683060-B2A3-47FF-8FC2-F87351A4BD0F
 :END:
+
 ** Version control
 :PROPERTIES:
 :CUSTOM_ID: version-control
 :ID:       50CCEE1D-FA4D-47D0-BF75-7577CE8F4662
 :END:
+
 *** Magit
 :PROPERTIES:
 :CUSTOM_ID: magit
@@ -1095,11 +1137,13 @@ by using Magit.
   (use-package magit
     :ensure t)
 #+end_src
+
 ** Code completion
 :PROPERTIES:
 :ID:       67EE4C12-C335-4C7F-A3E5-A934150B999D
 :CUSTOM_ID: code-completion
 :END:
+
 *** Corfu
 :PROPERTIES:
 :ID:       0D468204-32B8-41BB-B29B-8DDD2F9A6FD2
@@ -1112,11 +1156,13 @@ by using Magit.
     :ensure t
     :defer t
     :init (global-corfu-mode))
+
   (use-package emacs
     :custom
     (tab-always-indent 'complete)
     (text-mode-ispell-word-completion nil)
     (read-extended-command-predicate #'command-completion-default-include-p))
+
   (use-package dabbrev
     :ensure t
     :bind (("M-/" . dabbrev-completion)
@@ -1127,6 +1173,10 @@ by using Magit.
     (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
     (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
 #+end_src
+
+I keep this code because I'm interesting in finding out what makes
+M-x not working.
+
 #+begin_src emacs-lisp
 ;;; This setting makes M-x useless for some reason
   (use-package corfu
@@ -1143,6 +1193,7 @@ by using Magit.
       :config
       (global-corfu-mode))
 #+end_src
+
 *** Cape
 :PROPERTIES:
 :ID:       FEC3E5EA-ABBF-44DD-9526-10CFE0AB9ABC
@@ -1162,11 +1213,13 @@ by using Magit.
     (add-hook 'completion-at-point-functions #'cape-file)
     (add-hook 'completion-at-point-functions #'cape-elisp-block))
 #+end_src
+
 ** Project management
 :PROPERTIES:
 :CUSTOM_ID: project-management
 :ID:       B5954506-B844-4846-A4D6-0134C726EE1B
 :END:
+
 *** Projectile
 :PROPERTIES:
 :CUSTOM_ID: projectile
@@ -1181,11 +1234,13 @@ by using Magit.
     (projectile-mode +1)
     )
 #+end_src
+
 * Org
 :PROPERTIES:
 :CUSTOM_ID: org
 :ID:       301AFB02-C777-47B8-811F-AB23BAD48BD8
 :END:
+
 ** Org
 :PROPERTIES:
 :CUSTOM_ID: org-0
@@ -1326,6 +1381,7 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
 :CUSTOM_ID: org-bullets
 :ID:       15A7A547-A4F5-4B0B-9F9C-023B906799ED
 :END:
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package org-bullets
     :ensure t
@@ -1338,6 +1394,7 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
 :CUSTOM_ID: internet
 :ID:       B74CB804-F0C5-41A8-92F8-9075E20E0F3E
 :END:
+
 ** Browse URL
 :PROPERTIES:
 :CUSTOM_ID: browse-url
@@ -1355,12 +1412,14 @@ TODO work in progress
     (put 'browse-url-handlers 'safe-local-variable (lambda (x) t))
     (put 'browse-url-browser-function 'safe-local-variable (lambda (x) t)))
 #+end_src
+
 ** Elfeed
 :PROPERTIES:
 :CUSTOM_ID: elfeed
 :ID:       4D5A1602-9550-4BEF-B09B-6895EC308A63
 :END:
 [[https://github.com/skeeto/elfeed][An Emacs web feeds client]].
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package elfeed
     :ensure t
@@ -1381,17 +1440,20 @@ TODO work in progress
                          ("https://www.dpreview.com/feeds/news/latest" photography dpreview)
                          ))))
 #+end_src
+
 * Shells and terminals
 :PROPERTIES:
 :CUSTOM_ID: shells-and-terminals
 :ID:       64CFFC69-182E-420E-AFA2-74053A7CF939
 :END:
+
 ** Eshell
 :PROPERTIES:
 :CUSTOM_ID: eshell
 :ID:       26D21080-CD8B-425D-9588-FD4E01D2011D
 :END:
 Eshell is an Emacs shell written in Elisp.
+
 #+begin_src emacs-lisp :tangle init.el
   (use-package eshell-toggle
     :ensure t
