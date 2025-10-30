@@ -2,6 +2,9 @@
 #+OPTIOINS: toc:2 num:nil
 
 * Emacs Configuration
+:PROPERTIES:
+:ID:       09343f47-1679-440f-95cd-f785f7c69ae2
+:END:
 This is my personal Emacs configuration. It is a wok in progress. The relevant
 configuration files are tangled from this Org-document (=C-c C-v t=). I don't
 tangle on save or anything like that. This configuration will probably never be
@@ -26,14 +29,23 @@ If you want to learn more about Org:
 - [[https://www.gnu.org/software/emacs/manual/index.html][GNU Emacs Manuals Online]]
 
 * Table of Contents
+:PROPERTIES:
+:ID:       b189e2ec-4f92-4bed-b382-b2ce1303e84f
+:END:
 
 * Generate files and file headers
+:PROPERTIES:
+:ID:       b4a28b58-af79-40c9-814d-eb61d5f09fbb
+:END:
 The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
 use this configuration as is.
 
 *Here be dragons*
 
 ** init.el
+:PROPERTIES:
+:ID:       e23de079-3a6b-4539-8009-07ebbc60ff1a
+:END:
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el :mkdirp yes
@@ -53,6 +65,9 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 #+end_src
 
 ** early-init.el
+:PROPERTIES:
+:ID:       da74a372-1f4c-4047-93bc-b7abae58327d
+:END:
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/early-init.el :mkdirp yes
@@ -72,6 +87,9 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 #+end_src
 
 ** custom.el
+:PROPERTIES:
+:ID:       2afa1d80-84f9-4cc0-bf39-d812d6d83e8d
+:END:
 In Emacs, a custom file is used to store customization settings seperately
 from the main init file, allowing for easier management of user preferences.
 I use this literate org-file but I like to separate the preferences all the same.
@@ -83,6 +101,9 @@ I use this literate org-file but I like to separate the preferences all the same
 #+end_src
 
 * Aliases
+:PROPERTIES:
+:ID:       f5220e9f-af04-417b-9a65-fa3d67010025
+:END:
 Here I set my aliases I like to use.
 
 #+begin_src bash :tangle ~/.emacs.d/eshell/aliases :mkdirp yes
@@ -94,13 +115,22 @@ Here I set my aliases I like to use.
 #+end_src
 
 * Early-init
+:PROPERTIES:
+:ID:       f7e0fdee-a113-4843-8166-fc9328cae8d0
+:END:
 ** Garbage collection
+:PROPERTIES:
+:ID:       fabf79ba-92bc-4ad3-a7c5-5356c0a79965
+:END:
 #+begin_src emacs-lisp :tangle ~/.emacs.d/early-init.el
   (setq gc-cons-threshold 64000000)
   (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
 #+end_src
 
 * Package Manager
+:PROPERTIES:
+:ID:       59ca8f2d-5a9f-45a1-9582-0d31e70a7c99
+:END:
 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html][Package installation]] are usually installed using =use-package=. Some packages
 are downloaded or cloned from sources outside of the ones listed below. These
 packages live in =~/.emacs.d/manual-packages=. This code sets up the package
@@ -121,6 +151,9 @@ manager, adds sources and initialize the packages manager.
 #+end_src
 
 * Misc settings
+:PROPERTIES:
+:ID:       43dcbe04-dc3a-4be8-a402-eab1e425a79b
+:END:
 Settings that doesn't fit in anywhere else gets it's own place here.
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (setq-default c-basic-offset 4 ; Amount of basic offset used by + and - symbols in 'c-offsets-alist'. 
@@ -146,7 +179,13 @@ Settings that doesn't fit in anywhere else gets it's own place here.
 #+end_src
 
 * Look and Feel
+:PROPERTIES:
+:ID:       b4317374-26d8-4d71-bb40-78946ec94b37
+:END:
 ** Which key
+:PROPERTIES:
+:ID:       008cab1b-8437-4962-afef-b11c8cdaed80
+:END:
 [[https://github.com/justbur/emacs-which-key][which-key]] is a minor mode for Emacs that displays the key bindings following your currently entered incomplete
 command (a prefix) in a popup. 
 
@@ -159,6 +198,9 @@ command (a prefix) in a popup.
 #+end_src
 
 ** Vertico
+:PROPERTIES:
+:ID:       afab5a72-3d01-4264-82d3-25bc98d269e4
+:END:
 [[https://github.com/minad/vertico][Vertico]] provides a performant and minimalistic vertical completion UI based on the default completion system. 
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -174,6 +216,9 @@ command (a prefix) in a popup.
 #+end_src
 
 ** Save history
+:PROPERTIES:
+:ID:       f2dff2fc-f45f-431c-8fe1-9524e69ed73a
+:END:
 Vertico sorts by history position.
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (use-package savehist
@@ -182,6 +227,9 @@ Vertico sorts by history position.
 #+end_src 
 
 ** Marginalia
+:PROPERTIES:
+:ID:       572a1a5b-e918-4a16-af33-af8992d4a655
+:END:
 [[https://github.com/minad/marginalia][Marginalia]] are marks or annotations placed at the margin of the page of a book or in this case helpful colorful
 annotations placed at the margin of the minibuffer for your completion candidates.
 
@@ -195,6 +243,9 @@ annotations placed at the margin of the minibuffer for your completion candidate
 #+end_src
 
 ** Orderless
+:PROPERTIES:
+:ID:       7394eb5c-4819-4465-b380-2c7e12f94e78
+:END:
 This package provides an [[https://github.com/oantolin/orderless][orderless]] completion style that divides the pattern into space-separated components,
 and matches candidates that match all of the components in any order. Each component can match in any one of several
 ways: literally, as a regexp, as an initialism, in the flex style, or as multiple word prefixes. By default, regexp
@@ -210,6 +261,9 @@ and literal matches are enabled.
 #+end_src
 
 ** Emacs minibuffer configuration
+:PROPERTIES:
+:ID:       2386fc56-8664-46b4-8878-3d74fa25eeea
+:END:
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (use-package emacs
     :custom
@@ -220,6 +274,9 @@ and literal matches are enabled.
 #+end_src
 
 ** Doom Themes
+:PROPERTIES:
+:ID:       b9c589dc-625e-4e80-9a53-d3cb1dcfd2ae
+:END:
 A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspired by community favorites.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -229,6 +286,9 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
 #+end_src
 
 ** Modeline
+:PROPERTIES:
+:ID:       5c1d34f2-2583-47e0-bab0-d22e4ecea22f
+:END:
 [[https://github.com/seagle0128/doom-modeline][Doom modeline]] is used to cleanup and configure the modeline.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -260,6 +320,9 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
 #+end_src
 
 ** Fonts
+:PROPERTIES:
+:ID:       70e1ff31-a9cb-4890-ae61-4b4b9f206cb8
+:END:
 Setting the font faces.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -282,6 +345,9 @@ Setting the font faces.
 #+end_src
 
 ** All-the-icons
+:PROPERTIES:
+:ID:       15bb2874-6932-47d1-958b-c502f5a7ebd4
+:END:
 [[https://github.com/domtronn/all-the-icons.el][All-the-icons]] is a utility package to collect various Icon Fonts and propertize them within Emacs.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -291,6 +357,9 @@ Setting the font faces.
 #+end_src
 
 ** All-the-icons-completion
+:PROPERTIES:
+:ID:       07d958df-9362-4c0e-a6ac-630a4214432a
+:END:
 [[https://github.com/iyefrat/all-the-icons-completion][All-the-icons-completion]] adds icons to completion candidates in Emacs.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -303,6 +372,9 @@ Setting the font faces.
 #+end_src
 
 ** Nerd icons
+:PROPERTIES:
+:ID:       4bb8c5e4-4a95-45d1-a57e-738691514ed4
+:END:
 [[https://github.com/emacsmirror/nerd-icons][Nerd-icons]] - Emacs Nerd Font Icons Library.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -311,6 +383,9 @@ Setting the font faces.
 #+end_src
 
 ** Window
+:PROPERTIES:
+:ID:       8c55f09a-2cc7-45d1-8dee-3543c65b63cc
+:END:
 Setup how to split windows in Emacs.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -333,6 +408,9 @@ Setup how to split windows in Emacs.
 #+end_src
 
 ** Switch window
+:PROPERTIES:
+:ID:       25402c3a-1c2b-4664-aeb2-3db770e2c0aa
+:END:
 [[https://github.com/dimitri/switch-window][Switch-window]] offer a visual way to choose a window to switch to.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -343,6 +421,9 @@ Setup how to split windows in Emacs.
 #+end_src
 
 ** Winner
+:PROPERTIES:
+:ID:       b099f7bd-e78f-46b4-94a3-aceb38fb6bd2
+:END:
 Winner mode in Emacs allows you to restore previous window configurations after
 they have been changed, making it easier to manage your layout.
 
@@ -353,6 +434,9 @@ they have been changed, making it easier to manage your layout.
 #+end_src
 
 ** Ibuffer
+:PROPERTIES:
+:ID:       a40b06f4-aba4-4179-b0ee-e3cc2830a7ab
+:END:
 I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-life/][ibuffer changed my life]] from Tony Ballantyne Tech.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -375,7 +459,13 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
 #+end_src
 
 * Keybindings
+:PROPERTIES:
+:ID:       ed00b6c1-85c2-4b2b-8bfb-a52e51a954df
+:END:
 ** Evil
+:PROPERTIES:
+:ID:       1ae2dce6-7075-4450-94de-e070a9c313d0
+:END:
 [[https://github.com/emacs-evil/evil][Evil]] is an extensible *vi* layer for Emacs.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -401,4 +491,482 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
     (define-key evil-motion-state-map (kbd "RET") nil)
     (define-key evil-motion-state-map (kbd "TAB") nil))
   (setq org-return-follows-link t)
+#+end_src
+
+** Personal keybindings
+:PROPERTIES:
+:ID:       a270f9f2-1d9c-4ce3-9930-b8241af5e41f
+:END:
+This is probably not the only place where keybindings are defined.
+There are some in the =General= section and in other places. Oh my!
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
+  (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
+  (global-set-key (kbd "C-c p") 'projectile-command-map) ; projectile command map
+  (global-set-key (kbd "C-+") 'text-scale-increase)      ; increase text size
+  (global-set-key (kbd "C--") 'text-scale-decrease)      ; decrease text size
+  (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+  (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+  (global-set-key [escape] 'keyboard-escape-quit)        ; be default, Emacs requires you to hit ESC
+                                                         ; three times to escape quit the minibuffer
+#+end_src
+
+** Ivy and Counsel
+:PROPERTIES:
+:ID:       2ec2540b-f62d-48c3-8c48-8239114f960d
+:END:
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package counsel
+    :ensure t
+    :after ivy
+    :diminish
+    :config
+    (counsel-mode)
+    (setq ivy-initial-inputs-alist nil))
+
+  (use-package ivy
+    :ensure t
+    :bind
+    (("C-c C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :diminish
+    :custom
+    (setq ivy-use-virtual-buffers t
+          ivy-count-format "(%d/%d) "
+          enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
+
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
+
+  (use-package ivy-rich
+    :ensure t
+    :after ivy
+    :init (ivy-rich-mode 1)
+    :custom (ivy-virtual-abbreviate 'full
+                                    ivy-rich-switch-buffer-align-virtual-buffer t
+                                    ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+                                 'ivy-rich-switch-buffer-transformer))
+#+end_src
+
+** General
+:PROPERTIES:
+:ID:       8fc3f3aa-013e-4f8a-917a-0c06027d2992
+:END:
+[[https://github.com/noctuid/general.el][General]] is a more convenient key definition system in Emacs.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package general
+    :ensure t
+    :config
+    (general-evil-setup)
+    ;; set up "SPC" as the global leader key
+    (general-create-definer my/leader-keys
+                            :states '(normal insert visual emacs)
+                            :keymaps 'override
+                            :prefix "SPC"
+                            :global-prefix "M-SPC") ; access leader key in insert mode
+    (my/leader-keys
+     "SPC" '(counsel-M-x :wk "Counsel M-x")
+     "." '(find-file :wk "Find file")
+     "TAB TAB" '(comment-line :wk "Comment lines")
+     "u" '(universal-argument :wk "Universal argument")
+     )
+
+    (my/leader-keys
+      "b" '(:ignore t :wk "Bookmarks/Buffers")
+      "b b" '(switch-to-buffer :wk "Switch to buffer")
+      "b c" '(clone-indirect-buffer :wk "Create indirect buffer copy in a split")
+      "b C" '(clone-indirect-buffer-other-window :wk "Clone indirect buffer in new window")
+      "b d" '(bookmark-delete :wk "Delete bookmark")
+      "b i" '(ibuffer :wk "Ibuffer")
+      "b k" '(kill-current-buffer :wk "Kill current buffer")
+      "b l" '(list-bookmarks :wk "List bookmarks")
+      "b m" '(bookmark-set :wk "Set bookmark")
+      "b n" '(next-buffer :wk "Next buffer")
+      "b p" '(previous-buffer :wk "Previous buffer")
+      "b r" '(revert-buffer :wk "Reload buffer")
+      "b R" '(rename-buffer :wk "Rename buffer")
+      "b s" '(basic-save-buffer :wk "Save buffer")
+      "b S" '(save-some-buffers :wk "Save multiple buffers")
+      "b w" '(bookmark-save :wk "Save current bookmarks to bookmark file")
+      )
+
+    (my/leader-keys
+      "d" '(:ignore t :wk "Dired")
+      "d d" '(dired :wk "Open dired")
+      "d j" '(dired-jump :wk "Dired jump to current")
+      )
+
+    (my/leader-keys
+      "e" '(:ignore t :wk "Eshell/Evaluate")
+      "e b" '(eval-buffer :wk "Evaluate elisp in buffer")
+      "e d" '(eval-defun :wk "Evaluate defun containing or after point")
+      "e e" '(eval-expression :wk "Evaluate and elisp expression")
+      "e h" '(counsel-ssh-history :wk "Eshell history")
+      "e l" '(eval-last-sexp :wk "Evaluate elisp expression before point")
+      "e r" '(eval-region :wk "Evaluate elisp in region")
+      "e R" '(eww-reload :wk "Reload current page in EWW")
+      "e s" '(eshell :wk "Eshell")
+      "e w" '(eww :wk "EWW emacs web browser")
+      )
+
+    (my/leader-keys
+      "f" '(:ignore t :wk "Files")
+      "f c" '((lambda () (interactive) (find-file "~/repos/emacs/README.org")) :wk "Open emacs configuration file")
+      "f e" '((lambda () (interactive) (dired "~/repos/emacs/")) :wk "Open config dir in dired")
+      "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
+      "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
+      "f l" '(counsel-locate :wk "Locate a file")
+      "f r" '(counsel-recentf :wk "Find recent files")
+      )
+
+    (my/leader-keys
+      "g" '(:ignore t :wk "Git")
+      "g d" '(magit-dispatch :wk "Magit dispatch")
+      "g ." '(magit-file-dispatch :wk "Magit file dispatch")
+      "g b" '(magit-branch-checkout :wk "Switch branch")
+      "g c" '(:ignore t :wk "Create")
+      "g c b" '(magit-branch-and-checkout :wk "Create branch and checkout")
+      "g c c" '(magit-commit-create :wk "Create commit")
+      "g c f" '(magit-commit-fixup :wk "Create fixup commit")
+      "g C" '(magit-clone :wk "Clone repo")
+      "g f" '(:ignore t :wk "Find")
+      "g f c" '(magit-show-commit :wk "Magit show commit")
+      "g f f" '(magit-find-file :wk "Magit find file")
+      "g f g" '(magit-find-git-config-file :wk "Find gitconfig file")
+      "g F" '(magit-fetch :wk "Git fetch")
+      "g g" '(magit-status :wk "Magit status")
+      "g i" '(magit-init :wk "Initialize git repo")
+      "g l" '(magit-log-buffer-file :wk "Magit buffer log")
+      "g r" '(vc-revert :wk "Git revert file")
+      "g s" '(magit-stage-file :wk "Git stage file")
+      "g u" '(magit-unstage-file :wk "Git unstage file")
+      )
+
+    (my/leader-keys
+      "h" '(:ignore t :wk "Help")
+      "h a" '(counsel-apropos :wk "Apropos")
+      "h b" '(describe-bindings :wk "Desc. bindings")
+      "h c" '(describe-char :wk "Desc. character under cursor")
+      "h d" '(:ignore t :wk "Emacs documentation")
+      "h d a" '(about-emacs :wk "About Emacs")
+      "h d d" '(view-emacs-debugging :wk "View Emacs debugging")
+      "h d f" '(view-emacs-FAQ :wk "View Emacs FAQ")
+      "h d m" '(info-emacs-manual :wk "The Emacs manual")
+      "h d n" '(view-emacs-news :wk "View Emacs News")
+      "h d o" '(describe-distribution :wk "How to obtain Emacs")
+      "h d p" '(view-emacs-problems :wk "View Emacs problems")
+      "h d t" '(view-emacs-todo :wk "View Emacs todo")
+      "h d w" '(describe-no-warranty :wk "Desc. no warranty")
+      "h e" '(view-echo-area-messages :wk "View echo area messages")
+      "h f" '(describe-function :wk "Desc. function")
+      "h F" '(describe-face :wk "Desc. face")
+      "h g" '(describe-gnu-project :wk "Desc. GNU Project")
+      "h i" '(info :wk "Info")
+      "h I" '(describe-input-method :wk "Desc. input method")
+      "h k" '(describe-key :wk "Desc. key")
+      "h l" '(view-lossage :wk "Display recent keystrokes and the commands run")
+      "h L" '(describe-language-environment :wk "Desc. language environment")
+      "h m" '(describe-mode :wk "Desc. mode")
+      "h r" '(:ignore t :wk "Reload")
+      "h r r" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :wk "Reload emacs config")
+      "h t" '(load-theme :wk "Load theme")
+      "h v" '(describe-variable :wk "Desc. variable")
+      "h w" '(where-is :wk "Prints keybinding for command if set")
+      "h x" '(describe-command :wk "Desc. command")
+      )
+
+    (my/leader-keys
+      "o" '(:ignore t :wk "Org")
+      "o a" '(org-agenda :wk "Org agenda")
+      "o e" '(org-export-dispatch :wk "Org export dispatch")
+      "o i" '(org-toggle-item :wk "Org toggle item")
+      "o t" '(org-todo :wk "Org todo")
+      "o B" '(org-babel-tangle :wk "Org babel tangle")
+      "o T" '(org-todo-list :wk "Org todo list")
+      "o b" '(:ignore t :wk "Tables")
+      "o b -" '(org-table-insert-hline :wk "Insert hline in table")
+      "o d" '(:ignore t :wk "Date/deadline")
+      "o s" '(org-time-stamp :wk "Org time stamp")
+      "o p" '(org-present :wk "Org present")
+      )
+    
+
+    (my/leader-keys
+      "i" '(:ignore t :wk "Internet")
+      "i e" '(elfeed :wk "Open Elfeed")
+      "i u" '(elfeed-update :wk "Elfeed update")
+      )
+
+    (my/leader-keys
+      "p" '(projectile-command-map :wk "Projectile")
+      )
+
+    (my/leader-keys
+      "s" '(:ignore t :wk "Search")
+      "s d" '(dictionary-search :wk "Search dictioinary")
+      "s m" '(man :wk "Man pages")
+      "s t" '(tldr :wk "Lookup TLDR docs for a command")
+      )
+
+    (my/leader-keys
+      "t" '(:ignore t :wk "Toggle")
+      "t t" '(ef-themes-toggle :wk "Switch light/dark theme")
+      "t e" '(eshell-toggle :wk "Toggle Eshell")
+      "t l" '(display-line-numbers-mode :wk "Toggle line numbers")
+      "t r" '((lambda() (interactive) (setq display-line-numbers 'relative)) :wk "Relative line numbers")
+      "t o" '((lambda() (interactive) (setq display-line-numbers 't)) :wk "Ordinary line numbers")
+      )
+
+    (my/leader-keys
+      "w" '(:ignore t :wk "Windows")
+      "w c" '(evil-window-delete :wk "Close window")
+      "w n" '(evil-window-new :wk "New window")
+      "w s" '(evil-window-split :wk "Horizontal split window")
+      "w v" '(evil-window-vsplit :wk "Vertical split window")
+      "w h" '(evil-window-left :wk "Window left")
+      "w j" '(evil-window-down :wk "Window down")
+      "w l" '(evil-window-right :wk "Window right")
+      "w k" '(evil-window-up :wk "Window up")
+      "w w" '(evil-window-next :wk "Next window")
+      )
+    
+    ) 
+#+end_src
+
+** Helpful
+:PROPERTIES:
+:ID:       1850714f-29eb-454c-a8f8-1ff875b7c987
+:END:
+[[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package helpful
+    :ensure t
+    :commands (helpful-at-point
+  	     helpful-callable
+  	     helpful-command
+  	     helpful-function
+  	     helpful-key
+  	     helpful-macro
+  	     helpful-variable)
+    :bind
+    ([remap display-local-help] . helpful-at-point)
+    ([remap describe-function] . helpful-callable)
+    ([remap describe-variable] . helpful-variable)
+    ([remap describe-symbol] . helpful-symbol)
+    ([remap describe-key] . helpful-key)
+    ([remap describe-command] . helpful-command))
+#+end_src
+
+** Move text
+:PROPERTIES:
+:ID:       61eef392-399d-4ec0-b2fe-2d62a2209bc8
+:END:
+[[https://github.com/emacsfodder/move-text][MoveText]] allows you to move the current line using M-up / M-down (or any other bindings you choose)
+if a region is marked, it will move the region instead.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package move-text
+    :ensure t
+    :defer
+    :init (move-text-default-bindings))
+#+end_src
+
+** TLDR
+:PROPERTIES:
+:ID:       6f0edc20-9009-4635-9b49-a46d0ab4e353
+:END:
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package tldr
+    :ensure t)
+#+end_src
+
+* Programming
+:PROPERTIES:
+:ID:       8a7174a2-7846-47f7-a898-3b707e0beae9
+:END:
+** Magit
+:PROPERTIES:
+:ID:       b7bae419-7a23-4590-916e-af05d9e760de
+:END:
+[[https://magit.vc/][Magit]] is a complete text-based user interface to Git. It fills the glaring gap between
+the Git command-line interface and various GUIs, letting you perform trivial as well as
+elaborate version control tasks with just a couple of mnemonic key presses. Magit looks
+like a prettified version of what you get after running a few Git commands but in Magit
+every bit of visible information is also actionable to an extent that goes far beyond
+what any Git GUI provides and it takes care of automatically refreshing this output when
+it becomes outdated. In the background Magit just runs Git commands and if you wish you
+can see what exactly is being run, making it possible for you to learn the git command-line
+by using Magit.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package magit
+    :ensure t)
+#+end_src
+
+** Corfu
+:PROPERTIES:
+:ID:       575bc524-8df5-4513-a007-04b69d7a88dd
+:END:
+[[https://github.com/minad/corfu][Corfu]] enhances in-buffer completion with a small completion popup.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package corfu
+    :ensure t
+    :defer t
+    :init (global-corfu-mode))
+
+  (use-package emacs
+    :custom
+    (tab-always-indent 'complete)
+    (text-mode-ispell-word-completion nil)
+    (read-extended-command-predicate #'command-completion-default-include-p))
+
+  (use-package dabbrev
+    :ensure t
+    :bind (("M-/" . dabbrev-completion)
+           ("C-M-/" . dabbrev-expand))
+    :config
+    (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+    (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+    (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+    (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
+#+end_src
+
+** Cape
+:PROPERTIES:
+:ID:       cf8fff05-8406-479e-a708-dad26ec52156
+:END:
+[[https://github.com/minad/cape][Cape]] provides completion at point extensions which can be used in comlbination with
+[[https://github.com/minad/corfu][Corfu]], [[https://github.com/company-mode/company-mode][Company]] or the default completion UI.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package cape
+    :ensure t
+    :defer t
+    :commands (cape-dabbrev cape-file cape-elisp-block)
+    :bind ("C-c p" . cape-prefix-map)
+    :init
+    (add-hook 'completion-at-point-functions #'cape-dabbrev)
+    (add-hook 'completion-at-point-functions #'cape-file)
+    (add-hook 'completion-at-point-functions #'cape-elisp-block))
+#+end_src
+
+** Projectile
+:PROPERTIES:
+:ID:       8d599f14-19a5-43ee-8f4a-8b224d061a87
+:END:
+[[https://github.com/bbatsov/projectile][Projectile]] is a project interaction Library for Emacs.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package projectile
+    :ensure t
+    :init
+    (projectile-mode +1)
+    )
+#+end_src
+
+* Org
+:PROPERTIES:
+:ID:       14e0936c-b949-476a-bc5b-9c96e132565f
+:END:
+Why usse Emacs? Because [[https://orgmode.org/][Org-mode]] exists. Org-mode is a  GNU Emacs major mode for
+keeping notes, authoring documents, computational notebooks, literate programming,
+maintaining to-do lists, planning projects, and more — in a fast and effective
+plain text system.
+
+This configuration file is writen with org-mode.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package org
+    :ensure t)
+#+end_src
+
+** Org make-toc
+:PROPERTIES:
+:ID:       792f468a-b8e2-4f9e-8ffa-0eb848b34cd8
+:END:
+[[https://github.com/alphapapa/org-make-toc][Org-make-toc]] creates tables of contents for org-mode files.
+
+A document may have any number of tables of contents (TOCs), each of which may list entries in a highly
+configurable way.
+
+To make a basic TOC, follow these steps:
+
+1. Choose a heading to contain a TOC and move the point to it.
+2. Run command =org-make-toc-insert=, which inserts a =:CONTENTS:= drawer and sets TOC properties.
+   Set the =include= property to all.
+3. Run the command =org-make-toc= to update all TOCs in the document.
+
+Use command =org-make-toc-set= to change TOC properties for the entry at point with completion.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package org-make-toc
+    :ensure t
+    :config
+    (setq org-make-toc-insert-custom-ids t))
+
+  (defun my/update-toc-before-save-hook ()
+    "Update TOC before saving buffer in org-mode"
+    (when (eq major-mode 'org-mode)
+      (org-make-toc)
+      ))
+
+  (add-hook 'before-save-hook #'my/update-toc-before-save-hook)
+
+  (defun my/org-add-ids-to-headlines-in-file ()
+    "Add ID properites to all headlines in the current file which do not already have one."
+    (interactive)
+    (org-map-entries 'org-id-get-create))
+
+  (add-hook 'org-mode-hook
+            (lambda () (add-hook 'before-save-hook 'my/org-add-ids-to-headlines-in-file nil 'local)))
+#+end_src
+
+** Org tempo
+:PROPERTIES:
+:ID:       06da885d-ea2d-4168-a87d-f7bcb48e8434
+:END:
+With [[https://orgmode.org/manual/Structure-Templates.html][structure templates]] it is possible to insert empty structural blocks,
+such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such a block.
+
+|-----+-----------------------------------------|
+| Key | Template                                |
+|-----+-----------------------------------------|
+| c   | ‘#+BEGIN_CENTER’ … ‘#+END_CENTER’       |
+| C   | ‘#+BEGIN_COMMENT’ … ‘#+END_COMMENT’     |
+| e   | ‘#+BEGIN_EXAMPLE’ … ‘#+END_EXAMPLE’     |
+| a   | ‘#+BEGIN_EXPORT ascii’ … ‘#+END_EXPORT’ |
+| h   | ‘#+BEGIN_EXPORT html’ … ‘#+END_EXPORT’  |
+| l   | ‘#+BEGIN_EXPORT latex’ … ‘#+END_EXPORT’ |
+| E   | ‘#+BEGIN_EXPORT’ … ‘#+END_EXPORT’       |
+| q   | ‘#+BEGIN_QUOTE’ … ‘#+END_QUOTE’         |
+| el  | ‘#+BEGIN_SRC emacs-lisp’ … ‘#+END_SRC’  |
+| s   | ‘#+BEGIN_SRC’ … ‘#+END_SRC’             |
+| v   | ‘#+BEGIN_VERSE’ … ‘#+END_VERSE’         |
+|-----+-----------------------------------------|
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package org-tempo
+    :config
+    (add-to-list 'org-structure-template-alist
+  	       '("el" . "src emacs-lisp")))
+#+end_src
+
+** Org bullets
+:PROPERTIES:
+:ID:       2d554ba7-d774-4efc-8bc4-d03953a4e25c
+:END:
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package org-bullets
+    :ensure t
+    )
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+end_src
