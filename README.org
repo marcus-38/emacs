@@ -103,19 +103,19 @@ use this configuration as is.
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el :mkdirp yes
-;;; init.el -*- lexical-binding: t; -*-
+  ;;; init.el -*- lexical-binding: t; -*-
 
-;;; Commentary:
-;; This is my personal Emacs configuration. The file is tangled from a
-;; literate org document where I try to document what each piece is for.
-;; If you found my configurations you are free to use as you please, but
-;; please read the whole thing before you do. I regulary commit my
-;; configuration even though it is not working. Yes, I know, you shouldn't
-;; do that but you have been warned.
+  ;;; Commentary:
+  ;; This is my personal Emacs configuration. The file is tangled from a
+  ;; literate org document where I try to document what each piece is for.
+  ;; If you found my configurations you are free to use as you please, but
+  ;; please read the whole thing before you do. I regulary commit my
+  ;; configuration even though it is not working. Yes, I know, you shouldn't
+  ;; do that but you have been warned.
 
-;; Here be dragons
+  ;; Here be dragons
 
-;; Code:
+  ;; Code:
 #+end_src
 
 ** early-init.el
@@ -224,6 +224,7 @@ Settings that doesn't fit in anywhere else gets it's own place here.
             column-number-mode t ; Show column number in modeline.
   	      tab-width 4) ; Distance between tab stops, in columns.
 
+  (setq default-tab-width 4) ; default tab-width to 4 characters
   (tool-bar-mode -1) ; Disable the tool-bar.
   (scroll-bar-mode -1) ; Specify whether to have vertical scroll bars, and on which side.
   (menu-bar-mode -1) ; Disable the menu-bar
@@ -237,6 +238,13 @@ Settings that doesn't fit in anywhere else gets it's own place here.
   (global-hl-line-mode 1) ; Highlight the current line in Emacs.
 
   (setq display-line-numbers 'relative) ; Show relative line numbers
+
+  (cua-mode 1) ; standard keyboard shortcuts for cut, copy, paste and undo
+               ; C-c = copy
+               ; C-x = cut
+               ; C-v = paste
+               ; C-z = undo
+
 #+end_src
 
 * Look and Feel
@@ -399,15 +407,15 @@ Setting the font faces.
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (set-face-attribute 'default nil
                       :font "Iosevka Fixed"
-                      :height 160
+                      :height 120
                       :weight 'medium)
   (set-face-attribute 'variable-pitch nil
                       :font "Iosevka"
-                      :height 150
+                      :height 110
                       :weight 'medium)
   (set-face-attribute 'fixed-pitch nil
                       :font "Iosevka Fixed"
-                      :height 170
+                      :height 130
                       :weight 'medium)
   (set-face-attribute 'font-lock-comment-face nil
                       :slant 'italic)
@@ -707,6 +715,8 @@ There are some in the =General= section and in other places. Oh my!
       "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
       "f l" '(counsel-locate :wk "Locate a file")
       "f r" '(counsel-recentf :wk "Find recent files")
+      "f s" '(basic-save-buffer :wk "Save file")
+      "f S" '(save-some-buffers :wk "Save multiple buffers")
       )
 
     (my/leader-keys
@@ -783,8 +793,8 @@ There are some in the =General= section and in other places. Oh my!
 
     (my/leader-keys
       "i" '(:ignore t :wk "Internet")
-      "i e" '(elfeed :wk "Open Elfeed")
-      "i u" '(elfeed-update :wk "Elfeed update")
+      ;; "i e" '(elfeed :wk "Open Elfeed")
+      ;; "i u" '(elfeed-update :wk "Elfeed update")
       )
 
     (my/leader-keys
@@ -1109,3 +1119,4 @@ Eshell is an Emacs shell written in Elisp.
         eshell-destroy-buffer-when-process-dies t
         eshell-visual-commands '("bash" "fish" "htop" "ssh" "top" "zsh"))
 #+end_src
+
