@@ -1,6 +1,5 @@
 #+TITLE: I tinker with my Emacs Configuration
 #+OPTIOINS: toc:2 num:nil
-#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 
 * Emacs Configuration
 This is my personal Emacs configuration. It is a wok in progress. The relevant
@@ -37,7 +36,7 @@ use this configuration as is.
 ** init.el
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
-#+begin_src emacs-lisp :tangle ~/.config/emacs/init.el :mkdirp yes
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el :mkdirp yes
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;;; Commentary:
@@ -56,7 +55,7 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 ** early-init.el
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
-#+begin_src emacs-lisp :tangle ~/.config/emacs/early-init.el :mkdirp yes
+#+begin_src emacs-lisp :tangle ~/.emacs.d/early-init.el :mkdirp yes
 ;;; early-init.el -*- lexical-binding: t; -*-
 
 ;;; Commentary:
@@ -77,16 +76,16 @@ In Emacs, a custom file is used to store customization settings seperately
 from the main init file, allowing for easier management of user preferences.
 I use this literate org-file but I like to separate the preferences all the same.
 
-#+begin_src emacs-lisp :tangle ~/.config/emacs/init.el :mkdirp yes
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el :mkdirp yes
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (when (file-exists-p custom-file)
     (load custom-file))
 #+end_src
 
-** Aliases
+* Aliases
 Here I set my aliases I like to use.
 
-#+begin_src bash :tangle ~/.config/emacs/eshell/aliases :mkdirp yes
+#+begin_src bash :tangle ~/.emacs.d/eshell/aliases :mkdirp yes
   # alias for emacs commands
   alias ff find-file $1
 
@@ -94,3 +93,312 @@ Here I set my aliases I like to use.
   alias less view-file $1
 #+end_src
 
+* Early-init
+** Garbage collection
+#+begin_src emacs-lisp :tangle ~/.emacs.d/early-init.el
+  (setq gc-cons-threshold 64000000)
+  (add-hook 'after-init-hook #'(lambda () (setq gc-cons-threshold 800000)))
+#+end_src
+
+* Package Manager
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html][Package installation]] are usually installed using =use-package=. Some packages
+are downloaded or cloned from sources outside of the ones listed below. These
+packages live in =~/.emacs.d/manual-packages=. This code sets up the package
+manager, adds sources and initialize the packages manager.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+  			 ("melpa-stable" . "https://stable.melpa.org/packages/")
+  			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+  			 ("gnu" . "https://elpa.gnu.org/packages/")))
+  (setq package-user-dir (expand-file-name "~/.emacs.d/packages"))
+  (require 'package)
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+  (package-install-selected-packages)
+  (require 'use-package)
+#+end_src
+
+* Misc settings
+Settings that doesn't fit in anywhere else gets it's own place here.
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (setq-default c-basic-offset 4 ; Amount of basic offset used by + and - symbols in 'c-offsets-alist'. 
+  	      c-default-style "linux" ; Style which gets installed by default when a file is visited.
+  	      indent-tabs-mode nil ; Don't insert tabs
+  	      fill-column 80 ; Column beyond which automatic line-wrapping should happen.
+            column-number-mode t ; Show column number in modeline.
+  	      tab-width 4) ; Distance between tab stops, in columns.
+
+  (tool-bar-mode -1) ; Disable the tool-bar.
+  (scroll-bar-mode -1) ; Specify whether to have vertical scroll bars, and on which side.
+  (menu-bar-mode -1) ; Disable the menu-bar
+
+  (setq load-prefer-newer t) ; Non-nil means load prefers the newest version of a file.
+  (setq tab-always-indent 'complete) ; Controls the operation of the TAB key.
+
+  (delete-selection-mode 1) ; select text and delete it by typing.
+  (setq org-support-shift-select t) ; Non-nil means make shift-cursor select text when possible.
+
+  (global-hl-line-mode 1) ; Highlight the current line in Emacs.
+
+  (setq display-line-numbers 'relative) ; Show relative line numbers
+#+end_src
+
+* Look and Feel
+** Which key
+[[https://github.com/justbur/emacs-which-key][which-key]] is a minor mode for Emacs that displays the key bindings following your currently entered incomplete
+command (a prefix) in a popup. 
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package which-key
+    :ensure t
+    :delight
+    :custom (which-key-idle-delay 0.5)
+    :config (which-key-mode))
+#+end_src
+
+** Vertico
+[[https://github.com/minad/vertico][Vertico]] provides a performant and minimalistic vertical completion UI based on the default completion system. 
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+    (use-package vertico
+      :ensure t
+      :init (vertico-mode)
+      :bind (:map vertico-map
+    	      ("C-<backspace>" . vertico-directory-up))
+      :config
+      (keymap-set vertico-map "?" #'minibuffer-completion-help)
+      (keymap-set vertico-map "M-RET" #'minibuffer-force-complete-and-exit)
+      (keymap-set vertico-map "M-TAB" #'minibuffer-complete))
+#+end_src
+
+** Save history
+Vertico sorts by history position.
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package savehist
+    :init
+    (savehist-mode))
+#+end_src 
+
+** Marginalia
+[[https://github.com/minad/marginalia][Marginalia]] are marks or annotations placed at the margin of the page of a book or in this case helpful colorful
+annotations placed at the margin of the minibuffer for your completion candidates.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package marginalia
+    :ensure t
+    :after vertico
+    :init (marginalia-mode)
+    :custom
+    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil)))
+#+end_src
+
+** Orderless
+This package provides an [[https://github.com/oantolin/orderless][orderless]] completion style that divides the pattern into space-separated components,
+and matches candidates that match all of the components in any order. Each component can match in any one of several
+ways: literally, as a regexp, as an initialism, in the flex style, or as multiple word prefixes. By default, regexp
+and literal matches are enabled.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package orderless
+    :ensure t
+    :custom
+    (completion-category-defaults nil)
+    (completion-category-overrides '((file (styles . (partial-completion)))))
+    (completion-styles '(orderless basic)))
+#+end_src
+
+** Emacs minibuffer configuration
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package emacs
+    :custom
+    (enable-recursive-minibuffers t)
+    (read-extended-command-predicate #'command-completion-default-include-p)
+    (minibuffer-prompt-properties
+     '(read-only t cursor-intangible t face minibuffer-prompt)))
+#+end_src
+
+** Doom Themes
+A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspired by community favorites.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package doom-themes
+    :ensure t)
+  (load-theme 'doom-one :no-confirm)
+#+end_src
+
+** Modeline
+[[https://github.com/seagle0128/doom-modeline][Doom modeline]] is used to cleanup and configure the modeline.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package doom-modeline
+    :ensure t
+    :config
+    (setq
+     doom-modeline-support-imenu t
+     doom-modeline-icon t
+     doom-modeline-major-mode-icon t
+     doom-modeline-buffer-state-icon t
+     doom-modeline-buffer-modification-icon t
+     doom-modeline-column-zero-based t
+     doom-modeline-highlight-modified-buffer-name nil
+     doom-modeline-percent-position '(-3 "%p")
+     doom-modeline-position-column-line-format '("%l:%c")
+     doom-modeline-total-line-number t
+     doom-modeline-modal t
+     doom-modeline-modal-modern-icon t
+     doom-modeline-time t
+     )
+    (setq doom-modeline-height 1)
+    (custom-set-faces
+     '(mode-line ((t (:family "Noto Sans" :height 0.9))))
+     '(mode-line-active ((t (:famliy "Noto Sans" :height 0.9))))
+     '(mode-line-inactive ((t (:family "Noto Sans" :height 0.9)))))
+    :init
+    (doom-modeline-mode 1))
+#+end_src
+
+** Fonts
+Setting the font faces.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (set-face-attribute 'default nil
+                      :font "Iosevka Fixed"
+                      :height 160
+                      :weight 'medium)
+  (set-face-attribute 'variable-pitch nil
+                      :font "Iosevka"
+                      :height 150
+                      :weight 'medium)
+  (set-face-attribute 'fixed-pitch nil
+                      :font "Iosevka Fixed"
+                      :height 170
+                      :weight 'medium)
+  (set-face-attribute 'font-lock-comment-face nil
+                      :slant 'italic)
+  (set-face-attribute 'font-lock-keyword-face nil
+                      :slant 'italic)
+#+end_src
+
+** All-the-icons
+[[https://github.com/domtronn/all-the-icons.el][All-the-icons]] is a utility package to collect various Icon Fonts and propertize them within Emacs.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package all-the-icons
+    :ensure t
+    :if (display-graphic-p))
+#+end_src
+
+** All-the-icons-completion
+[[https://github.com/iyefrat/all-the-icons-completion][All-the-icons-completion]] adds icons to completion candidates in Emacs.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package all-the-icons-completion
+    :ensure t
+    :defer
+    :hook (marginalia-mode . #'all-the-icons-completion-marginalia-setup)
+    :init
+    (all-the-icons-completion-mode))
+#+end_src
+
+** Nerd icons
+[[https://github.com/emacsmirror/nerd-icons][Nerd-icons]] - Emacs Nerd Font Icons Library.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package nerd-icons
+    :ensure t)
+#+end_src
+
+** Window
+Setup how to split windows in Emacs.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package window
+    :ensure nil
+    :bind (("C-x 2" . vsplit-last-buffer)
+           ("C-x 3" . hsplit-last-buffer)
+           ([remap kill-buffer] . kill-this-buffer))
+    :preface
+    (defun hsplit-last-buffer ()
+      "Focus to the last created horizontal window."
+      (interactive)
+      (split-window-horizontally)
+      (other-window 1))
+    (defun vsplit-last-buffer ()
+      "Focus to the last created vertical window."
+      (interactive)
+      (split-window-vertically)
+      (other-window 1)))
+#+end_src
+
+** Switch window
+[[https://github.com/dimitri/switch-window][Switch-window]] offer a visual way to choose a window to switch to.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package switch-window
+    :ensure t
+    :bind (("C-x o" . switch-window)
+           ("C-x w" . switch-window-then-swap-buffer)))
+#+end_src
+
+** Winner
+Winner mode in Emacs allows you to restore previous window configurations after
+they have been changed, making it easier to manage your layout.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package winner
+    :ensure nil
+    :config (winner-mode))
+#+end_src
+
+** Ibuffer
+I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-life/][ibuffer changed my life]] from Tony Ballantyne Tech.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (global-set-key (kbd "C-x C-b") 'ibuffer) ; instead of buffer-list
+  (setq ibuffer-expert t)                   ; stop yes no prompt on delete
+  (setq ibuffer-saved-filter-groups
+        (quote (("default"
+                 ("dired" (mode . dired-mode))
+                 ("org" (mode . org-mode))
+                 ("magit" (name . "^magit"))
+                 ("planner" (or
+                             (name . "^\\*Calendar\\*$")
+                             (name . "^\\*Org Agenda\\*$")))
+                 ("emacs" (or
+                           (name . "^\\*scratch\\*$")
+                           (name . "^\\*Messages\\*$")))
+                 ))))
+  (add-hook 'ibuffer-mode-hook (lambda ()
+                                 (ibuffer-switch-to-saved-filter-groups "default")))
+#+end_src
+
+* Keybindings
+** Evil
+[[https://github.com/emacs-evil/evil][Evil]] is an extensible *vi* layer for Emacs.
+
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-integration t
+          evil-want-keybinding nil
+          evil-vsplit-window-right t
+          evil-split-window-below t
+          evil-undo-system 'undo-redo)
+    (evil-mode 1))
+
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    :config
+    (add-to-list 'evil-collection-mode-list 'help)
+    (evil-collection-init))
+
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil))
+  (setq org-return-follows-link t)
+#+end_src
