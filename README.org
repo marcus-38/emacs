@@ -2,4 +2,4 @@
 #+OPTIOINS: toc:2 num:nil
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 
-# I tinker with my Emacs configuration
+* I tinker with my Emacs configuration
