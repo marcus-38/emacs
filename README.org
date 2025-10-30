@@ -390,9 +390,9 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
      )
     (setq doom-modeline-height 1)
     (custom-set-faces
-     '(mode-line ((t (:family "Noto Sans" :height 0.9))))
-     '(mode-line-active ((t (:famliy "Noto Sans" :height 0.9))))
-     '(mode-line-inactive ((t (:family "Noto Sans" :height 0.9)))))
+     '(mode-line ((t (:family "FiraCode Nerd Font" :height 0.9))))
+     '(mode-line-active ((t (:famliy "FiraCode Nerd Font" :height 0.9))))
+     '(mode-line-inactive ((t (:family "FiraCode Nerd Font" :height 0.9)))))
     :init
     (doom-modeline-mode 1))
 #+end_src
@@ -406,15 +406,18 @@ Setting the font faces.
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (set-face-attribute 'default nil
-                      :font "Iosevka Fixed"
+                      ;; :font "Iosevka Fixed"
+                      :font "FiraCode Nerd Font"
                       :height 120
                       :weight 'medium)
   (set-face-attribute 'variable-pitch nil
-                      :font "Iosevka"
+                      ;; :font "Iosevka"
+                      :font "FiraCode nerd Font"
                       :height 110
                       :weight 'medium)
   (set-face-attribute 'fixed-pitch nil
-                      :font "Iosevka Fixed"
+                      :font "FiraCode Nerd Font"
+                      ;; :font "Iosevka Fixed"
                       :height 130
                       :weight 'medium)
   (set-face-attribute 'font-lock-comment-face nil
@@ -462,6 +465,7 @@ Setting the font faces.
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (use-package nerd-icons
     :ensure t)
+  (setq nerd-icons-font-family "FiraCode Nerd Font")
 #+end_src
 
 ** Window
