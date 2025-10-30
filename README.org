@@ -81,6 +81,8 @@ If you want to learn more about Org:
   - [[#org-make-][Org make-]]
   - [[#org-tempo][Org tempo]]
   - [[#org-bullets][Org bullets]]
+- [[#shells-and-terminals][Shells and terminals]]
+  - [[#eshell][Eshell]]
 :END:
 
 * Generate files and file headers
@@ -1070,4 +1072,40 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
     :ensure t
     )
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+end_src
+
+* Shells and terminals
+:PROPERTIES:
+:CUSTOM_ID: shells-and-terminals
+:ID:       dae6c7a1-54da-4e7e-ac03-25f6b4fbc494
+:END:
+** Eshell
+:PROPERTIES:
+:CUSTOM_ID: eshell
+:ID:       723f14cf-df00-422b-a2d9-3c0deeb12d58
+:END:
+Eshell is an Emacs shell written in Elisp.
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+(use-package eshell-toggle
+    :ensure t
+    :custom
+    (eshell-toggle-size-fraction 3)
+    (ehsell-toggle-use-projectile-root t)
+    (eshell-toggle-run-command nil)
+    (ehsell-toggle-init-function #'eshell-toggle-init-ansi-term))
+
+  (use-package eshell-syntax-highlighting
+    :ensure t
+    :after esh-mode
+    :config
+    (eshell-syntax-highlighting-global-mode +1))
+
+  (setq eshell-rc-script (concat user-emacs-directory "eshell/profile")
+        eshell-aliases-file (concat user-emacs-directory "eshell/aliases")
+        eshell-history-size 5000
+        eshell-buffer-maximum-lines 5000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input t
+        eshell-destroy-buffer-when-process-dies t
+        eshell-visual-commands '("bash" "fish" "htop" "ssh" "top" "zsh"))
 #+end_src
