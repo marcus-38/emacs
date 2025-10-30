@@ -3,3 +3,94 @@
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 
 * Emacs Configuration
+This is my personal Emacs configuration. It is a wok in progress. The relevant
+configuration files are tangled from this Org-document (=C-c C-v t=). I don't
+tangle on save or anything like that. This configuration will probably never be
+finished. This is one of my many rabbit holes...
+
+I use github as my backup. Not to share code. Don't use my configuration as is.
+I regulary commit this configuration to github even though it is not working.
+Yes I know, I shouldn't but I do so you have been warned.
+
+*Here be dragons*
+
+
+If you are looking for insperation, check out these instead:
+- [[https://sachachua.com/blog/][Sacha Chua's Living an awesome life]]
+- [[https://protesilaos.com/][Protesilaos Stavrou's personal website]]
+- [[https://www.spacemacs.org/][Spacemacs - a community-driven Emacs distribution]]
+- [[https://github.com/doomemacs/doomemacs][Doom Emacs - a configuration framework for Emacs]]
+
+If you want to learn more about Org:
+- [[https://orgmode.org/manual/index.html][The Org manual]]
+- [[https://www.gnu.org/software/emacs/tour/][A guided tour of Emacs]]
+- [[https://www.gnu.org/software/emacs/manual/index.html][GNU Emacs Manuals Online]]
+
+* Table of Contents
+
+* Generate files and file headers
+The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
+use this configuration as is.
+
+*Here be dragons*
+
+** init.el
+Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
+
+#+begin_src emacs-lisp :tangle ~/.config/emacs/init.el :mkdirp yes
+;;; init.el -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;; This is my personal Emacs configuration. The file is tangled from a
+;; literate org document where I try to document what each piece is for.
+;; If you found my configurations you are free to use as you please, but
+;; please read the whole thing before you do. I regulary commit my
+;; configuration even though it is not working. Yes, I know, you shouldn't
+;; do that but you have been warned.
+
+;; Here be dragons
+
+;; Code:
+#+end_src
+
+** early-init.el
+Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
+
+#+begin_src emacs-lisp :tangle ~/.config/emacs/early-init.el :mkdirp yes
+;;; early-init.el -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;; This is my personal Emacs configuration. The file is tangled from a
+;; literate org document where I try to document what each piece is for.
+;; If you found my configurations you are free to use as you please, but
+;; please read the whole thing before you do. I regulary commit my
+;; configuration even though it is not working. Yes, I know, you shouldn't
+;; do that but you have been warned.
+
+;; Here be dragons
+
+;; Code:
+#+end_src
+
+** custom.el
+In Emacs, a custom file is used to store customization settings seperately
+from the main init file, allowing for easier management of user preferences.
+I use this literate org-file but I like to separate the preferences all the same.
+
+#+begin_src emacs-lisp :tangle ~/.config/emacs/init.el :mkdirp yes
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file))
+#+end_src
+
+** Aliases
+Here I set my aliases I like to use.
+
+#+begin_src bash :tangle ~/.config/emacs/eshell/aliases :mkdirp yes
+  # alias for emacs commands
+  alias ff find-file $1
+
+  # aliasing standard shell commands to better emacs alternatives
+  alias less view-file $1
+#+end_src
+
