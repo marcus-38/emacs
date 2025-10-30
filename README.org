@@ -66,6 +66,7 @@ If you want to learn more about Org:
   - [[#ibuffer][Ibuffer]]
 - [[#keybindings][Keybindings]]
   - [[#evil][Evil]]
+- [[#personal-elisp-functions][Personal elisp functions]]
   - [[#personal-keybindings][Personal keybindings]]
   - [[#ivy-and-counsel][Ivy and Counsel]]
   - [[#general][General]]
@@ -584,7 +585,19 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
     (define-key evil-motion-state-map (kbd "TAB") nil))
   (setq org-return-follows-link t)
 #+end_src
-
+* Personal elisp functions
+:PROPERTIES:
+:ID:       6aac4257-3e7a-42df-96da-a859d749a0f5
+:CUSTOM_ID: personal-elisp-functions
+:END:
+Be very careful when using my functions. Here be dragons...
+#+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (defun fet/open-configuration ()
+    "Open configuration file '~/repos/emacs/README.org'"
+    (interactive)
+    (find-file "~/repos/emacs/README.org")
+    )
+#+end_src
 ** Personal keybindings
 :PROPERTIES:
 :ID:       a270f9f2-1d9c-4ce3-9930-b8241af5e41f
@@ -594,6 +607,7 @@ This is probably not the only place where keybindings are defined.
 There are some in the =General= section and in other places. Oh my!
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
+  (global-set-key (kbd "C-,") 'fet/open-configuration)
   (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
   (global-set-key (kbd "C-c p") 'projectile-command-map) ; projectile command map
   (global-set-key (kbd "C-+") 'text-scale-increase)      ; increase text size
@@ -712,7 +726,8 @@ There are some in the =General= section and in other places. Oh my!
 
     (my/leader-keys
       "f" '(:ignore t :wk "Files")
-      "f c" '((lambda () (interactive) (find-file "~/repos/emacs/README.org")) :wk "Open emacs configuration file")
+      ;; "f c" '((lambda () (interactive) (find-file "~/repos/emacs/README.org")) :wk "Open emacs configuration file")
+      "f c" '(fet/open-configuration :wk "Open emacs configuration file")
       "f e" '((lambda () (interactive) (dired "~/repos/emacs/")) :wk "Open config dir in dired")
       "f g" '(counsel-grep-or-swiper :wk "Search for string current file")
       "f j" '(counsel-file-jump :wk "Jump to a file below current directory")
