@@ -1,2 +1,5 @@
-# emacs
-I tinker with my emacs configuration
+#+TITLE: I tinker with my Emacs configuration
+#+OPTIOINS: toc:2 num:nil
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+
+# I tinker with my Emacs configuration
