@@ -594,7 +594,6 @@ This is probably not the only place where keybindings are defined.
 There are some in the =General= section and in other places. Oh my!
 
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
-  (global-set-key (kbd "C-c t") 'ef-themes-toggle)       ; toggle theme 
   (global-set-key (kbd "C-c g") 'magit-status)           ; magit status
   (global-set-key (kbd "C-c p") 'projectile-command-map) ; projectile command map
   (global-set-key (kbd "C-+") 'text-scale-increase)      ; increase text size
