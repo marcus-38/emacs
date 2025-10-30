@@ -4,6 +4,7 @@
 * Emacs Configuration
 :PROPERTIES:
 :ID:       09343f47-1679-440f-95cd-f785f7c69ae2
+:CUSTOM_ID: emacs-configuration
 :END:
 This is my personal Emacs configuration. It is a wok in progress. The relevant
 configuration files are tangled from this Org-document (=C-c C-v t=). I don't
@@ -31,11 +32,61 @@ If you want to learn more about Org:
 * Table of Contents
 :PROPERTIES:
 :ID:       b189e2ec-4f92-4bed-b382-b2ce1303e84f
+:TOC:      :include all :depth 3 :force (nothing) :ignore (nothing) :local (depth)
+:CUSTOM_ID: table-of-contents
+:END:
+:CONTENTS:
+- [[#emacs-configuration][Emacs Configuration]]
+- [[#table-of-contents][Table of Contents]]
+- [[#generate-files-and-file-headers][Generate files and file headers]]
+  - [[#initel][init.el]]
+  - [[#early-initel][early-init.el]]
+  - [[#customel][custom.el]]
+- [[#aliases][Aliases]]
+- [[#early-init][Early-init]]
+  - [[#garbage-collection][Garbage collection]]
+- [[#package-manager][Package Manager]]
+- [[#misc-settings][Misc settings]]
+- [[#look-and-feel][Look and Feel]]
+  - [[#which-key][Which key]]
+  - [[#vertico][Vertico]]
+  - [[#save-history][Save history]]
+  - [[#marginalia][Marginalia]]
+  - [[#orderless][Orderless]]
+  - [[#emacs-minibuffer-configuration][Emacs minibuffer configuration]]
+  - [[#doom-themes][Doom Themes]]
+  - [[#modeline][Modeline]]
+  - [[#fonts][Fonts]]
+  - [[#all-the-icons][All-the-icons]]
+  - [[#all-the-icons-completion][All-the-icons-completion]]
+  - [[#nerd-icons][Nerd icons]]
+  - [[#window][Window]]
+  - [[#switch-window][Switch window]]
+  - [[#winner][Winner]]
+  - [[#ibuffer][Ibuffer]]
+- [[#keybindings][Keybindings]]
+  - [[#evil][Evil]]
+  - [[#personal-keybindings][Personal keybindings]]
+  - [[#ivy-and-counsel][Ivy and Counsel]]
+  - [[#general][General]]
+  - [[#helpful][Helpful]]
+  - [[#move-text][Move text]]
+  - [[#tldr][TLDR]]
+- [[#programming][Programming]]
+  - [[#magit][Magit]]
+  - [[#corfu][Corfu]]
+  - [[#cape][Cape]]
+  - [[#projectile][Projectile]]
+- [[#org][Org]]
+  - [[#org-make-][Org make-]]
+  - [[#org-tempo][Org tempo]]
+  - [[#org-bullets][Org bullets]]
 :END:
 
 * Generate files and file headers
 :PROPERTIES:
 :ID:       b4a28b58-af79-40c9-814d-eb61d5f09fbb
+:CUSTOM_ID: generate-files-and-file-headers
 :END:
 The file headers sets [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical-binding]] to true. I also try to warn people not to
 use this configuration as is.
@@ -45,6 +96,7 @@ use this configuration as is.
 ** init.el
 :PROPERTIES:
 :ID:       e23de079-3a6b-4539-8009-07ebbc60ff1a
+:CUSTOM_ID: initel
 :END:
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
@@ -67,6 +119,7 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 ** early-init.el
 :PROPERTIES:
 :ID:       da74a372-1f4c-4047-93bc-b7abae58327d
+:CUSTOM_ID: early-initel
 :END:
 Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexical-Binding.html][lexical binding]].
 
@@ -89,6 +142,7 @@ Header text and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Lexi
 ** custom.el
 :PROPERTIES:
 :ID:       2afa1d80-84f9-4cc0-bf39-d812d6d83e8d
+:CUSTOM_ID: customel
 :END:
 In Emacs, a custom file is used to store customization settings seperately
 from the main init file, allowing for easier management of user preferences.
@@ -103,6 +157,7 @@ I use this literate org-file but I like to separate the preferences all the same
 * Aliases
 :PROPERTIES:
 :ID:       f5220e9f-af04-417b-9a65-fa3d67010025
+:CUSTOM_ID: aliases
 :END:
 Here I set my aliases I like to use.
 
@@ -117,10 +172,12 @@ Here I set my aliases I like to use.
 * Early-init
 :PROPERTIES:
 :ID:       f7e0fdee-a113-4843-8166-fc9328cae8d0
+:CUSTOM_ID: early-init
 :END:
 ** Garbage collection
 :PROPERTIES:
 :ID:       fabf79ba-92bc-4ad3-a7c5-5356c0a79965
+:CUSTOM_ID: garbage-collection
 :END:
 #+begin_src emacs-lisp :tangle ~/.emacs.d/early-init.el
   (setq gc-cons-threshold 64000000)
@@ -130,6 +187,7 @@ Here I set my aliases I like to use.
 * Package Manager
 :PROPERTIES:
 :ID:       59ca8f2d-5a9f-45a1-9582-0d31e70a7c99
+:CUSTOM_ID: package-manager
 :END:
 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html][Package installation]] are usually installed using =use-package=. Some packages
 are downloaded or cloned from sources outside of the ones listed below. These
@@ -153,6 +211,7 @@ manager, adds sources and initialize the packages manager.
 * Misc settings
 :PROPERTIES:
 :ID:       43dcbe04-dc3a-4be8-a402-eab1e425a79b
+:CUSTOM_ID: misc-settings
 :END:
 Settings that doesn't fit in anywhere else gets it's own place here.
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -181,10 +240,12 @@ Settings that doesn't fit in anywhere else gets it's own place here.
 * Look and Feel
 :PROPERTIES:
 :ID:       b4317374-26d8-4d71-bb40-78946ec94b37
+:CUSTOM_ID: look-and-feel
 :END:
 ** Which key
 :PROPERTIES:
 :ID:       008cab1b-8437-4962-afef-b11c8cdaed80
+:CUSTOM_ID: which-key
 :END:
 [[https://github.com/justbur/emacs-which-key][which-key]] is a minor mode for Emacs that displays the key bindings following your currently entered incomplete
 command (a prefix) in a popup. 
@@ -200,6 +261,7 @@ command (a prefix) in a popup.
 ** Vertico
 :PROPERTIES:
 :ID:       afab5a72-3d01-4264-82d3-25bc98d269e4
+:CUSTOM_ID: vertico
 :END:
 [[https://github.com/minad/vertico][Vertico]] provides a performant and minimalistic vertical completion UI based on the default completion system. 
 
@@ -218,6 +280,7 @@ command (a prefix) in a popup.
 ** Save history
 :PROPERTIES:
 :ID:       f2dff2fc-f45f-431c-8fe1-9524e69ed73a
+:CUSTOM_ID: save-history
 :END:
 Vertico sorts by history position.
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
@@ -229,6 +292,7 @@ Vertico sorts by history position.
 ** Marginalia
 :PROPERTIES:
 :ID:       572a1a5b-e918-4a16-af33-af8992d4a655
+:CUSTOM_ID: marginalia
 :END:
 [[https://github.com/minad/marginalia][Marginalia]] are marks or annotations placed at the margin of the page of a book or in this case helpful colorful
 annotations placed at the margin of the minibuffer for your completion candidates.
@@ -245,6 +309,7 @@ annotations placed at the margin of the minibuffer for your completion candidate
 ** Orderless
 :PROPERTIES:
 :ID:       7394eb5c-4819-4465-b380-2c7e12f94e78
+:CUSTOM_ID: orderless
 :END:
 This package provides an [[https://github.com/oantolin/orderless][orderless]] completion style that divides the pattern into space-separated components,
 and matches candidates that match all of the components in any order. Each component can match in any one of several
@@ -263,6 +328,7 @@ and literal matches are enabled.
 ** Emacs minibuffer configuration
 :PROPERTIES:
 :ID:       2386fc56-8664-46b4-8878-3d74fa25eeea
+:CUSTOM_ID: emacs-minibuffer-configuration
 :END:
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (use-package emacs
@@ -276,6 +342,7 @@ and literal matches are enabled.
 ** Doom Themes
 :PROPERTIES:
 :ID:       b9c589dc-625e-4e80-9a53-d3cb1dcfd2ae
+:CUSTOM_ID: doom-themes
 :END:
 A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspired by community favorites.
 
@@ -288,6 +355,7 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
 ** Modeline
 :PROPERTIES:
 :ID:       5c1d34f2-2583-47e0-bab0-d22e4ecea22f
+:CUSTOM_ID: modeline
 :END:
 [[https://github.com/seagle0128/doom-modeline][Doom modeline]] is used to cleanup and configure the modeline.
 
@@ -322,6 +390,7 @@ A [[https://github.com/doomemacs/themes][theme megapack]] for GNU Emacs, inspire
 ** Fonts
 :PROPERTIES:
 :ID:       70e1ff31-a9cb-4890-ae61-4b4b9f206cb8
+:CUSTOM_ID: fonts
 :END:
 Setting the font faces.
 
@@ -347,6 +416,7 @@ Setting the font faces.
 ** All-the-icons
 :PROPERTIES:
 :ID:       15bb2874-6932-47d1-958b-c502f5a7ebd4
+:CUSTOM_ID: all-the-icons
 :END:
 [[https://github.com/domtronn/all-the-icons.el][All-the-icons]] is a utility package to collect various Icon Fonts and propertize them within Emacs.
 
@@ -359,6 +429,7 @@ Setting the font faces.
 ** All-the-icons-completion
 :PROPERTIES:
 :ID:       07d958df-9362-4c0e-a6ac-630a4214432a
+:CUSTOM_ID: all-the-icons-completion
 :END:
 [[https://github.com/iyefrat/all-the-icons-completion][All-the-icons-completion]] adds icons to completion candidates in Emacs.
 
@@ -374,6 +445,7 @@ Setting the font faces.
 ** Nerd icons
 :PROPERTIES:
 :ID:       4bb8c5e4-4a95-45d1-a57e-738691514ed4
+:CUSTOM_ID: nerd-icons
 :END:
 [[https://github.com/emacsmirror/nerd-icons][Nerd-icons]] - Emacs Nerd Font Icons Library.
 
@@ -385,6 +457,7 @@ Setting the font faces.
 ** Window
 :PROPERTIES:
 :ID:       8c55f09a-2cc7-45d1-8dee-3543c65b63cc
+:CUSTOM_ID: window
 :END:
 Setup how to split windows in Emacs.
 
@@ -410,6 +483,7 @@ Setup how to split windows in Emacs.
 ** Switch window
 :PROPERTIES:
 :ID:       25402c3a-1c2b-4664-aeb2-3db770e2c0aa
+:CUSTOM_ID: switch-window
 :END:
 [[https://github.com/dimitri/switch-window][Switch-window]] offer a visual way to choose a window to switch to.
 
@@ -423,6 +497,7 @@ Setup how to split windows in Emacs.
 ** Winner
 :PROPERTIES:
 :ID:       b099f7bd-e78f-46b4-94a3-aceb38fb6bd2
+:CUSTOM_ID: winner
 :END:
 Winner mode in Emacs allows you to restore previous window configurations after
 they have been changed, making it easier to manage your layout.
@@ -436,6 +511,7 @@ they have been changed, making it easier to manage your layout.
 ** Ibuffer
 :PROPERTIES:
 :ID:       a40b06f4-aba4-4179-b0ee-e3cc2830a7ab
+:CUSTOM_ID: ibuffer
 :END:
 I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-life/][ibuffer changed my life]] from Tony Ballantyne Tech.
 
@@ -461,10 +537,12 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
 * Keybindings
 :PROPERTIES:
 :ID:       ed00b6c1-85c2-4b2b-8bfb-a52e51a954df
+:CUSTOM_ID: keybindings
 :END:
 ** Evil
 :PROPERTIES:
 :ID:       1ae2dce6-7075-4450-94de-e070a9c313d0
+:CUSTOM_ID: evil
 :END:
 [[https://github.com/emacs-evil/evil][Evil]] is an extensible *vi* layer for Emacs.
 
@@ -496,6 +574,7 @@ I found a post [[https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-l
 ** Personal keybindings
 :PROPERTIES:
 :ID:       a270f9f2-1d9c-4ce3-9930-b8241af5e41f
+:CUSTOM_ID: personal-keybindings
 :END:
 This is probably not the only place where keybindings are defined.
 There are some in the =General= section and in other places. Oh my!
@@ -515,6 +594,7 @@ There are some in the =General= section and in other places. Oh my!
 ** Ivy and Counsel
 :PROPERTIES:
 :ID:       2ec2540b-f62d-48c3-8c48-8239114f960d
+:CUSTOM_ID: ivy-and-counsel
 :END:
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (use-package counsel
@@ -557,6 +637,7 @@ There are some in the =General= section and in other places. Oh my!
 ** General
 :PROPERTIES:
 :ID:       8fc3f3aa-013e-4f8a-917a-0c06027d2992
+:CUSTOM_ID: general
 :END:
 [[https://github.com/noctuid/general.el][General]] is a more convenient key definition system in Emacs.
 
@@ -743,6 +824,7 @@ There are some in the =General= section and in other places. Oh my!
 ** Helpful
 :PROPERTIES:
 :ID:       1850714f-29eb-454c-a8f8-1ff875b7c987
+:CUSTOM_ID: helpful
 :END:
 [[https://github.com/Wilfred/helpful][Helpful]] is an alternative to the built-in Emacs help that provides much more contextual information.
 
@@ -768,6 +850,7 @@ There are some in the =General= section and in other places. Oh my!
 ** Move text
 :PROPERTIES:
 :ID:       61eef392-399d-4ec0-b2fe-2d62a2209bc8
+:CUSTOM_ID: move-text
 :END:
 [[https://github.com/emacsfodder/move-text][MoveText]] allows you to move the current line using M-up / M-down (or any other bindings you choose)
 if a region is marked, it will move the region instead.
@@ -782,6 +865,7 @@ if a region is marked, it will move the region instead.
 ** TLDR
 :PROPERTIES:
 :ID:       6f0edc20-9009-4635-9b49-a46d0ab4e353
+:CUSTOM_ID: tldr
 :END:
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (use-package tldr
@@ -791,10 +875,12 @@ if a region is marked, it will move the region instead.
 * Programming
 :PROPERTIES:
 :ID:       8a7174a2-7846-47f7-a898-3b707e0beae9
+:CUSTOM_ID: programming
 :END:
 ** Magit
 :PROPERTIES:
 :ID:       b7bae419-7a23-4590-916e-af05d9e760de
+:CUSTOM_ID: magit
 :END:
 [[https://magit.vc/][Magit]] is a complete text-based user interface to Git. It fills the glaring gap between
 the Git command-line interface and various GUIs, letting you perform trivial as well as
@@ -814,6 +900,7 @@ by using Magit.
 ** Corfu
 :PROPERTIES:
 :ID:       575bc524-8df5-4513-a007-04b69d7a88dd
+:CUSTOM_ID: corfu
 :END:
 [[https://github.com/minad/corfu][Corfu]] enhances in-buffer completion with a small completion popup.
 
@@ -843,6 +930,7 @@ by using Magit.
 ** Cape
 :PROPERTIES:
 :ID:       cf8fff05-8406-479e-a708-dad26ec52156
+:CUSTOM_ID: cape
 :END:
 [[https://github.com/minad/cape][Cape]] provides completion at point extensions which can be used in comlbination with
 [[https://github.com/minad/corfu][Corfu]], [[https://github.com/company-mode/company-mode][Company]] or the default completion UI.
@@ -862,6 +950,7 @@ by using Magit.
 ** Projectile
 :PROPERTIES:
 :ID:       8d599f14-19a5-43ee-8f4a-8b224d061a87
+:CUSTOM_ID: projectile
 :END:
 [[https://github.com/bbatsov/projectile][Projectile]] is a project interaction Library for Emacs.
 
@@ -876,6 +965,7 @@ by using Magit.
 * Org
 :PROPERTIES:
 :ID:       14e0936c-b949-476a-bc5b-9c96e132565f
+:CUSTOM_ID: org
 :END:
 Why usse Emacs? Because [[https://orgmode.org/][Org-mode]] exists. Org-mode is a  GNU Emacs major mode for
 keeping notes, authoring documents, computational notebooks, literate programming,
@@ -889,9 +979,18 @@ This configuration file is writen with org-mode.
     :ensure t)
 #+end_src
 
-** Org make-toc
+** Org make-
+:PROPERTIES:
+:CUSTOM_ID: org-make-
+:ID:       63ea68e2-260b-451c-b35f-67f998a4db87
+:END:
+:CONTENTS:
+
+:END:
+toc
 :PROPERTIES:
 :ID:       792f468a-b8e2-4f9e-8ffa-0eb848b34cd8
+:TOC:      :include all :depth 3 :force (nothing) :ignore (nothing) :local (nothing)
 :END:
 [[https://github.com/alphapapa/org-make-toc][Org-make-toc]] creates tables of contents for org-mode files.
 
@@ -933,6 +1032,7 @@ Use command =org-make-toc-set= to change TOC properties for the entry at point w
 ** Org tempo
 :PROPERTIES:
 :ID:       06da885d-ea2d-4168-a87d-f7bcb48e8434
+:CUSTOM_ID: org-tempo
 :END:
 With [[https://orgmode.org/manual/Structure-Templates.html][structure templates]] it is possible to insert empty structural blocks,
 such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such a block.
@@ -963,6 +1063,7 @@ such as ‘#+BEGIN_SRC’ … ‘#+END_SRC’, or to wrap existing text in such 
 ** Org bullets
 :PROPERTIES:
 :ID:       2d554ba7-d774-4efc-8bc4-d03953a4e25c
+:CUSTOM_ID: org-bullets
 :END:
 #+begin_src emacs-lisp :tangle ~/.emacs.d/init.el
   (use-package org-bullets
